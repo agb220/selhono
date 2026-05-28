@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 
-:root {
+@theme {
+  --font-dm: var(--font-dm);
+  --font-jost: var(--font-jost);
+
   --dark-100: #4d5053;
   --dark-200: #292f36;
   --gold-100: #d8a876;
@@ -47,4 +50,88 @@ svg {
 
 .container {
   @apply mx-auto !max-w-[calc(100%-32px)] md:!max-w-[calc(100%-80px)] xl:!max-w-[1240px];
+}
+
+.h1 {
+  @apply font-dm text-[65px] leading-tight font-normal;
+}
+
+.h2 {
+  @apply font-dm text-[60px] leading-tight font-normal;
+}
+
+.h3 {
+  @apply font-dm text-[55px] leading-tight font-normal;
+}
+
+.h4 {
+  @apply font-dm text-[50px] leading-tight font-normal;
+}
+
+.h5 {
+  @apply font-dm text-[25px] leading-tight font-normal;
+}
+
+.h5 {
+  @apply font-dm text-[22px] leading-normal font-normal;
+}
+
+.h6 {
+  @apply font-dm text-xl leading-tight font-normal;
+}
+
+.text-accent {
+  @apply font-dm text-[35px] leading-tight font-normal;
+}
+
+.paragraph {
+  @apply font-jost text-[28px] leading-normal font-normal;
+}
+
+.text-number {
+  @apply font-dm text-[85px] leading-tight font-normal;
+}
+
+.text-number-big {
+  @apply font-dm text-[250px] leading-tight font-normal;
+}
+
+.text-number-small {
+  @apply font-jost text-[15px] leading-normal font-medium;
+}
+
+.text-small {
+  @apply font-jost text-base leading-normal font-normal;
+}
+
+.text-medium-bold {
+  @apply font-jost text-2xl leading-normal font-bold;
+}
+
+.button {
+  @apply font-jost text-lg leading-tight font-medium;
+}
+
+.button-semmibold {
+  @apply font-jost text-lg leading-tight font-semibold;
+}
+
+.button-small {
+  @apply font-jost text-[16px] leading-normal font-medium;
+}
+
+.link {
+  @apply font-jost text-xl leading-tight font-medium;
+}
+
+.link-regular {
+  @apply font-jost text-xl leading-normal font-normal;
+}
+
+.input {
+  @apply font-jost text-[30px] leading-normal font-normal;
+}
+
+.input-medium {
+  @apply font-jost text-[22px] leading-normal font-normal;
 }
