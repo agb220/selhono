@@ -4,14 +4,14 @@
   --font-dm: var(--font-dm);
   --font-jost: var(--font-jost);
 
-  --dark-100: #4d5053;
-  --dark-200: #292f36;
-  --gold-100: #d8a876;
-  --gold-200: #c76904;
-  --gold-300: #cda274;
-  --light-100: #f9f9f9;
-  --light-200: #f4f0ec;
-  --grey-100: #e7e7e7;
+  --color-dark-100: #4d5053;
+  --color-dark-200: #292f36;
+  --color-gold-100: #d8a876;
+  --color-gold-200: #c76904;
+  --color-gold-300: #cda274;
+  --color-light-100: #f9f9f9;
+  --color-light-200: #f4f0ec;
+  --color-grey-100: #e7e7e7;
 }
 
 * {

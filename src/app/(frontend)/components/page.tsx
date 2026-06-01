@@ -1,3 +1,4 @@
+import { ArrowShortSvg, ArrowSvg, PhoneSvg } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -19,12 +20,32 @@ export default function ComponentsPlayground() {
         <section className="space-y-4">
           <h2 className="text-xl font-bold font-dm ">1. Buttons (Кнопки)</h2>
           <div className="flex flex-wrap gap-4 items-center p-6  rounded-2xl border border-gold-100">
-            <Button variant="default">Primary Button</Button>
-            <Button variant="outline">Secondary Outline</Button>
-            <Button variant="ghost">Ghost Button</Button>
-
+            <Button variant="default" icon={ArrowSvg}>
+              Default Button
+            </Button>
+            <Button variant="primary" icon={ArrowSvg}>
+              Primary Button
+            </Button>
+            <Button variant="outline" icon={ArrowSvg}>
+              Secondary Outline
+            </Button>
+            Circle-light
+            <Button variant="circle-light" size="icon-lg" icon={ArrowShortSvg}></Button>
+            Circle-gold
+            <Button variant="circle-gold" size="icon-lg" icon={ArrowShortSvg}></Button>
+            Circle-outline
+            <Button variant="circle-outline" size="icon-md">
+              01
+            </Button>
+            Circle white
+            <Button variant="circle-white" size="icon-xl" icon={PhoneSvg}>
+              <Link href="#"></Link>
+            </Button>
             <Button asChild variant="default">
               <Link href="#">As Link Component</Link>
+            </Button>
+            <Button asChild variant="link" size="menu">
+              <Link href="#">Menu link</Link>
             </Button>
           </div>
         </section>
