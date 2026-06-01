@@ -8,27 +8,26 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Базові варіанти з кольорами з вашого styles.css
+        // buttons
         default: 'bg-gold-300 text-white button-semmibold hover:bg-dark-200 button-semibold',
         primary: 'bg-dark-200 text-white button-semmibold hover:bg-gold-300',
 
-        // Варіанти для іконок у колі (різні типи фонів)
+        // icon in circle
         'circle-white': 'bg-white text-gold-300 hover:bg-gold-300 hover:text-white',
         'circle-light': 'bg-light-200 text-dark-200 hover:bg-gold-300 hover:text-white',
         'circle-gold': 'hover:bg-gold-200 text-white bg-gold-300 hover:text-white',
         'circle-outline':
           'border border-gold-300 bg-transparent hover:border-transparent text-dark-200 hover:bg-light-200 aria-current:text-light-200 aria-current:border-transparent',
 
-        // Чистий текст / посилання
+        // link
         link: 'text-dark-200 link hover:text-gold-300 p-0 bg-transparent aria-current:text-gold-300',
         outline: 'text-dark-200 button-semibold hover:text-gold-300',
       },
       size: {
-        // Стандартний великий розмір кнопок із текстом для сайту (h-[75px])
         default: 'h-[75px] px-[48px] py-[26px] rounded-[18px] gap-[10px]',
         sm: 'h-12 px-6 rounded-xl gap-2 text-sm',
 
-        // Розміри для круглих кнопок-іконок
+        // for icons
         'icon-xl': 'size-[93px] p-0',
         'icon-lg': 'size-[70px] p-0',
         'icon-md': 'size-[52px] p-0',
@@ -67,20 +66,16 @@ function Button({
 }: ButtonProps) {
   const Comp = asChild ? Slot.Root : 'button'
 
-  // Перевіряємо, чи це круглий варіант за замовчуванням, щоб автоматично зробити його колом
   const isCircleVariant = variant?.toString().startsWith('circle-')
   const shouldBeCircle = isCircle || isCircleVariant
 
-  // Рендеримо компонент іконки з підтримкою group-hover анімацій
   const renderIcon = () => {
     if (!IconProp) return null
     return (
       <IconProp
         className={cn(
           'transition-transform duration-300 ease-out',
-          // Якщо це іконка в кінці тексту, вона плавно летить вправо-вгору на ховері
           iconPlacement === 'end' && !isCircleVariant && 'group-hover/button:translate-x-1',
-          // If це іконка на початку тексту, можна налаштувати інший рух
           iconPlacement === 'start' && !isCircleVariant && 'group-hover/button:-translate-x-1',
         )}
       />
@@ -96,7 +91,7 @@ function Button({
       className={cn(
         buttonVariants({ variant, size, className }),
 
-        shouldBeCircle && 'rounded-full', // Динамічно робимо кнопку круглою
+        shouldBeCircle && 'rounded-full',
       )}
       {...props}
     >
