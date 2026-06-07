@@ -2,7 +2,9 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import Link from 'next/link'
 import Image from 'next/image'
-import LanguageSwitcher from '../ui/dropdownMenu'
+import NavLink from '../ui/MenuComp/NavLink'
+import LanguageSwitcher from '../ui/MenuComp/LanguageSwitcher'
+import MobileMenu from '../ui/MenuComp/MobileMenu'
 import { Locales } from '../../_locales/types'
 
 interface HeaderProps {
@@ -12,6 +14,16 @@ interface HeaderProps {
 export default async function Header({ locale }: HeaderProps) {
   const payload = await getPayload({ config })
 
+  const MENU_MOCK = [
+    { id: '1', title: locale === Locales.DE ? 'Über uns' : 'About Us', slug: 'about' },
+    { id: '2', title: locale === Locales.DE ? 'Dienstleistungen' : 'Services', slug: 'services' },
+    { id: '3', title: locale === Locales.DE ? 'Projekte' : 'Projects', slug: 'projects' },
+    { id: '4', title: locale === Locales.DE ? 'Galerie' : 'Gallery', slug: 'gallery' },
+    { id: '5', title: locale === Locales.DE ? 'Blog' : 'Blog', slug: 'blog' },
+    { id: '6', title: locale === Locales.DE ? 'Preise' : 'Pricing', slug: 'pricing' },
+    { id: '7', title: locale === Locales.DE ? 'Kontakt' : 'Contact', slug: 'contact' },
+  ]
+
   const logoSettings = await payload.findGlobal({
     slug: 'logo-settings',
   })
@@ -20,7 +32,7 @@ export default async function Header({ locale }: HeaderProps) {
     slug: 'main-menu',
   })
 
-  const dynamicItems = (mainMenu.items as any[]) || []
+  const dynamicItems = MENU_MOCK
 
   const homePage = {
     id: 'static-home',
@@ -37,9 +49,11 @@ export default async function Header({ locale }: HeaderProps) {
     })),
   ]
 
-  const MAX_VISIBLE_ITEMS = 6
-  const visiblePages = allHeaderPages.slice(0, MAX_VISIBLE_ITEMS)
-  const hiddenPages = allHeaderPages.slice(MAX_VISIBLE_ITEMS)
+  const MAX_VISIBLE_ITEMS = 4
+  const shouldSlice = allHeaderPages.length > MAX_VISIBLE_ITEMS + 1
+
+  const visiblePages = shouldSlice ? allHeaderPages.slice(0, MAX_VISIBLE_ITEMS) : allHeaderPages
+  const hasMorePages = shouldSlice ? allHeaderPages.slice(MAX_VISIBLE_ITEMS) : []
 
   return (
     <header className="w-full sticky top-0 z-40">
@@ -63,32 +77,18 @@ export default async function Header({ locale }: HeaderProps) {
 
         <div className="hidden md:flex items-center gap-8">
           <nav className="flex items-center gap-6">
-            {visiblePages.map((page) => (
-              <Link
-                key={page.id}
-                href={`/${page.slug ? `/${page.slug}` : ''}`}
-                className="text-dark-200/80 hover:text-dark-200 font-medium transition-colors"
-              >
-                {page.title}
-              </Link>
-            ))}
+            {visiblePages.map((page) => {
+              const pageHref = `/${locale}${page.slug ? `/${page.slug}` : ''}`
+
+              return <NavLink key={page.id} href={pageHref} title={page.title} />
+            })}
           </nav>
 
           <LanguageSwitcher currentLocale={locale} />
         </div>
 
-        {/* MOB */}
-        <div className="block md:hidden">
-          <button className="p-2 text-dark-200">
-            <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+        <div className={hasMorePages ? 'block' : 'block md:hidden'}>
+          <MobileMenu allPages={allHeaderPages} locale={locale} />
         </div>
       </div>
     </header>

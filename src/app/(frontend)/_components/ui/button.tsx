@@ -82,6 +82,8 @@ function Button({
     )
   }
 
+  console.log('btn isActive', isActive)
+
   return (
     <Comp
       data-slot="button"
@@ -92,6 +94,7 @@ function Button({
         buttonVariants({ variant, size, className }),
 
         shouldBeCircle && 'rounded-full',
+        isActive && 'text-gold-300! font-bold',
       )}
       {...props}
     >
