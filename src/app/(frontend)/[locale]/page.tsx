@@ -14,14 +14,5 @@ export default async function HomePage({ params }: PageProps) {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  return (
-    <div className="py-20 text-center">
-      <h1 className="text-4xl font-bold font-dm text-slate-800">
-        SELHONO ({locale.toUpperCase()})
-      </h1>
-      <p className="mt-4 text-lg font-jost text-slate-600">
-        Let's make your home beautiful together
-      </p>
-    </div>
-  )
+  return <div className="py-20 text-center"></div>
 }

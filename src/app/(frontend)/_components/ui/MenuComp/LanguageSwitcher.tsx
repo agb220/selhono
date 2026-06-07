@@ -1,10 +1,8 @@
 'use client'
-
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-
-import { DropDownSvg } from '../../icons'
-import { Locales } from '../../../_locales/types'
 import { useChangeLocale } from '../../../_locales/client'
+import { Locales } from '../../../_locales/types'
+import { DropDownSvg } from '../../icons'
 
 interface LanguageSwitcherProps {
   currentLocale: string
@@ -16,7 +14,7 @@ export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProp
   return (
     <div className="pl-6 flex items-center">
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="flex items-center gap-1.5 text-sm font-semibold text-dark-200 hover:text-dark-200/80 transition-colors uppercase outline-none select-none cursor-pointer group">
+        <DropdownMenu.Trigger className="flex items-center gap-1.5 link  hover:text-gold-300 transition-colors uppercase outline-none select-none cursor-pointer group">
           {currentLocale}
           <DropDownSvg
             className="size-4 opacity-60 transition-transform duration-200 group-data-[state=open]:rotate-180"

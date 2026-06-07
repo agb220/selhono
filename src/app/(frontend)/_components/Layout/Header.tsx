@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getScopedI18n } from '../../_locales/server'
 import NavLink from '../ui/MenuComp/NavLink'
 import LanguageSwitcher from '../ui/MenuComp/LanguageSwitcher'
 import MobileMenu from '../ui/MenuComp/MobileMenu'
@@ -12,6 +13,7 @@ interface HeaderProps {
 }
 
 export default async function Header({ locale }: HeaderProps) {
+  const t = getScopedI18n('menu')
   const payload = await getPayload({ config })
 
   const MENU_MOCK = [
@@ -75,7 +77,7 @@ export default async function Header({ locale }: HeaderProps) {
           )}
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden xl:flex items-center gap-8">
           <nav className="flex items-center gap-6">
             {visiblePages.map((page) => {
               const pageHref = `/${locale}${page.slug ? `/${page.slug}` : ''}`
@@ -87,7 +89,7 @@ export default async function Header({ locale }: HeaderProps) {
           <LanguageSwitcher currentLocale={locale} />
         </div>
 
-        <div className={hasMorePages ? 'block' : 'block md:hidden'}>
+        <div className={hasMorePages ? 'block' : 'block xl:hidden'}>
           <MobileMenu allPages={allHeaderPages} locale={locale} />
         </div>
       </div>

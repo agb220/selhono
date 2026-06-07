@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { usePathname } from 'next/navigation'
 import NavLink from './NavLink'
-import { useChangeLocale } from '../../../_locales/client'
+import { useChangeLocale, useScopedI18n } from '../../../_locales/client'
 import { Locales } from '../../../_locales/types'
 
 interface MobileMenuProps {
@@ -12,6 +12,7 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
+  const t = useScopedI18n('menu')
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimated, setIsAnimated] = useState(false)
   const pathname = usePathname()
@@ -89,7 +90,7 @@ export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
             </button>
           </div>
 
-          <Dialog.Title className="sr-only">Navigation Menu</Dialog.Title>
+          <Dialog.Title className="sr-only">{t('navTitle')}</Dialog.Title>
           <nav className="flex-1 overflow-y-auto pr-2 mb-6 flex flex-col gap-4 items-start scrollbar-thin">
             {allPages.map((page) => {
               const pageHref = `/${locale}${page.slug ? `/${page.slug}` : ''}`
@@ -99,7 +100,7 @@ export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
 
           <div className="pt-4 border-t border-border/60 flex flex-col gap-3 shrink-0">
             <span className="text-xs font-bold text-dark-200/40 uppercase tracking-widest">
-              {locale === Locales.DE ? 'Sprache' : 'Language'}
+              {locale === Locales.DE ? t('lang') : t('lang')}
             </span>
             <div className="grid grid-cols-2 gap-3">
               <button
