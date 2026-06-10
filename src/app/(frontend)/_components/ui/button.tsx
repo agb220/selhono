@@ -92,6 +92,7 @@ function Button({
         buttonVariants({ variant, size, className }),
 
         shouldBeCircle && 'rounded-full',
+        isActive && 'text-gold-300! font-bold',
       )}
       {...props}
     >
