@@ -1,8 +1,8 @@
 'use client'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { Button } from '../Button'
 import { cn } from '@/lib/utils'
+import { Button } from '../Button'
 
 interface NavLinkProps {
   href: string
