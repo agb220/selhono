@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    categories: Category;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -93,11 +95,15 @@ export interface Config {
     homepage: Homepage;
     'main-menu': MainMenu;
     'logo-settings': LogoSetting;
+    'footer-settings': FooterSetting;
+    'social-links': SocialLink;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     'main-menu': MainMenuSelect<false> | MainMenuSelect<true>;
     'logo-settings': LogoSettingsSelect<false> | LogoSettingsSelect<true>;
+    'footer-settings': FooterSettingsSelect<false> | FooterSettingsSelect<true>;
+    'social-links': SocialLinksSelect<false> | SocialLinksSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -202,6 +208,20 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  /**
+   * генерується автоматично з англійської назви сторінки
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -235,6 +255,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: string | Category;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -326,6 +350,16 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -424,6 +458,48 @@ export interface LogoSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer-settings".
+ */
+export interface FooterSetting {
+  id: string;
+  companyBlock: {
+    description: string;
+  };
+  columnTitles: {
+    pagesTitle: string;
+    servicesTitle: string;
+    contactTitle: string;
+  };
+  contactBlock?: {
+    address?: string | null;
+    email?: string | null;
+    phone?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social-links".
+ */
+export interface SocialLink {
+  id: string;
+  links?:
+    | {
+        name: string;
+        url: string;
+        /**
+         * Завантажте файл іконки у форматі .svg
+         */
+        icon: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "homepage_select".
  */
 export interface HomepageSelect<T extends boolean = true> {
@@ -454,6 +530,51 @@ export interface LogoSettingsSelect<T extends boolean = true> {
   logoType?: T;
   logoText?: T;
   logoImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer-settings_select".
+ */
+export interface FooterSettingsSelect<T extends boolean = true> {
+  companyBlock?:
+    | T
+    | {
+        description?: T;
+      };
+  columnTitles?:
+    | T
+    | {
+        pagesTitle?: T;
+        servicesTitle?: T;
+        contactTitle?: T;
+      };
+  contactBlock?:
+    | T
+    | {
+        address?: T;
+        email?: T;
+        phone?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social-links_select".
+ */
+export interface SocialLinksSelect<T extends boolean = true> {
+  links?:
+    | T
+    | {
+        name?: T;
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

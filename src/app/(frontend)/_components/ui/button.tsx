@@ -82,8 +82,6 @@ function Button({
     )
   }
 
-  console.log('btn isActive', isActive)
-
   return (
     <Comp
       data-slot="button"

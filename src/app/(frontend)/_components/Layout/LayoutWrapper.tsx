@@ -12,7 +12,7 @@ const LayoutWrapper = async ({ children, params }: LayoutWrapperProps) => {
     <>
       <Header locale={locale} />
       {children}
-      <Footer />
+      <Footer locale={locale} />
     </>
   )
 }

@@ -5,12 +5,16 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { en } from '@payloadcms/translations/languages/en'
+import { de } from '@payloadcms/translations/languages/de'
 import { Users } from './app/(payload)/_collections/Users'
 import { Media } from './app/(payload)/_collections/Media'
 import { Pages } from './app/(payload)/_collections/Pages'
 import { Homepage } from './app/(payload)/_globals/Homepage'
 import { MainMenu } from './app/(payload)/_globals/MainMenu'
 import { LogoSettings } from './app/(payload)/_globals/LogoSettings'
+import Categories from './app/(payload)/_collections/Categories'
+import { FooterSettings } from './app/(payload)/_globals/FooterSettings'
+import { SocialLinks } from './app/(payload)/_globals/SocialLinks'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,8 +26,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages],
-  globals: [Homepage, MainMenu, LogoSettings],
+  collections: [Users, Media, Pages, Categories],
+  globals: [Homepage, MainMenu, LogoSettings, FooterSettings, SocialLinks],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -36,11 +40,20 @@ export default buildConfig({
   plugins: [],
 
   localization: {
-    locales: ['en', 'de'],
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Deutsch',
+        code: 'de',
+      },
+    ],
     defaultLocale: 'en',
     fallback: true,
   },
   i18n: {
-    supportedLanguages: { en },
+    supportedLanguages: { en, de },
   },
 })

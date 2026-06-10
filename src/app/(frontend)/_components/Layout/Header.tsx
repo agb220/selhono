@@ -58,7 +58,7 @@ export default async function Header({ locale }: HeaderProps) {
   const hasMorePages = shouldSlice ? allHeaderPages.slice(MAX_VISIBLE_ITEMS) : []
 
   return (
-    <header className="w-full sticky top-0 z-40">
+    <header className="w-full sticky top-0 z-40 bg-white">
       <div className="container max-h-20 py-4 md:py-14 flex items-center justify-between">
         <Link
           href="/"

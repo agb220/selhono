@@ -7,15 +7,14 @@ import { cn } from '@/lib/utils'
 interface NavLinkProps {
   href: string
   title: string
+  className?: string
 }
 
-export default function NavLink({ href, title }: NavLinkProps) {
+export default function NavLink({ href, title, className }: NavLinkProps) {
   const pathname = usePathname()
 
   const isActive =
     pathname === href || (href !== '/en' && href !== '/de' && pathname.startsWith(href))
-
-  console.log('isActive', isActive)
 
   return (
     <Button
@@ -23,7 +22,7 @@ export default function NavLink({ href, title }: NavLinkProps) {
       size="menu"
       isActive={isActive}
       asChild
-      className={cn(isActive && 'text-gold-300! font-bold')}
+      className={(cn(isActive && 'text-gold-300! font-bold'), 'font-normal!')}
     >
       <Link href={href}>{title}</Link>
     </Button>
