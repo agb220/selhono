@@ -23,7 +23,7 @@ export default async function HomePage() {
 
   return (
     <LayoutWrapper>
-      <main className="py-20">
+      <main className="">
         {(findResult.layout || []).map((section: any, idx: number) => {
           if (section.blockType === 'main-hero') {
             return <MainHeroSection key={idx} {...section} />

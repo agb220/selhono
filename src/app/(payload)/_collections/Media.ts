@@ -2,26 +2,103 @@ import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  admin: {
-    group: 'Налаштування',
-  },
-  access: {
-    read: () => true,
-  },
   fields: [
     {
       name: 'alt',
       type: 'text',
-      required: true,
     },
   ],
   upload: {
     staticDir: 'media',
-    mimeTypes: ['image/*'],
-    disableLocalStorage: false,
-
-    formatOptions: {
-      format: 'png',
-    },
+    mimeTypes: ['image/*', 'application/pdf'],
+    imageSizes: [
+      {
+        name: 'thumbnail',
+        width: 400,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'jpg',
+          options: {
+            quality: 60,
+          },
+        },
+      },
+      {
+        name: 'card',
+        width: 600,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'jpg',
+          options: {
+            quality: 80,
+          },
+        },
+      },
+      {
+        name: 'slider',
+        width: 1280,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'jpg',
+          options: {
+            quality: 80,
+          },
+        },
+      },
+      {
+        name: 'big',
+        width: 2000,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'jpg',
+          options: {
+            quality: 80,
+          },
+        },
+      },
+      {
+        name: 'large',
+        width: 2800,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'jpg',
+          options: {
+            quality: 80,
+          },
+        },
+      },
+      {
+        name: 'pngSlider',
+        width: 1200,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'png',
+          options: {
+            quality: 80,
+          },
+        },
+      },
+      {
+        name: 'pngBig',
+        width: 2000,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'png',
+          options: {
+            quality: 80,
+          },
+        },
+      },
+    ],
+  },
+  access: {
+    read: () => true,
   },
 }

@@ -9,7 +9,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         // buttons
-        default: 'bg-gold-300 text-white button-semmibold hover:bg-dark-200 button-semibold',
+        default:
+          'bg-gold-300 text-white button-semmibold hover:bg-dark-200 button-semibold hover:bg-dark-200!',
         primary: 'bg-dark-200 text-white button-semmibold hover:bg-gold-300',
 
         // icon in circle
@@ -90,18 +91,34 @@ function Button({
       aria-current={isActive ? 'page' : props['aria-current']}
       className={cn(
         buttonVariants({ variant, size, className }),
-
         shouldBeCircle && 'rounded-full',
         isActive && 'text-gold-300! font-bold',
       )}
       {...props}
     >
       {asChild ? (
-        children
+        IconProp && React.isValidElement(children) ? (
+          React.cloneElement(
+            children as React.ReactElement<any>,
+            {
+              className: cn(
+                'inline-flex items-center justify-center gap-[10px]',
+                (children.props as any).className,
+              ),
+            },
+            <>
+              {iconPlacement === 'start' && renderIcon()}
+              {(children.props as any).children}
+              {iconPlacement === 'end' && renderIcon()}
+            </>,
+          )
+        ) : (
+          children
+        )
       ) : (
         <>
           {IconProp && iconPlacement === 'start' && renderIcon()}
-          {children && <span>{children}</span>}
+          {children}
           {IconProp && iconPlacement === 'end' && renderIcon()}
         </>
       )}

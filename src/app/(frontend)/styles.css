@@ -52,19 +52,19 @@ svg {
   @apply mx-auto !max-w-[calc(100%-32px)] md:!max-w-[calc(100%-80px)] xl:!max-w-[1240px];
 }
 
-.h1 {
-  @apply font-dm text-[65px] leading-tight font-normal;
+@utility h1 {
+  @apply font-dm text-[70px] leading-tight font-normal;
 }
 
-.h2 {
+@utility h2 {
   @apply font-dm text-[60px] leading-tight font-normal;
 }
 
-.h3 {
+@utility h3 {
   @apply font-dm text-[55px] leading-tight font-normal;
 }
 
-.h4 {
+@utility h4 {
   @apply font-dm text-[50px] leading-tight font-normal;
 }
 
