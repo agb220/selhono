@@ -11,6 +11,8 @@ interface LanguageSwitcherProps {
 export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
   const changeLocale = useChangeLocale()
 
+  console.log('changeLocale', changeLocale)
+
   return (
     <div className="pl-6 flex items-center">
       <DropdownMenu.Root>

@@ -1,54 +1,22 @@
 import { GlobalConfig } from 'payload'
+import { MainHeroBlock } from '../_collections/MainHeroBlock'
 
-export const Homepage: GlobalConfig = {
-  slug: 'homepage',
+export const HomePage: GlobalConfig = {
+  slug: 'home-page',
+  access: {
+    read: () => true,
+  },
   label: 'Головна сторінка',
   admin: {
-    group: 'Контент сайту',
+    group: 'Сторінки',
   },
   fields: [
     {
-      type: 'tabs', // Розбиваємо полях по вкладках, щоб адмінка була красивою
-      tabs: [
-        {
-          label: 'Головний екран (Hero)',
-          fields: [
-            {
-              name: 'heroTitle',
-              type: 'text',
-              required: true,
-              label: 'Головний заголовок (H1)',
-              defaultValue: 'Ми створюємо унікальний дизайн',
-            },
-            {
-              name: 'heroDescription',
-              type: 'textarea',
-              label: 'Опис під заголовком',
-            },
-            {
-              name: 'heroImage',
-              type: 'upload',
-              relationTo: 'media',
-              label: 'Фонова картинка',
-            },
-          ],
-        },
-        {
-          label: 'Секція Про нас',
-          fields: [
-            {
-              name: 'aboutTitle',
-              type: 'text',
-              label: 'Заголовок секції',
-            },
-            {
-              name: 'aboutText',
-              type: 'richText',
-              label: 'Текст',
-            },
-          ],
-        },
-      ],
+      name: 'layout',
+      type: 'blocks',
+      label: 'Конструктор головної сторінки',
+      minRows: 1,
+      blocks: [MainHeroBlock],
     },
   ],
 }

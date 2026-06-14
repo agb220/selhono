@@ -6,13 +6,12 @@ import { Button } from '../ui/Button'
 import NavLink from '../ui/MenuComp/NavLink'
 import { Locales } from '../../_locales/types'
 import SocialMediaComp from '../Shared/SocialMediaComp'
+import { getCurrentLocale } from '../../_locales/server'
 
-interface FooterProps {
-  locale: string
-}
-
-const Footer = async ({ locale }: FooterProps) => {
+const Footer = async () => {
   const payload = await getPayload({ config })
+  const locale = await getCurrentLocale()
+
   const logoSettings = await payload.findGlobal({
     slug: 'logo-settings',
   })

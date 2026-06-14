@@ -92,14 +92,14 @@ export interface Config {
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'de') | ('en' | 'de')[];
   globals: {
-    homepage: Homepage;
+    'home-page': HomePage;
     'main-menu': MainMenu;
     'logo-settings': LogoSetting;
     'footer-settings': FooterSetting;
     'social-links': SocialLink;
   };
   globalsSelect: {
-    homepage: HomepageSelect<false> | HomepageSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'main-menu': MainMenuSelect<false> | MainMenuSelect<true>;
     'logo-settings': LogoSettingsSelect<false> | LogoSettingsSelect<true>;
     'footer-settings': FooterSettingsSelect<false> | FooterSettingsSelect<true>;
@@ -405,31 +405,27 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage".
+ * via the `definition` "home-page".
  */
-export interface Homepage {
+export interface HomePage {
   id: string;
-  heroTitle: string;
-  heroDescription?: string | null;
-  heroImage?: (string | null) | Media;
-  aboutTitle?: string | null;
-  aboutText?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  layout?: MainHeroBlockType[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MainHeroBlockType".
+ */
+export interface MainHeroBlockType {
+  title: string;
+  subtitle: string;
+  buttonText?: string | null;
+  buttonLink?: string | null;
+  backgroundImage: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'main-hero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -500,17 +496,30 @@ export interface SocialLink {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage_select".
+ * via the `definition` "home-page_select".
  */
-export interface HomepageSelect<T extends boolean = true> {
-  heroTitle?: T;
-  heroDescription?: T;
-  heroImage?: T;
-  aboutTitle?: T;
-  aboutText?: T;
+export interface HomePageSelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        'main-hero'?: T | MainHeroBlockTypeSelect<T>;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MainHeroBlockType_select".
+ */
+export interface MainHeroBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  backgroundImage?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

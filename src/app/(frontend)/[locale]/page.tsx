@@ -1,18 +1,35 @@
-import { headers as getHeaders } from 'next/headers'
 import { getPayload } from 'payload'
-import React from 'react'
 import config from '@/payload.config'
+import MainHeroSection from '../_components/MainHeroSection'
+import LayoutWrapper from '../_components/Layout/LayoutWrapper'
+import { getCurrentLocale } from '../_locales/server'
+import { notFound } from 'next/navigation'
 
-interface PageProps {
-  params: Promise<{ locale: string }>
-}
+export default async function HomePage() {
+  const locale = await getCurrentLocale()
 
-export default async function HomePage({ params }: PageProps) {
-  const { locale } = await params
-
-  const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  return <div className="py-20 text-center"></div>
+  const findResult = await payload.findGlobal({
+    slug: 'home-page',
+    locale: locale as any,
+    depth: 2,
+  })
+
+  if (!findResult) {
+    return notFound()
+  }
+
+  return (
+    <LayoutWrapper>
+      <main className="py-20">
+        {(findResult.layout || []).map((section: any, idx: number) => {
+          if (section.blockType === 'main-hero') {
+            return <MainHeroSection key={idx} {...section} />
+          }
+        })}
+      </main>
+    </LayoutWrapper>
+  )
 }
