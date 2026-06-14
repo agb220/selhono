@@ -2,17 +2,15 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import Image from 'next/image'
 import Link from 'next/dist/client/link'
-import { Button } from '../ui/Button'
 import NavLink from '../ui/MenuComp/NavLink'
 import { Locales } from '../../_locales/types'
 import SocialMediaComp from '../Shared/SocialMediaComp'
+import { getCurrentLocale } from '../../_locales/server'
 
-interface FooterProps {
-  locale: string
-}
-
-const Footer = async ({ locale }: FooterProps) => {
+const Footer = async () => {
   const payload = await getPayload({ config })
+  const locale = await getCurrentLocale()
+
   const logoSettings = await payload.findGlobal({
     slug: 'logo-settings',
   })
@@ -37,7 +35,7 @@ const Footer = async ({ locale }: FooterProps) => {
   const pagesLinks = mainMenu.items || []
 
   return (
-    <footer className="container">
+    <footer className="container pt-10">
       <div className="flex flex-col xl:flex-row  mb-16 xl:mb-34.5 justify-between gap-14 xl:gap-25.25">
         <div className=" ">
           <div>

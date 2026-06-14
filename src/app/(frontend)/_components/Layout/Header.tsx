@@ -2,19 +2,17 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getScopedI18n } from '../../_locales/server'
+import { getCurrentLocale, getScopedI18n } from '../../_locales/server'
 import NavLink from '../ui/MenuComp/NavLink'
 import LanguageSwitcher from '../ui/MenuComp/LanguageSwitcher'
 import MobileMenu from '../ui/MenuComp/MobileMenu'
 import { Locales } from '../../_locales/types'
 
-interface HeaderProps {
-  locale: string
-}
-
-export default async function Header({ locale }: HeaderProps) {
+export default async function Header() {
   const t = getScopedI18n('menu')
   const payload = await getPayload({ config })
+
+  const locale = await getCurrentLocale()
 
   const MENU_MOCK = [
     { id: '1', title: locale === Locales.DE ? 'Über uns' : 'About Us', slug: 'about' },

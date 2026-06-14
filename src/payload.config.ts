@@ -9,7 +9,7 @@ import { de } from '@payloadcms/translations/languages/de'
 import { Users } from './app/(payload)/_collections/Users'
 import { Media } from './app/(payload)/_collections/Media'
 import { Pages } from './app/(payload)/_collections/Pages'
-import { Homepage } from './app/(payload)/_globals/Homepage'
+import { HomePage } from './app/(payload)/_globals/HomePage'
 import { MainMenu } from './app/(payload)/_globals/MainMenu'
 import { LogoSettings } from './app/(payload)/_globals/LogoSettings'
 import Categories from './app/(payload)/_collections/Categories'
@@ -27,7 +27,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Pages, Categories],
-  globals: [Homepage, MainMenu, LogoSettings, FooterSettings, SocialLinks],
+  globals: [HomePage, MainMenu, LogoSettings, FooterSettings, SocialLinks],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
