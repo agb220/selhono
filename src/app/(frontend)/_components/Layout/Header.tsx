@@ -55,8 +55,6 @@ export default async function Header() {
   const visiblePages = shouldSlice ? allHeaderPages.slice(0, MAX_VISIBLE_ITEMS) : allHeaderPages
   const hasMorePages = shouldSlice ? allHeaderPages.slice(MAX_VISIBLE_ITEMS) : []
 
-  console.log('locale', locale)
-
   return (
     <header className="w-full sticky top-0 z-40 bg-white">
       <div className="container max-h-20 py-4 md:py-14 flex items-center justify-between">
