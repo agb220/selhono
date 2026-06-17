@@ -68,15 +68,15 @@ svg {
   @apply font-dm text-[50px] leading-tight font-normal;
 }
 
-.h5 {
+@utility h5 {
   @apply font-dm text-[25px] leading-tight font-normal;
 }
 
-.h5 {
+.h6 {
   @apply font-dm text-[22px] leading-normal font-normal;
 }
 
-.h6 {
+.h7 {
   @apply font-dm text-xl leading-tight font-normal;
 }
 

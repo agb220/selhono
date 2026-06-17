@@ -8,10 +8,8 @@ import { ArrowSvg } from './icons'
 import { Button } from './ui/Button'
 
 const MainHeroSection = (props: MainHeroBlockType) => {
-  console.log('props', props)
-
   return (
-    <section className="container">
+    <section className="container mb-14 md:mb-18 xl:mb-23.75">
       <div className="relative h-[90vh] md:h-[85vh] w-full rounded-tl-[100px] rounded-br-[100px] overflow-hidden shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
         <div className="absolute inset-0 bg-black/25 z-10" />
         <Image
