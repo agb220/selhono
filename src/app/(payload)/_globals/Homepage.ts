@@ -1,5 +1,6 @@
 import { GlobalConfig } from 'payload'
-import { MainHeroBlock } from '../_collections/MainHeroBlock'
+import { MainHeroBlock } from '../_blocks/MainHeroBlock'
+import { ProcessSectionBlock } from '../_blocks/ProcessSectionBlock'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -16,7 +17,7 @@ export const HomePage: GlobalConfig = {
       type: 'blocks',
       label: 'Конструктор головної сторінки',
       minRows: 1,
-      blocks: [MainHeroBlock],
+      blocks: [MainHeroBlock, ProcessSectionBlock],
     },
   ],
 }

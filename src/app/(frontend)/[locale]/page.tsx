@@ -4,6 +4,7 @@ import MainHeroSection from '../_components/MainHeroSection'
 import LayoutWrapper from '../_components/Layout/LayoutWrapper'
 import { getCurrentLocale } from '../_locales/server'
 import { notFound } from 'next/navigation'
+import WorkStagesSection from '../_components/Shared/WorkStagesSection'
 
 export default async function HomePage() {
   const locale = await getCurrentLocale()
@@ -27,6 +28,10 @@ export default async function HomePage() {
         {(findResult.layout || []).map((section: any, idx: number) => {
           if (section.blockType === 'main-hero') {
             return <MainHeroSection key={idx} {...section} />
+          }
+
+          if (section.blockType === 'process-section') {
+            return <WorkStagesSection key={idx} items={section.stages || []} />
           }
         })}
       </main>

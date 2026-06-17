@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     pages: Page;
     categories: Category;
+    'work-stage': WorkStage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'work-stage': WorkStageSelect<false> | WorkStageSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -280,6 +282,19 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "work-stage".
+ */
+export interface WorkStage {
+  id: string;
+  title: string;
+  description: string;
+  nameLink: string;
+  link: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -317,6 +332,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: string | Category;
+      } | null)
+    | ({
+        relationTo: 'work-stage';
+        value: string | WorkStage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -497,6 +516,18 @@ export interface CategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "work-stage_select".
+ */
+export interface WorkStageSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  nameLink?: T;
+  link?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -541,7 +572,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface HomePage {
   id: string;
-  layout?: MainHeroBlockType[] | null;
+  layout?: (MainHeroBlockType | ProcessSectionBlockType)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -558,6 +589,16 @@ export interface MainHeroBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'main-hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessSectionBlockType".
+ */
+export interface ProcessSectionBlockType {
+  stages: (string | WorkStage)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'process-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -635,6 +676,7 @@ export interface HomePageSelect<T extends boolean = true> {
     | T
     | {
         'main-hero'?: T | MainHeroBlockTypeSelect<T>;
+        'process-section'?: T | ProcessSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -650,6 +692,15 @@ export interface MainHeroBlockTypeSelect<T extends boolean = true> {
   buttonText?: T;
   buttonLink?: T;
   backgroundImage?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessSectionBlockType_select".
+ */
+export interface ProcessSectionBlockTypeSelect<T extends boolean = true> {
+  stages?: T;
   id?: T;
   blockName?: T;
 }

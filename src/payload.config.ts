@@ -15,6 +15,7 @@ import { LogoSettings } from './app/(payload)/_globals/LogoSettings'
 import Categories from './app/(payload)/_collections/Categories'
 import { FooterSettings } from './app/(payload)/_globals/FooterSettings'
 import { SocialLinks } from './app/(payload)/_globals/SocialLinks'
+import { WorkStage } from './app/(payload)/_collections/WorkStage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,7 +27,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Categories],
+  collections: [Users, Media, Pages, Categories, WorkStage],
   globals: [HomePage, MainMenu, LogoSettings, FooterSettings, SocialLinks],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
