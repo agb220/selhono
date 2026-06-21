@@ -41,16 +41,18 @@ const Footer = async () => {
           <div>
             <Link
               href="/"
-              className="flex items-center gap-2 text-2xl font-bold tracking-tight text-dark-200 min-w-56.75"
+              className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight text-dark-200"
             >
               {logoSettings.logoType === 'image' && logoSettings.logoImage ? (
-                <Image
-                  src={(logoSettings.logoImage as any).url}
-                  alt={(logoSettings.logoImage as any).alt || 'Logo'}
-                  width={140}
-                  height={40}
-                  className="object-contain max-h-8 md:max-h-12.5 w-auto"
-                />
+                <div className="max-h-8 md:max-h-12.5 min-w-56.75">
+                  <Image
+                    src={(logoSettings.logoImage as any).url}
+                    alt={(logoSettings.logoImage as any).alt || 'Logo'}
+                    height={50}
+                    width={227}
+                    className="object-cover object-center"
+                  />
+                </div>
               ) : (
                 <>{logoSettings.logoText || 'SELHONO'}</>
               )}
