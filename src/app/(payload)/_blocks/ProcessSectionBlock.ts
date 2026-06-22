@@ -9,7 +9,7 @@ export const ProcessSectionBlock: Block = {
   },
 
   admin: {
-    group: 'Конструктор сторінок',
+    group: 'Page Builder',
     images: {
       thumbnail: {
         url: '/blocks/WorkStages.png',

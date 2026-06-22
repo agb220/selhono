@@ -135,3 +135,7 @@ svg {
 .input-medium {
   @apply font-jost text-[22px] leading-normal font-normal;
 }
+
+.clip-promo-section {
+  clip-path: path('M 0 0 L 215 0 A 420 420 0 0 1 365 350 L 365 2000 L 3000 2000 L 3000 0 Z');
+}

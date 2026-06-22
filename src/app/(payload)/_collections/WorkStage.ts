@@ -6,7 +6,7 @@ export const WorkStage: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'updatedAt'],
-    group: 'Контент блоків',
+    group: 'Blocks Content',
   },
 
   labels: {
@@ -42,7 +42,7 @@ export const WorkStage: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Посилання для кнопки (Read More)',
-      defaultValue: '#',
+      defaultValue: '/',
     },
   ],
 }

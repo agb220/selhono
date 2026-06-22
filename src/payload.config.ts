@@ -16,6 +16,7 @@ import Categories from './app/(payload)/_collections/Categories'
 import { FooterSettings } from './app/(payload)/_globals/FooterSettings'
 import { SocialLinks } from './app/(payload)/_globals/SocialLinks'
 import { WorkStage } from './app/(payload)/_collections/WorkStage'
+import { PromoBlock } from './app/(payload)/_globals/PromoBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,7 +29,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Pages, Categories, WorkStage],
-  globals: [HomePage, MainMenu, LogoSettings, FooterSettings, SocialLinks],
+  globals: [HomePage, MainMenu, LogoSettings, FooterSettings, SocialLinks, PromoBlock],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

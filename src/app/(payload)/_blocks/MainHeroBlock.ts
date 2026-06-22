@@ -8,7 +8,7 @@ export const MainHeroBlock: Block = {
   },
   interfaceName: 'MainHeroBlockType',
   admin: {
-    group: 'Конструктор сторінок',
+    group: 'Page Builder',
     images: {
       thumbnail: {
         url: '/blocks/MainHeroEx.png',

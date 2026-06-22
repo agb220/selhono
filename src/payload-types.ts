@@ -99,6 +99,7 @@ export interface Config {
     'logo-settings': LogoSetting;
     'footer-settings': FooterSetting;
     'social-links': SocialLink;
+    'promo-block': PromoBlock;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -106,6 +107,7 @@ export interface Config {
     'logo-settings': LogoSettingsSelect<false> | LogoSettingsSelect<true>;
     'footer-settings': FooterSettingsSelect<false> | FooterSettingsSelect<true>;
     'social-links': SocialLinksSelect<false> | SocialLinksSelect<true>;
+    'promo-block': PromoBlockSelect<false> | PromoBlockSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -572,7 +574,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface HomePage {
   id: string;
-  layout?: (MainHeroBlockType | ProcessSectionBlockType)[] | null;
+  layout?: (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -599,6 +601,15 @@ export interface ProcessSectionBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'process-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromoBlockSectionType".
+ */
+export interface PromoBlockSectionType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'promo-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -669,6 +680,27 @@ export interface SocialLink {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promo-block".
+ */
+export interface PromoBlock {
+  id: string;
+  title: string;
+  description: string;
+  contactInfo?: {
+    phone?: string | null;
+    label?: string | null;
+  };
+  ctaButton?: {
+    label?: string | null;
+    link?: string | null;
+  };
+  leftImage: string | Media;
+  rightImage: string | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -677,6 +709,7 @@ export interface HomePageSelect<T extends boolean = true> {
     | {
         'main-hero'?: T | MainHeroBlockTypeSelect<T>;
         'process-section'?: T | ProcessSectionBlockTypeSelect<T>;
+        'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -701,6 +734,14 @@ export interface MainHeroBlockTypeSelect<T extends boolean = true> {
  */
 export interface ProcessSectionBlockTypeSelect<T extends boolean = true> {
   stages?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromoBlockSectionType_select".
+ */
+export interface PromoBlockSectionTypeSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }
@@ -767,6 +808,31 @@ export interface SocialLinksSelect<T extends boolean = true> {
         icon?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promo-block_select".
+ */
+export interface PromoBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  contactInfo?:
+    | T
+    | {
+        phone?: T;
+        label?: T;
+      };
+  ctaButton?:
+    | T
+    | {
+        label?: T;
+        link?: T;
+      };
+  leftImage?: T;
+  rightImage?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
