@@ -2,25 +2,25 @@ import { GlobalConfig } from 'payload'
 
 export const LogoSettings: GlobalConfig = {
   slug: 'logo-settings',
-  label: 'Налаштування logo',
+  label: 'Logo Settings',
   admin: {
-    group: 'Налаштування',
+    group: 'Settings',
   },
   fields: [
     {
       name: 'logoType',
       type: 'select',
-      label: 'Тип логотипа',
+      label: 'Logo Type',
       defaultValue: 'text',
       options: [
-        { label: 'Текст', value: 'text' },
-        { label: 'Зображення (SVG/PNG)', value: 'image' },
+        { label: 'Text', value: 'text' },
+        { label: 'Image (SVG/PNG)', value: 'image' },
       ],
     },
     {
       name: 'logoText',
       type: 'text',
-      label: 'Текст логотипа',
+      label: 'Logo text',
 
       localized: true,
       admin: {
@@ -31,7 +31,7 @@ export const LogoSettings: GlobalConfig = {
       name: 'logoImage',
       type: 'upload',
       relationTo: 'media',
-      label: 'Файл логотипа',
+      label: 'Logo file',
       admin: {
         condition: (data) => data?.logoType === 'image',
       },

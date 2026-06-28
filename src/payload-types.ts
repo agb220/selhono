@@ -247,7 +247,7 @@ export interface Page {
   id: string;
   title: string;
   /**
-   * Наприклад: "services", "about", "project". Не використовуйте "index" або "/", бо головна сторінка вже створена в коді.
+   * For example: “services,” “about,” “project.” Do not use ‘index’ or “/,” because the home page has already been created in the code.
    */
   slug: string;
   content?: {
@@ -276,7 +276,7 @@ export interface Category {
   id: string;
   title: string;
   /**
-   * генерується автоматично з англійської назви сторінки
+   * is automatically generated from the English page title
    */
   slug: string;
   updatedAt: string;
@@ -585,6 +585,9 @@ export interface HomePage {
 export interface MainHeroBlockType {
   title: string;
   subtitle: string;
+  /**
+   * Character limit: 25. Prevents layout breaking in the navigation menu.
+   */
   buttonText?: string | null;
   buttonLink?: string | null;
   backgroundImage: string | Media;
@@ -618,7 +621,7 @@ export interface PromoBlockSectionType {
 export interface MainMenu {
   id: string;
   /**
-   * Оберіть сторінки та перетягуйте їх для зміни порядку. Сторінка "Home" додається на сайт автоматично першою.
+   * Select the pages and drag and drop them to change their order. The “Home” page is automatically added to the site as the first page.
    */
   items?: (string | Page)[] | null;
   updatedAt?: string | null;
@@ -669,7 +672,7 @@ export interface SocialLink {
         name: string;
         url: string;
         /**
-         * Завантажте файл іконки у форматі .svg
+         * Upload an icon file in .svg format
          */
         icon: string | Media;
         id?: string | null;
@@ -692,6 +695,9 @@ export interface PromoBlock {
   };
   ctaButton?: {
     label?: string | null;
+    /**
+     * Character limit: 25. Prevents layout breaking in the navigation menu.
+     */
     link?: string | null;
   };
   leftImage: string | Media;

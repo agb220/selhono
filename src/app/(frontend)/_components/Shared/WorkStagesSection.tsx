@@ -17,7 +17,7 @@ const WorkStagesSection = (props: WorkStagesSectionProps) => {
   })
 
   return (
-    <section className="overflow-hidden mb-12 md:mb-20 xl:mb-38.5">
+    <section className="overflow-hidden mb-8 md:mb-12 xl:mb-20">
       <div className="container mx-auto">
         <div className="overflow-hidden" ref={emblaRef}>
           <ul className="flex gap-5 md:gap-10.5 group/list">

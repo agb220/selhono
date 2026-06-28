@@ -34,7 +34,7 @@ export const SocialLinks: GlobalConfig = {
           label: 'SVG Icon File',
           required: true,
           admin: {
-            description: 'Завантажте файл іконки у форматі .svg',
+            description: 'Upload an icon file in .svg format',
           },
         },
       ],

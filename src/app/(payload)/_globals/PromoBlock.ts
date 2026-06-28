@@ -54,6 +54,15 @@ export const PromoBlock: GlobalConfig = {
           name: 'link',
           type: 'text',
           label: 'Button Link (URL)',
+          admin: {
+            description: 'Character limit: 25. Prevents layout breaking in the navigation menu.',
+          },
+          validate: (val: any) => {
+            if (val && val.length > 25) {
+              return 'The label is too long! Maximum allowed is 25 characters.'
+            }
+            return true
+          },
         },
       ],
     },

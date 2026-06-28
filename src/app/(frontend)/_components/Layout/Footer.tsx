@@ -1,5 +1,3 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
 import Image from 'next/image'
 import Link from 'next/dist/client/link'
 import NavLink from '../ui/MenuComp/NavLink'
@@ -7,8 +5,10 @@ import { Locales } from '../../_locales/types'
 import SocialMediaComp from '../Shared/SocialMediaComp'
 import { getCurrentLocale } from '../../_locales/server'
 
+import { getPayload } from '@/lib/payload'
+
 const Footer = async () => {
-  const payload = await getPayload({ config })
+  const payload = await getPayload()
   const locale = await getCurrentLocale()
 
   const logoSettings = await payload.findGlobal({

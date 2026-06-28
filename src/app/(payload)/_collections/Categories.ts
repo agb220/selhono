@@ -46,7 +46,7 @@ const Categories: CollectionConfig = {
       },
       admin: {
         readOnly: false,
-        description: 'генерується автоматично з англійської назви сторінки',
+        description: 'is automatically generated from the English page title',
       },
     },
   ],

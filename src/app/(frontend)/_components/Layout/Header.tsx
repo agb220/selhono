@@ -1,5 +1,3 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getCurrentLocale, getScopedI18n } from '../../_locales/server'
@@ -7,10 +5,11 @@ import NavLink from '../ui/MenuComp/NavLink'
 import LanguageSwitcher from '../ui/MenuComp/LanguageSwitcher'
 import MobileMenu from '../ui/MenuComp/MobileMenu'
 import { Locales } from '../../_locales/types'
+import { getPayload } from '@/lib/payload'
 
 export default async function Header() {
   const t = getScopedI18n('menu')
-  const payload = await getPayload({ config })
+  const payload = await getPayload()
 
   const locale = await getCurrentLocale()
 
@@ -56,7 +55,7 @@ export default async function Header() {
   const hasMorePages = shouldSlice ? allHeaderPages.slice(MAX_VISIBLE_ITEMS) : []
 
   return (
-    <header className="w-full sticky top-0 z-40 bg-white">
+    <header className="w-full fixed top-0 z-40 bg-white">
       <div className="container max-h-20 py-4 md:py-14 flex items-center justify-between">
         <Link
           href="/"

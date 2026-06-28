@@ -10,8 +10,8 @@ export const WorkStage: CollectionConfig = {
   },
 
   labels: {
-    singular: 'Етап роботи',
-    plural: 'Етапи роботи',
+    singular: 'Stage of work',
+    plural: 'Stage of work',
   },
 
   fields: [
@@ -19,14 +19,14 @@ export const WorkStage: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
-      label: 'Заголовок картки',
+      label: 'Card Title',
       localized: true,
     },
     {
       name: 'description',
       type: 'textarea',
       required: true,
-      label: 'Опис картки',
+      label: 'Card Description',
       localized: true,
     },
     {
@@ -41,7 +41,7 @@ export const WorkStage: CollectionConfig = {
       name: 'link',
       type: 'text',
       required: true,
-      label: 'Посилання для кнопки (Read More)',
+      label: 'Link for the “Read More” button',
       defaultValue: '/',
     },
   ],

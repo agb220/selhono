@@ -5,14 +5,14 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    group: 'Контент сайту',
+    group: 'Website Content',
   },
   fields: [
     {
       name: 'title',
       type: 'text',
       required: true,
-      label: 'Назва сторінки',
+      label: 'Page Title',
     },
     {
       name: 'slug',
@@ -22,13 +22,13 @@ export const Pages: CollectionConfig = {
       label: 'Slug (URL адреса)',
       admin: {
         description:
-          'Наприклад: "services", "about", "project". Не використовуйте "index" або "/", бо головна сторінка вже створена в коді.',
+          'For example: “services,” “about,” “project.” Do not use ‘index’ or “/,” because the home page has already been created in the code.',
       },
     },
     {
       name: 'content',
       type: 'richText',
-      label: 'Контент сторінки',
+      label: 'Page Content',
     },
   ],
 }

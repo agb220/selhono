@@ -133,7 +133,7 @@ svg {
 }
 
 .input-medium {
-  @apply font-jost text-[22px] leading-normal font-normal;
+  @apply font-jost text-[22px] leading-normal font-medium;
 }
 
 .clip-promo-section {

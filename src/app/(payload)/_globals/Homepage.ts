@@ -8,15 +8,15 @@ export const HomePage: GlobalConfig = {
   access: {
     read: () => true,
   },
-  label: 'Головна сторінка',
+  label: 'Main page',
   admin: {
-    group: 'Сторінки',
+    group: 'Pages',
   },
   fields: [
     {
       name: 'layout',
       type: 'blocks',
-      label: 'Конструктор головної сторінки',
+      label: 'Home Page Builder',
       minRows: 1,
       blocks: [MainHeroBlock, ProcessSectionBlock, PromoBlockSection],
     },

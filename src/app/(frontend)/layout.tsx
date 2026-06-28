@@ -6,7 +6,7 @@ export const metadata = {
   description: "SELHONO - Let's make your home beautiful together",
   title: 'SELHONO',
   icons: {
-    icon: '../../favicon.ico',
+    icon: '../(frontend)/favicon.ico',
   },
 }
 
