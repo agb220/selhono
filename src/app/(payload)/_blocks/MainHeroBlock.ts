@@ -8,11 +8,11 @@ export const MainHeroBlock: Block = {
   },
   interfaceName: 'MainHeroBlockType',
   admin: {
-    group: 'Конструктор сторінок',
+    group: 'Page Builder',
     images: {
       thumbnail: {
         url: '/blocks/MainHeroEx.png',
-        alt: 'Прев’ю головного банера',
+        alt: 'Main banner preview',
       },
     },
   },
@@ -37,6 +37,15 @@ export const MainHeroBlock: Block = {
       label: 'Button Text',
       localized: true,
       defaultValue: 'Get Started',
+      admin: {
+        description: 'Character limit: 25. Prevents layout breaking in the navigation menu.',
+      },
+      validate: (val: any) => {
+        if (val && val.length > 25) {
+          return 'The label is too long! Maximum allowed is 25 characters.'
+        }
+        return true
+      },
     },
     {
       name: 'buttonLink',

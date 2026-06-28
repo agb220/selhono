@@ -6,7 +6,7 @@ export const FooterSettings: GlobalConfig = {
     read: () => true,
   },
   admin: {
-    group: 'Налаштування',
+    group: 'Settings',
   },
   fields: [
     {

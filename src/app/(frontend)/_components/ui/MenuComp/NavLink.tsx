@@ -13,8 +13,18 @@ interface NavLinkProps {
 export default function NavLink({ href, title, className }: NavLinkProps) {
   const pathname = usePathname()
 
-  const isActive =
-    pathname === href || (href !== '/en' && href !== '/de' && pathname.startsWith(href))
+  const normalizePath = (path: string) => {
+    if (!path) return '/'
+
+    const cleanPath = path.replace(/^\/(de|en)(\/|$)/, '/')
+
+    return cleanPath.length > 1 && cleanPath.endsWith('/') ? cleanPath.slice(0, -1) : cleanPath
+  }
+
+  const cleanPathname = normalizePath(pathname)
+  const cleanHref = normalizePath(href)
+
+  const isActive = cleanHref === '/' ? cleanPathname === '/' : cleanPathname.startsWith(cleanHref)
 
   return (
     <Button
@@ -22,9 +32,11 @@ export default function NavLink({ href, title, className }: NavLinkProps) {
       size="menu"
       isActive={isActive}
       asChild
-      className={(cn(isActive && 'text-gold-300! font-bold'), 'font-normal!')}
+      className={cn('font-normal!', isActive && 'text-gold-300! font-bold', className)}
     >
-      <Link href={href}>{title}</Link>
+      <Link href={href} className="max-w-35 truncate inline-block vertical-middle">
+        {title}
+      </Link>
     </Button>
   )
 }

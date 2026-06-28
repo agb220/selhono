@@ -2,9 +2,9 @@ import { GlobalConfig } from 'payload'
 
 export const MainMenu: GlobalConfig = {
   slug: 'main-menu',
-  label: 'Головне меню',
+  label: 'Main menu',
   admin: {
-    group: 'Налаштування',
+    group: 'Settings',
   },
   fields: [
     {
@@ -12,10 +12,10 @@ export const MainMenu: GlobalConfig = {
       type: 'relationship',
       relationTo: 'pages',
       hasMany: true,
-      label: 'Сторінки в меню',
+      label: 'Pages in the menu',
       admin: {
         description:
-          'Оберіть сторінки та перетягуйте їх для зміни порядку. Сторінка "Home" додається на сайт автоматично першою.',
+          'Select the pages and drag and drop them to change their order. The “Home” page is automatically added to the site as the first page.',
       },
     },
   ],

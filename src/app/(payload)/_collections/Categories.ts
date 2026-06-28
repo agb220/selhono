@@ -1,14 +1,13 @@
 import { CollectionConfig } from 'payload'
 
-// Функція-хелпер для створення слага
 const formatSlug = (val: string): string =>
   val
     .trim()
     .toLowerCase()
-    .replace(/[^a-z0-9 -]/g, '') // видаляємо все крім букв, цифр і пробілів/дефісів
-    .replace(/\s+/g, '-') // замінюємо пробіли на дефіси
-    .replace(/-+/g, '-') // прибираємо подвійні дефіси
-    .replace(/^-+|-+$/g, '') // зрізаємо дефіси на початку та в кінці
+    .replace(/[^a-z0-9 -]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '')
 
 const Categories: CollectionConfig = {
   slug: 'categories',
@@ -47,7 +46,7 @@ const Categories: CollectionConfig = {
       },
       admin: {
         readOnly: false,
-        description: 'генерується автоматично з англійської назви сторінки',
+        description: 'is automatically generated from the English page title',
       },
     },
   ],

@@ -99,6 +99,7 @@ export interface Config {
     'logo-settings': LogoSetting;
     'footer-settings': FooterSetting;
     'social-links': SocialLink;
+    'promo-block': PromoBlock;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -106,6 +107,7 @@ export interface Config {
     'logo-settings': LogoSettingsSelect<false> | LogoSettingsSelect<true>;
     'footer-settings': FooterSettingsSelect<false> | FooterSettingsSelect<true>;
     'social-links': SocialLinksSelect<false> | SocialLinksSelect<true>;
+    'promo-block': PromoBlockSelect<false> | PromoBlockSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -245,7 +247,7 @@ export interface Page {
   id: string;
   title: string;
   /**
-   * Наприклад: "services", "about", "project". Не використовуйте "index" або "/", бо головна сторінка вже створена в коді.
+   * For example: “services,” “about,” “project.” Do not use ‘index’ or “/,” because the home page has already been created in the code.
    */
   slug: string;
   content?: {
@@ -274,7 +276,7 @@ export interface Category {
   id: string;
   title: string;
   /**
-   * генерується автоматично з англійської назви сторінки
+   * is automatically generated from the English page title
    */
   slug: string;
   updatedAt: string;
@@ -572,7 +574,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface HomePage {
   id: string;
-  layout?: (MainHeroBlockType | ProcessSectionBlockType)[] | null;
+  layout?: (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -583,6 +585,9 @@ export interface HomePage {
 export interface MainHeroBlockType {
   title: string;
   subtitle: string;
+  /**
+   * Character limit: 25. Prevents layout breaking in the navigation menu.
+   */
   buttonText?: string | null;
   buttonLink?: string | null;
   backgroundImage: string | Media;
@@ -602,12 +607,21 @@ export interface ProcessSectionBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromoBlockSectionType".
+ */
+export interface PromoBlockSectionType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'promo-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "main-menu".
  */
 export interface MainMenu {
   id: string;
   /**
-   * Оберіть сторінки та перетягуйте їх для зміни порядку. Сторінка "Home" додається на сайт автоматично першою.
+   * Select the pages and drag and drop them to change their order. The “Home” page is automatically added to the site as the first page.
    */
   items?: (string | Page)[] | null;
   updatedAt?: string | null;
@@ -658,12 +672,36 @@ export interface SocialLink {
         name: string;
         url: string;
         /**
-         * Завантажте файл іконки у форматі .svg
+         * Upload an icon file in .svg format
          */
         icon: string | Media;
         id?: string | null;
       }[]
     | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promo-block".
+ */
+export interface PromoBlock {
+  id: string;
+  title: string;
+  description: string;
+  contactInfo?: {
+    phone?: string | null;
+    label?: string | null;
+  };
+  ctaButton?: {
+    label?: string | null;
+    /**
+     * Character limit: 25. Prevents layout breaking in the navigation menu.
+     */
+    link?: string | null;
+  };
+  leftImage: string | Media;
+  rightImage: string | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -677,6 +715,7 @@ export interface HomePageSelect<T extends boolean = true> {
     | {
         'main-hero'?: T | MainHeroBlockTypeSelect<T>;
         'process-section'?: T | ProcessSectionBlockTypeSelect<T>;
+        'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -701,6 +740,14 @@ export interface MainHeroBlockTypeSelect<T extends boolean = true> {
  */
 export interface ProcessSectionBlockTypeSelect<T extends boolean = true> {
   stages?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromoBlockSectionType_select".
+ */
+export interface PromoBlockSectionTypeSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }
@@ -767,6 +814,31 @@ export interface SocialLinksSelect<T extends boolean = true> {
         icon?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promo-block_select".
+ */
+export interface PromoBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  contactInfo?:
+    | T
+    | {
+        phone?: T;
+        label?: T;
+      };
+  ctaButton?:
+    | T
+    | {
+        label?: T;
+        link?: T;
+      };
+  leftImage?: T;
+  rightImage?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

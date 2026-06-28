@@ -5,6 +5,7 @@ import LayoutWrapper from '../_components/Layout/LayoutWrapper'
 import { getCurrentLocale } from '../_locales/server'
 import { notFound } from 'next/navigation'
 import WorkStagesSection from '../_components/Shared/WorkStagesSection'
+import PromoSection from '../_components/PromoSection'
 
 export default async function HomePage() {
   const locale = await getCurrentLocale()
@@ -32,6 +33,10 @@ export default async function HomePage() {
 
           if (section.blockType === 'process-section') {
             return <WorkStagesSection key={idx} items={section.stages || []} />
+          }
+
+          if (section.blockType === 'promo-section') {
+            return <PromoSection key={idx} />
           }
         })}
       </main>

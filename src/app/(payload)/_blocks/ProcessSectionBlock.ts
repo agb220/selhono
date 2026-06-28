@@ -4,16 +4,16 @@ export const ProcessSectionBlock: Block = {
   slug: 'process-section',
   interfaceName: 'ProcessSectionBlockType',
   labels: {
-    singular: 'Секція етапів роботи',
-    plural: 'Секції етапів роботи',
+    singular: 'Work Stages Section',
+    plural: 'Work Stages Sections',
   },
 
   admin: {
-    group: 'Конструктор сторінок',
+    group: 'Page Builder',
     images: {
       thumbnail: {
         url: '/blocks/WorkStages.png',
-        alt: 'Прев’ю секції етапів роботи',
+        alt: 'Preview of the Work Stages Section',
       },
     },
   },
@@ -25,7 +25,7 @@ export const ProcessSectionBlock: Block = {
       relationTo: 'work-stage',
       hasMany: true,
       required: true,
-      label: 'Оберіть етапи роботи для цієї секції',
+      label: 'Select the work steps for this section',
     },
   ],
 }
