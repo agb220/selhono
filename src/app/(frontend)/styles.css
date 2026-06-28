@@ -80,7 +80,11 @@ svg {
   @apply font-dm text-xl leading-tight font-normal;
 }
 
-.text-accent {
+@utility text-accent-lg {
+  @apply font-dm text-[45px] leading-tight font-normal;
+}
+
+@utility text-accent {
   @apply font-dm text-[35px] leading-tight font-normal;
 }
 

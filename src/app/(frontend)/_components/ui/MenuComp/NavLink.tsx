@@ -34,7 +34,9 @@ export default function NavLink({ href, title, className }: NavLinkProps) {
       asChild
       className={cn('font-normal!', isActive && 'text-gold-300! font-bold', className)}
     >
-      <Link href={href}>{title}</Link>
+      <Link href={href} className="max-w-35 truncate inline-block vertical-middle">
+        {title}
+      </Link>
     </Button>
   )
 }
