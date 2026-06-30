@@ -31,7 +31,18 @@ export default async function Header() {
     slug: 'main-menu',
   })
 
-  const dynamicItems = MENU_MOCK
+  console.log('mainMenu', mainMenu)
+
+  const dynamicItems =
+    (mainMenu as any)?.items?.map((pageData: any) => {
+      return {
+        id: pageData.id,
+        title: pageData.title || 'Untitled',
+        slug: pageData.slug || '',
+      }
+    }) || []
+
+  console.log('dynamicItems', dynamicItems)
 
   const homePage = {
     id: 'static-home',
@@ -39,14 +50,7 @@ export default async function Header() {
     slug: '',
   }
 
-  const allHeaderPages = [
-    homePage,
-    ...dynamicItems.map((item) => ({
-      id: item.id,
-      title: item.title,
-      slug: item.slug,
-    })),
-  ]
+  const allHeaderPages = [homePage, ...dynamicItems]
 
   const MAX_VISIBLE_ITEMS = 4
   const shouldSlice = allHeaderPages.length > MAX_VISIBLE_ITEMS + 1
