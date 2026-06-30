@@ -31,8 +31,6 @@ export default async function Header() {
     slug: 'main-menu',
   })
 
-  console.log('mainMenu', mainMenu)
-
   const dynamicItems =
     (mainMenu as any)?.items?.map((pageData: any) => {
       return {
@@ -41,8 +39,6 @@ export default async function Header() {
         slug: pageData.slug || '',
       }
     }) || []
-
-  console.log('dynamicItems', dynamicItems)
 
   const homePage = {
     id: 'static-home',
