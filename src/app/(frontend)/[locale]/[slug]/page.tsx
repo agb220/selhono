@@ -1,0 +1,86 @@
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+import { notFound } from 'next/navigation'
+import LayoutWrapper from '../../_components/Layout/LayoutWrapper'
+import MainHeroSection from '../../_components/MainHeroSection'
+import WorkStagesSection from '../../_components/Shared/WorkStagesSection'
+import PromoSection from '../../_components/PromoSection'
+import HeroScrollSection from '../../_components/HeroScrollSection'
+
+interface PageProps {
+  params: Promise<{
+    locale: string
+    slug: string
+  }>
+}
+
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: await config })
+  const pages = await payload.find({
+    collection: 'pages',
+    limit: 100,
+    depth: 0,
+  })
+
+  const locales = ['de', 'en']
+
+  return pages.docs.flatMap((page: any) =>
+    locales.map((locale: string) => ({
+      locale,
+      slug: page.slug,
+    })),
+  )
+}
+
+export default async function DynamicPage({ params }: PageProps) {
+  const { slug, locale } = await params
+  const payload = await getPayload({ config: await config })
+
+  const pageData = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    depth: 0,
+  })
+
+  const rawPage = pageData.docs[0]
+
+  if (!rawPage) {
+    return notFound()
+  }
+
+  const page = await payload.findByID({
+    collection: 'pages',
+    id: rawPage.id,
+    locale: locale as any,
+    depth: 2,
+  })
+
+  return (
+    <LayoutWrapper>
+      <main>
+        {(page.layout || []).map((section: any, idx: number) => {
+          if (section.blockType === 'main-hero') {
+            return <MainHeroSection key={idx} {...section} />
+          }
+          if (section.blockType === 'hero-scroll') {
+            return <HeroScrollSection key={idx} {...section} />
+          }
+
+          if (section.blockType === 'process-section') {
+            return <WorkStagesSection key={idx} items={section.stages || []} />
+          }
+
+          if (section.blockType === 'promo-section') {
+            return <PromoSection key={idx} />
+          }
+
+          return null
+        })}
+      </main>
+    </LayoutWrapper>
+  )
+}

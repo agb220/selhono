@@ -247,26 +247,78 @@ export interface Page {
   id: string;
   title: string;
   /**
-   * For example: “services,” “about,” “project.” Do not use ‘index’ or “/,” because the home page has already been created in the code.
+   * Enter the page URL identifier. For example: "about", "services", "contact". Do not use uppercase letters, spaces, or leading slashes.
    */
   slug: string;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  /**
+   * Add, remove, or reorder visual components to build the page structure.
+   */
+  layout?: (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType | HeroScrollBlockType)[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MainHeroBlockType".
+ */
+export interface MainHeroBlockType {
+  title: string;
+  subtitle: string;
+  /**
+   * Character limit: 25. Prevents layout breaking in the navigation menu.
+   */
+  buttonText?: string | null;
+  buttonLink?: string | null;
+  backgroundImage: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'main-hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessSectionBlockType".
+ */
+export interface ProcessSectionBlockType {
+  stages: (string | WorkStage)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'process-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "work-stage".
+ */
+export interface WorkStage {
+  id: string;
+  title: string;
+  description: string;
+  nameLink: string;
+  link: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromoBlockSectionType".
+ */
+export interface PromoBlockSectionType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'promo-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroScrollBlockType".
+ */
+export interface HeroScrollBlockType {
+  title?: string | null;
+  slides: {
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero-scroll';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -279,19 +331,6 @@ export interface Category {
    * is automatically generated from the English page title
    */
   slug: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "work-stage".
- */
-export interface WorkStage {
-  id: string;
-  title: string;
-  description: string;
-  nameLink: string;
-  link: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -502,9 +541,61 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  content?: T;
+  layout?:
+    | T
+    | {
+        'main-hero'?: T | MainHeroBlockTypeSelect<T>;
+        'process-section'?: T | ProcessSectionBlockTypeSelect<T>;
+        'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
+        'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
+      };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MainHeroBlockType_select".
+ */
+export interface MainHeroBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  backgroundImage?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessSectionBlockType_select".
+ */
+export interface ProcessSectionBlockTypeSelect<T extends boolean = true> {
+  stages?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromoBlockSectionType_select".
+ */
+export interface PromoBlockSectionTypeSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroScrollBlockType_select".
+ */
+export interface HeroScrollBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  slides?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -577,42 +668,6 @@ export interface HomePage {
   layout?: (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MainHeroBlockType".
- */
-export interface MainHeroBlockType {
-  title: string;
-  subtitle: string;
-  /**
-   * Character limit: 25. Prevents layout breaking in the navigation menu.
-   */
-  buttonText?: string | null;
-  buttonLink?: string | null;
-  backgroundImage: string | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'main-hero';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessSectionBlockType".
- */
-export interface ProcessSectionBlockType {
-  stages: (string | WorkStage)[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'process-section';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PromoBlockSectionType".
- */
-export interface PromoBlockSectionType {
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'promo-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -720,36 +775,6 @@ export interface HomePageSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MainHeroBlockType_select".
- */
-export interface MainHeroBlockTypeSelect<T extends boolean = true> {
-  title?: T;
-  subtitle?: T;
-  buttonText?: T;
-  buttonLink?: T;
-  backgroundImage?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessSectionBlockType_select".
- */
-export interface ProcessSectionBlockTypeSelect<T extends boolean = true> {
-  stages?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PromoBlockSectionType_select".
- */
-export interface PromoBlockSectionTypeSelect<T extends boolean = true> {
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

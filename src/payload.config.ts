@@ -17,6 +17,7 @@ import { FooterSettings } from './app/(payload)/_globals/FooterSettings'
 import { SocialLinks } from './app/(payload)/_globals/SocialLinks'
 import { WorkStage } from './app/(payload)/_collections/WorkStage'
 import { PromoBlock } from './app/(payload)/_globals/PromoBlock'
+import { HeroScrollBlock } from './app/(payload)/_blocks/HeroScrollBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
