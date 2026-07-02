@@ -4,4 +4,9 @@ export default {
     lang: 'Sprache',
     navTitle: 'Navigationsmenü',
   },
+  commingSoon: {
+    title: 'Demnächst verfügbar',
+    desc: 'Diese Seite befindet sich noch in der Entwicklung. Schauen Sie bald wieder vorbei!',
+    titleBtn: 'Zur Startseite',
+  },
 } as const

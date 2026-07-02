@@ -13,15 +13,15 @@ export default async function Header() {
 
   const locale = await getCurrentLocale()
 
-  const MENU_MOCK = [
-    { id: '1', title: locale === Locales.DE ? 'Über uns' : 'About Us', slug: 'about' },
-    { id: '2', title: locale === Locales.DE ? 'Dienstleistungen' : 'Services', slug: 'services' },
-    { id: '3', title: locale === Locales.DE ? 'Projekte' : 'Projects', slug: 'projects' },
-    { id: '4', title: locale === Locales.DE ? 'Galerie' : 'Gallery', slug: 'gallery' },
-    { id: '5', title: locale === Locales.DE ? 'Blog' : 'Blog', slug: 'blog' },
-    { id: '6', title: locale === Locales.DE ? 'Preise' : 'Pricing', slug: 'pricing' },
-    { id: '7', title: locale === Locales.DE ? 'Kontakt' : 'Contact', slug: 'contact' },
-  ]
+  // const MENU_MOCK = [
+  //   { id: '1', title: locale === Locales.DE ? 'Über uns' : 'About Us', slug: 'about' },
+  //   { id: '2', title: locale === Locales.DE ? 'Dienstleistungen' : 'Services', slug: 'services' },
+  //   { id: '3', title: locale === Locales.DE ? 'Projekte' : 'Projects', slug: 'projects' },
+  //   { id: '4', title: locale === Locales.DE ? 'Galerie' : 'Gallery', slug: 'gallery' },
+  //   { id: '5', title: locale === Locales.DE ? 'Blog' : 'Blog', slug: 'blog' },
+  //   { id: '6', title: locale === Locales.DE ? 'Preise' : 'Pricing', slug: 'pricing' },
+  //   { id: '7', title: locale === Locales.DE ? 'Kontakt' : 'Contact', slug: 'contact' },
+  // ]
 
   const logoSettings = await payload.findGlobal({
     slug: 'logo-settings',
@@ -29,6 +29,7 @@ export default async function Header() {
 
   const mainMenu = await payload.findGlobal({
     slug: 'main-menu',
+    locale: locale,
   })
 
   const dynamicItems =
@@ -56,7 +57,7 @@ export default async function Header() {
 
   return (
     <header className="w-full fixed top-0 z-40 bg-white">
-      <div className="container max-h-20 py-4 md:py-14 flex items-center justify-between">
+      <div className="container max-h-12 py-4 md:py-10 flex items-center justify-between">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight text-dark-200"

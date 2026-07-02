@@ -2,6 +2,8 @@ import { GlobalConfig } from 'payload'
 import { MainHeroBlock } from '../_blocks/MainHeroBlock'
 import { ProcessSectionBlock } from '../_blocks/ProcessSectionBlock'
 import { PromoBlockSection } from '../_blocks/PromoBlockSection'
+import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
+import { HeroBlock } from '../_blocks/HeroBlock'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -18,7 +20,7 @@ export const HomePage: GlobalConfig = {
       type: 'blocks',
       label: 'Home Page Builder',
       minRows: 1,
-      blocks: [MainHeroBlock, ProcessSectionBlock, PromoBlockSection],
+      blocks: [MainHeroBlock, ProcessSectionBlock, PromoBlockSection, HeroScrollBlock, HeroBlock],
     },
   ],
 }
