@@ -12,6 +12,7 @@ export default function HeroScrollSection(props: HeroScrollBlockType) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: 'center',
+    startIndex: 2,
     containScroll: false,
     skipSnaps: false,
   })
@@ -36,7 +37,7 @@ export default function HeroScrollSection(props: HeroScrollBlockType) {
         <Title
           as="h1"
           title={title}
-          className="absolute bottom-10 md:bottom-20 left-1/2 -translate-x-1/2 z-10 text-center pointer-events-none drop-shadow-md text-4xl md:text-6xl font-light"
+          className="absolute bottom-10 md:bottom-20 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none drop-shadow-md text-4xl md:text-6xl font-light"
         />
       )}
 
@@ -54,7 +55,7 @@ export default function HeroScrollSection(props: HeroScrollBlockType) {
                 }`}
               >
                 <div className="relative w-full h-full overflow-hidden">
-                  <div className="absolute top-0 bottom-0 right-0 left-0 bg-black/20 z-20"></div>
+                  <div className="absolute top-0 bottom-0 right-0 left-0 bg-black/20 z-10"></div>
                   <Image
                     src={getImageUrl({
                       media: slide.image,

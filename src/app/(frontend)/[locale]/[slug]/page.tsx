@@ -6,6 +6,8 @@ import MainHeroSection from '../../_components/MainHeroSection'
 import WorkStagesSection from '../../_components/Shared/WorkStagesSection'
 import PromoSection from '../../_components/PromoSection'
 import HeroScrollSection from '../../_components/HeroScrollSection'
+import HeroSection from '../../_components/HeroSection'
+import ComingSoon from '../../_components/ComingSoon'
 
 interface PageProps {
   params: Promise<{
@@ -59,27 +61,25 @@ export default async function DynamicPage({ params }: PageProps) {
     depth: 2,
   })
 
+  const layout = page.layout || []
+
   return (
     <LayoutWrapper>
       <main>
-        {(page.layout || []).map((section: any, idx: number) => {
-          if (section.blockType === 'main-hero') {
-            return <MainHeroSection key={idx} {...section} />
-          }
-          if (section.blockType === 'hero-scroll') {
-            return <HeroScrollSection key={idx} {...section} />
-          }
-
-          if (section.blockType === 'process-section') {
-            return <WorkStagesSection key={idx} items={section.stages || []} />
-          }
-
-          if (section.blockType === 'promo-section') {
-            return <PromoSection key={idx} />
-          }
-
-          return null
-        })}
+        {layout.length === 0 ? (
+          <ComingSoon locale={locale} isHome={false} />
+        ) : (
+          layout.map((section: any, idx: number) => {
+            if (section.blockType === 'main-hero') return <MainHeroSection key={idx} {...section} />
+            if (section.blockType === 'hero-scroll')
+              return <HeroScrollSection key={idx} {...section} />
+            if (section.blockType === 'hero-block') return <HeroSection key={idx} {...section} />
+            if (section.blockType === 'process-section')
+              return <WorkStagesSection key={idx} items={section.stages || []} />
+            if (section.blockType === 'promo-section') return <PromoSection key={idx} />
+            return null
+          })
+        )}
       </main>
     </LayoutWrapper>
   )

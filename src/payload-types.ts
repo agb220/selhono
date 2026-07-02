@@ -253,7 +253,9 @@ export interface Page {
   /**
    * Add, remove, or reorder visual components to build the page structure.
    */
-  layout?: (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType | HeroScrollBlockType)[] | null;
+  layout?:
+    | (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType | HeroScrollBlockType | HeroBlockType)[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -311,7 +313,7 @@ export interface PromoBlockSectionType {
  * via the `definition` "HeroScrollBlockType".
  */
 export interface HeroScrollBlockType {
-  title?: string | null;
+  title: string;
   slides: {
     image: string | Media;
     id?: string | null;
@@ -319,6 +321,17 @@ export interface HeroScrollBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero-scroll';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlockType".
+ */
+export interface HeroBlockType {
+  title: string;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -548,6 +561,7 @@ export interface PagesSelect<T extends boolean = true> {
         'process-section'?: T | ProcessSectionBlockTypeSelect<T>;
         'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
         'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
+        'hero-block'?: T | HeroBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -594,6 +608,16 @@ export interface HeroScrollBlockTypeSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlockType_select".
+ */
+export interface HeroBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
   id?: T;
   blockName?: T;
 }
@@ -665,7 +689,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface HomePage {
   id: string;
-  layout?: (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType)[] | null;
+  layout?:
+    | (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType | HeroScrollBlockType | HeroBlockType)[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -771,6 +797,8 @@ export interface HomePageSelect<T extends boolean = true> {
         'main-hero'?: T | MainHeroBlockTypeSelect<T>;
         'process-section'?: T | ProcessSectionBlockTypeSelect<T>;
         'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
+        'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
+        'hero-block'?: T | HeroBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;

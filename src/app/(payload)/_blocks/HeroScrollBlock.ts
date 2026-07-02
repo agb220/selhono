@@ -22,6 +22,7 @@ export const HeroScrollBlock: Block = {
       type: 'text',
       label: 'Section Title',
       localized: true,
+      required: true,
     },
     {
       name: 'slides',

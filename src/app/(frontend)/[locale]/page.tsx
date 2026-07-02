@@ -6,6 +6,9 @@ import { getCurrentLocale } from '../_locales/server'
 import { notFound } from 'next/navigation'
 import WorkStagesSection from '../_components/Shared/WorkStagesSection'
 import PromoSection from '../_components/PromoSection'
+import HeroSection from '../_components/HeroSection'
+import HeroScrollSection from '../_components/HeroScrollSection'
+import ComingSoon from '../_components/ComingSoon'
 
 export default async function HomePage() {
   const locale = await getCurrentLocale()
@@ -23,22 +26,32 @@ export default async function HomePage() {
     return notFound()
   }
 
+  const layout = findResult.layout || []
+
   return (
     <LayoutWrapper>
       <main className="">
-        {(findResult.layout || []).map((section: any, idx: number) => {
-          if (section.blockType === 'main-hero') {
-            return <MainHeroSection key={idx} {...section} />
-          }
-
-          if (section.blockType === 'process-section') {
-            return <WorkStagesSection key={idx} items={section.stages || []} />
-          }
-
-          if (section.blockType === 'promo-section') {
-            return <PromoSection key={idx} />
-          }
-        })}
+        {layout.length === 0 ? (
+          <ComingSoon locale={locale} isHome={false} />
+        ) : (
+          (layout || []).map((section: any, idx: number) => {
+            if (section.blockType === 'main-hero') {
+              return <MainHeroSection key={idx} {...section} />
+            }
+            if (section.blockType === 'hero-scroll') {
+              return <HeroScrollSection key={idx} {...section} />
+            }
+            if (section.blockType === 'hero-block') {
+              return <HeroSection key={idx} {...section} />
+            }
+            if (section.blockType === 'process-section') {
+              return <WorkStagesSection key={idx} items={section.stages || []} />
+            }
+            if (section.blockType === 'promo-section') {
+              return <PromoSection key={idx} />
+            }
+          })
+        )}
       </main>
     </LayoutWrapper>
   )
