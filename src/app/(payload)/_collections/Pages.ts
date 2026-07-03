@@ -6,6 +6,7 @@ import { PromoBlockSection } from '../_blocks/PromoBlockSection'
 import { formatSlug } from '@/lib/hooks/formatSlug'
 import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
 import { HeroBlock } from '../_blocks/HeroBlock'
+import { ReviewsSectionBlock } from '../_blocks/ReviewsSectionBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -50,7 +51,14 @@ export const Pages: CollectionConfig = {
       admin: {
         description: 'Add, remove, or reorder visual components to build the page structure.',
       },
-      blocks: [MainHeroBlock, ProcessSectionBlock, PromoBlockSection, HeroScrollBlock, HeroBlock],
+      blocks: [
+        MainHeroBlock,
+        ProcessSectionBlock,
+        PromoBlockSection,
+        HeroScrollBlock,
+        HeroBlock,
+        ReviewsSectionBlock,
+      ],
     },
   ],
 }

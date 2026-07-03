@@ -4,6 +4,7 @@ import { ProcessSectionBlock } from '../_blocks/ProcessSectionBlock'
 import { PromoBlockSection } from '../_blocks/PromoBlockSection'
 import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
 import { HeroBlock } from '../_blocks/HeroBlock'
+import { ReviewsSectionBlock } from '../_blocks/ReviewsSectionBlock'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -20,7 +21,14 @@ export const HomePage: GlobalConfig = {
       type: 'blocks',
       label: 'Home Page Builder',
       minRows: 1,
-      blocks: [MainHeroBlock, ProcessSectionBlock, PromoBlockSection, HeroScrollBlock, HeroBlock],
+      blocks: [
+        MainHeroBlock,
+        ProcessSectionBlock,
+        PromoBlockSection,
+        HeroScrollBlock,
+        HeroBlock,
+        ReviewsSectionBlock,
+      ],
     },
   ],
 }

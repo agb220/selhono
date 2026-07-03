@@ -17,7 +17,8 @@ import { FooterSettings } from './app/(payload)/_globals/FooterSettings'
 import { SocialLinks } from './app/(payload)/_globals/SocialLinks'
 import { WorkStage } from './app/(payload)/_collections/WorkStage'
 import { PromoBlock } from './app/(payload)/_globals/PromoBlock'
-import { HeroScrollBlock } from './app/(payload)/_blocks/HeroScrollBlock'
+import { Reviews } from './app/(payload)/_collections/Reviews'
+import { ReviewsBlock } from './app/(payload)/_globals/ReviewsBlock'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,8 +30,16 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Categories, WorkStage],
-  globals: [HomePage, MainMenu, LogoSettings, FooterSettings, SocialLinks, PromoBlock],
+  collections: [Users, Media, Pages, Categories, WorkStage, Reviews],
+  globals: [
+    HomePage,
+    MainMenu,
+    LogoSettings,
+    FooterSettings,
+    SocialLinks,
+    PromoBlock,
+    ReviewsBlock,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
