@@ -2,7 +2,6 @@ import { CollectionConfig } from 'payload'
 import { MainHeroBlock } from '../_blocks/MainHeroBlock'
 import { ProcessSectionBlock } from '../_blocks/ProcessSectionBlock'
 import { PromoBlockSection } from '../_blocks/PromoBlockSection'
-
 import { formatSlug } from '@/lib/hooks/formatSlug'
 import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
 import { HeroBlock } from '../_blocks/HeroBlock'

@@ -349,24 +349,9 @@ export interface HeroBlockType {
  * via the `definition` "ReviewsSectionBlockType".
  */
 export interface ReviewsSectionBlockType {
-  reviews: (string | Review)[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'reviews-section';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "reviews".
- */
-export interface Review {
-  id: string;
-  author: string;
-  location: string;
-  avatar?: (string | null) | Media;
-  text: string;
-  isApproved?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -379,6 +364,20 @@ export interface Category {
    * is automatically generated from the English page title
    */
   slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: string;
+  author: string;
+  location: string;
+  avatar?: (string | null) | Media;
+  text: string;
+  isApproved?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -666,7 +665,6 @@ export interface HeroBlockTypeSelect<T extends boolean = true> {
  * via the `definition` "ReviewsSectionBlockType_select".
  */
 export interface ReviewsSectionBlockTypeSelect<T extends boolean = true> {
-  reviews?: T;
   id?: T;
   blockName?: T;
 }

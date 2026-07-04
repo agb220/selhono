@@ -4,10 +4,9 @@ export const ReviewsSectionBlock: Block = {
   slug: 'reviews-section',
   interfaceName: 'ReviewsSectionBlockType',
   labels: {
-    singular: 'Reviews Section',
-    plural: 'Reviews Sections',
+    singular: 'Reviews Section [Global]',
+    plural: 'Reviews Sections [Global]',
   },
-
   admin: {
     group: 'Page Builder',
     images: {
@@ -17,15 +16,5 @@ export const ReviewsSectionBlock: Block = {
       },
     },
   },
-
-  fields: [
-    {
-      name: 'reviews',
-      type: 'relationship',
-      relationTo: 'reviews',
-      hasMany: true,
-      required: true,
-      label: 'Select the review for this section',
-    },
-  ],
+  fields: [],
 }
