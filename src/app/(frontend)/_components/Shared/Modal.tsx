@@ -21,12 +21,10 @@ export default function ModalLayout({
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 animate-fade-in" />
         <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-[30px] max-w-md w-full shadow-2xl z-50 focus:outline-none animate-scale-in">
-          <Dialog.Title className="text-2xl font-semibold text-dark-200 mb-1">{title}</Dialog.Title>
+          <Dialog.Title className="text-medium-bold text-center mb-1">{title}</Dialog.Title>
 
           {description && (
-            <Dialog.Description className="text-gray-500 mb-6 text-sm">
-              {description}
-            </Dialog.Description>
+            <Dialog.Description className="text-gold-300 mb-6 ">{description}</Dialog.Description>
           )}
 
           {children}

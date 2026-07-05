@@ -16,7 +16,7 @@ const ReviewsSection = async () => {
   })
 
   const approvedReviews = (data.reviews || []).filter(
-    (review): review is Review => typeof review === 'object',
+    (review): review is Review => typeof review === 'object' && review.isApproved === true,
   )
 
   return (
