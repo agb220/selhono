@@ -9,6 +9,7 @@ import HeroScrollSection from '../../_components/HeroScrollSection'
 import HeroSection from '../../_components/HeroSection'
 import ComingSoon from '../../_components/ComingSoon'
 import { setStaticParamsLocale } from 'next-international/server'
+import ReviewsSection from '../../_components/ReviewsSection'
 
 interface PageProps {
   params: Promise<{
@@ -81,6 +82,9 @@ export default async function DynamicPage({ params }: PageProps) {
             if (section.blockType === 'process-section')
               return <WorkStagesSection key={idx} items={section.stages || []} />
             if (section.blockType === 'promo-section') return <PromoSection key={idx} />
+            if (section.blockType === 'reviews-section') {
+              return <ReviewsSection key={idx} />
+            }
             return null
           })
         )}
