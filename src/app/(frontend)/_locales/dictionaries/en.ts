@@ -24,5 +24,7 @@ export default {
     successDesc: 'Your review will appear on the website soon.',
     errorTitle: 'Error',
     errorDesc: 'Something went wrong. Please try again.',
+    uploadingImage: 'Uploading photo...',
+    isSubmitting: 'Saving review...',
   },
 } as const

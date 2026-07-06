@@ -1,6 +1,5 @@
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import { notFound } from 'next/navigation'
-
 import LayoutWrapper from '../../_components/Layout/LayoutWrapper'
 import MainHeroSection from '../../_components/MainHeroSection'
 import WorkStagesSection from '../../_components/Shared/WorkStagesSection'

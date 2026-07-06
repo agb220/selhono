@@ -200,11 +200,7 @@ export default function ReviewForm({ onSuccess }: ReviewFormProps) {
 
       <div className="flex justify-center gap-3 mt-2">
         <Button type="submit" disabled={isSubmitting || uploadingImage || !isFormValid}>
-          {uploadingImage
-            ? 'Uploading photo...'
-            : isSubmitting
-              ? 'Saving review...'
-              : t('btnTitle')}
+          {uploadingImage ? t('uploadingImage') : isSubmitting ? t('isSubmitting') : t('btnTitle')}
         </Button>
       </div>
     </form>

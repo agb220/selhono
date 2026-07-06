@@ -24,5 +24,7 @@ export default {
     successDesc: 'Ihre Bewertung wird bald auf der Website erscheinen.',
     errorTitle: 'Fehler',
     errorDesc: 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.',
+    uploadingImage: 'Wird hochgeladen...',
+    isSubmitting: 'Wird gespeichert...',
   },
 } as const
