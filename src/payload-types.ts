@@ -72,6 +72,7 @@ export interface Config {
     pages: Page;
     categories: Category;
     'work-stage': WorkStage;
+    reviews: Review;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'work-stage': WorkStageSelect<false> | WorkStageSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -100,6 +102,7 @@ export interface Config {
     'footer-settings': FooterSetting;
     'social-links': SocialLink;
     'promo-block': PromoBlock;
+    'reviews-block': ReviewsBlock;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -108,6 +111,7 @@ export interface Config {
     'footer-settings': FooterSettingsSelect<false> | FooterSettingsSelect<true>;
     'social-links': SocialLinksSelect<false> | SocialLinksSelect<true>;
     'promo-block': PromoBlockSelect<false> | PromoBlockSelect<true>;
+    'reviews-block': ReviewsBlockSelect<false> | ReviewsBlockSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -254,7 +258,14 @@ export interface Page {
    * Add, remove, or reorder visual components to build the page structure.
    */
   layout?:
-    | (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType | HeroScrollBlockType | HeroBlockType)[]
+    | (
+        | MainHeroBlockType
+        | ProcessSectionBlockType
+        | PromoBlockSectionType
+        | HeroScrollBlockType
+        | HeroBlockType
+        | ReviewsSectionBlockType
+      )[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -335,6 +346,15 @@ export interface HeroBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ReviewsSectionBlockType".
+ */
+export interface ReviewsSectionBlockType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'reviews-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
@@ -344,6 +364,20 @@ export interface Category {
    * is automatically generated from the English page title
    */
   slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: string;
+  author: string;
+  location: string;
+  avatar?: (string | null) | Media;
+  text: string;
+  isApproved?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -390,6 +424,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'work-stage';
         value: string | WorkStage;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: string | Review;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -562,6 +600,7 @@ export interface PagesSelect<T extends boolean = true> {
         'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
         'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
         'hero-block'?: T | HeroBlockTypeSelect<T>;
+        'reviews-section'?: T | ReviewsSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -623,6 +662,14 @@ export interface HeroBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ReviewsSectionBlockType_select".
+ */
+export interface ReviewsSectionBlockTypeSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -640,6 +687,19 @@ export interface WorkStageSelect<T extends boolean = true> {
   description?: T;
   nameLink?: T;
   link?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  author?: T;
+  location?: T;
+  avatar?: T;
+  text?: T;
+  isApproved?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -690,7 +750,14 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface HomePage {
   id: string;
   layout?:
-    | (MainHeroBlockType | ProcessSectionBlockType | PromoBlockSectionType | HeroScrollBlockType | HeroBlockType)[]
+    | (
+        | MainHeroBlockType
+        | ProcessSectionBlockType
+        | PromoBlockSectionType
+        | HeroScrollBlockType
+        | HeroBlockType
+        | ReviewsSectionBlockType
+      )[]
     | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -788,6 +855,20 @@ export interface PromoBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews-block".
+ */
+export interface ReviewsBlock {
+  id: string;
+  title: string;
+  ctaButton?: {
+    label?: string | null;
+  };
+  reviews?: (string | Review)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -799,6 +880,7 @@ export interface HomePageSelect<T extends boolean = true> {
         'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
         'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
         'hero-block'?: T | HeroBlockTypeSelect<T>;
+        'reviews-section'?: T | ReviewsSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -892,6 +974,22 @@ export interface PromoBlockSelect<T extends boolean = true> {
       };
   leftImage?: T;
   rightImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews-block_select".
+ */
+export interface ReviewsBlockSelect<T extends boolean = true> {
+  title?: T;
+  ctaButton?:
+    | T
+    | {
+        label?: T;
+      };
+  reviews?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { DM_Serif_Display, Jost } from 'next/font/google'
+import { Toaster } from 'sonner'
 import './styles.css'
 
 export const metadata = {
@@ -30,7 +31,21 @@ export default async function FrontendLayout({ children }: SubLayoutProps) {
   return (
     <html className={`${dmSerif.variable} ${jost.variable}`} suppressHydrationWarning>
       <head></head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: '#ffffff',
+              color: '#1c1c1c',
+              borderRadius: '20px',
+              border: '1px solid #e2e8f0',
+              padding: '16px',
+            },
+          }}
+        />
+      </body>
     </html>
   )
 }

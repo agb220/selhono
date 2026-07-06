@@ -9,6 +9,7 @@ import PromoSection from '../_components/PromoSection'
 import HeroSection from '../_components/HeroSection'
 import HeroScrollSection from '../_components/HeroScrollSection'
 import ComingSoon from '../_components/ComingSoon'
+import ReviewsSection from '../_components/ReviewsSection'
 
 export default async function HomePage() {
   const locale = await getCurrentLocale()
@@ -49,6 +50,9 @@ export default async function HomePage() {
             }
             if (section.blockType === 'promo-section') {
               return <PromoSection key={idx} />
+            }
+            if (section.blockType === 'reviews-section') {
+              return <ReviewsSection key={idx} />
             }
           })
         )}
