@@ -35,6 +35,13 @@ export const ReviewsBlock: GlobalConfig = {
       hasMany: true,
       required: false,
       label: 'Select review',
+      filterOptions: () => {
+        return {
+          isApproved: {
+            equals: true,
+          },
+        }
+      },
     },
   ],
 }

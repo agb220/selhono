@@ -1,6 +1,6 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
+import { getPayload as getCachedPayload } from '@/lib/payload'
 import { notFound } from 'next/navigation'
+
 import LayoutWrapper from '../../_components/Layout/LayoutWrapper'
 import MainHeroSection from '../../_components/MainHeroSection'
 import WorkStagesSection from '../../_components/Shared/WorkStagesSection'
@@ -8,6 +8,7 @@ import PromoSection from '../../_components/PromoSection'
 import HeroScrollSection from '../../_components/HeroScrollSection'
 import HeroSection from '../../_components/HeroSection'
 import ComingSoon from '../../_components/ComingSoon'
+import { setStaticParamsLocale } from 'next-international/server'
 
 interface PageProps {
   params: Promise<{
@@ -17,7 +18,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const payload = await getPayload({ config: await config })
+  const payload = await getCachedPayload()
   const pages = await payload.find({
     collection: 'pages',
     limit: 100,
@@ -36,7 +37,10 @@ export async function generateStaticParams() {
 
 export default async function DynamicPage({ params }: PageProps) {
   const { slug, locale } = await params
-  const payload = await getPayload({ config: await config })
+
+  setStaticParamsLocale(locale)
+
+  const payload = await getCachedPayload()
 
   const pageData = await payload.find({
     collection: 'pages',
