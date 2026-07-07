@@ -4,6 +4,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { en } from '@payloadcms/translations/languages/en'
 import { de } from '@payloadcms/translations/languages/de'
 import { Users } from './app/(payload)/_collections/Users'
@@ -49,7 +50,31 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
   sharp,
-  plugins: [],
+
+  plugins: [
+    process.env.S3_BUCKET
+      ? s3Storage({
+          collections: {
+            media: {
+              disablePayloadAccessControl: true,
+              generateFileURL: ({ filename }) => {
+                return `${process.env.NEXT_PUBLIC_S3_PUBLIC_URL}/${filename}`
+              },
+            },
+          },
+          bucket: process.env.S3_BUCKET || '',
+          config: {
+            endpoint: process.env.S3_ENDPOINT,
+            credentials: {
+              accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+              secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+            },
+            region: 'auto',
+            forcePathStyle: true,
+          },
+        })
+      : null,
+  ].filter(Boolean) as any,
 
   localization: {
     locales: [
