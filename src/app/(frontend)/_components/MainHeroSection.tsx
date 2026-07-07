@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/dist/client/link'
 import { Title } from './Shared/Title'
-
+import { Button } from './ui/ButtonUI'
 import { MainHeroBlockType } from '@/payload-types'
 import { getImageUrl } from '@/lib/hooks/getURL'
 import { ArrowSvg } from './icons'
-import { Button } from './ui/Button'
 
 const MainHeroSection = (props: MainHeroBlockType) => {
   return (

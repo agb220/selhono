@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useScopedI18n } from '../_locales/client'
-import { Button } from './ui/Button'
 import { toast as sonnerToast } from 'sonner'
+import { Button } from './ui/ButtonUI'
 import { createReviewOnlyAction } from '../_actions/reviews'
+import { useScopedI18n } from '../_locales/client'
 
 interface ReviewFormProps {
   onSuccess: () => void

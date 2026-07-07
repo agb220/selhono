@@ -2,12 +2,10 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Button } from './ui/ButtonUI'
 import { getCurrentLocale } from '../_locales/server'
-
 import { getImageUrl } from '@/lib/hooks/getURL'
-
 import { ArrowSvg, PhoneSvg } from './icons'
-import { Button } from './ui/Button'
 
 const PromoSection = async () => {
   const locale = await getCurrentLocale()

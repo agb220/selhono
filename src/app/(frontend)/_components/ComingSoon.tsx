@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from './ui/Button'
+import { Button } from './ui/ButtonUI'
 import { getScopedI18n } from '../_locales/server'
 
 interface ComingSoonProps {

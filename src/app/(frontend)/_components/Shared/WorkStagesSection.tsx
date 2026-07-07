@@ -1,9 +1,8 @@
 'use client'
-
 import useEmblaCarousel from 'embla-carousel-react'
-import { Button } from '../ui/Button'
-import Link from 'next/dist/client/link'
 import { WorkStage } from '@/payload-types'
+import Link from 'next/dist/client/link'
+import { Button } from '../ui/ButtonUI'
 import { ArrowSvg } from '../icons'
 
 interface WorkStagesSectionProps {

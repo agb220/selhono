@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
-import { HeroScrollBlockType, Media } from '@/payload-types'
+import { HeroScrollBlockType } from '@/payload-types'
 import { Title } from './Shared/Title'
 import { getImageUrl } from '@/lib/hooks/getURL'
 
