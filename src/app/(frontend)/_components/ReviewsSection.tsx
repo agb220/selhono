@@ -1,8 +1,8 @@
 import config from '@/payload.config'
-import { getCurrentLocale } from '../_locales/server'
 import { getPayload } from 'payload'
-import { Review } from '@/payload-types'
 import ReviewsBlock from './Shared/ReviewsBlock'
+import { getCurrentLocale } from '../_locales/server'
+import { Review } from '@/payload-types'
 
 const ReviewsSection = async () => {
   const locale = await getCurrentLocale()
