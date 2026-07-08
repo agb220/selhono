@@ -30,6 +30,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      providers: ['@payloadcms/storage-s3#UploadHandlersProvider'],
+    },
   },
   collections: [Users, Media, Pages, Categories, WorkStage, Reviews],
   globals: [
@@ -55,6 +58,7 @@ export default buildConfig({
     s3Storage({
       collections: {
         media: {
+          disableLocalStorage: true,
           disablePayloadAccessControl: true,
           generateFileURL: ({ filename }) => {
             return `${process.env.NEXT_PUBLIC_S3_PUBLIC_URL}/${filename}`

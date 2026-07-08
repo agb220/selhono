@@ -36,77 +36,51 @@ export const getImageUrl = (params: {
 }) => {
   if (!params.media || typeof params.media === 'string') {
     if (typeof params.media === 'string' && params.media.startsWith('/media')) {
+      return `${process.env.NEXT_PUBLIC_SERVER_URL}${params.media}`
+    }
+
+    if (
+      typeof params.media === 'string' &&
+      (params.media.startsWith('http://') || params.media.startsWith('https://'))
+    ) {
       return params.media
     }
     return params.defaultImage?.src || ''
   }
-  if (
-    params.size === 'thumbnail' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.thumbnail &&
-    (params.media as Media).sizes?.thumbnail?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.thumbnail?.url}`
-  }
-  if (
-    params.size === 'card' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.card?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.card?.url}`
-  }
-  if (
-    params.size === 'slider' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.slider &&
-    (params.media as Media).sizes?.slider?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.slider?.url}`
-  }
-  if (
-    params.size === 'big' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.big?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.big?.url}`
-  }
-  if (
-    params.size === 'large' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.large?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.large?.url}`
+
+  const formatUrl = (url: string | null | undefined) => {
+    if (!url) return params.defaultImage?.src || ''
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url
+    }
+    return `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
   }
 
-  if (
-    params.size === 'pngSlider' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.pngSlider?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.pngSlider?.url}`
+  const mediaObj = params.media as Media
+
+  if (params.size === 'thumbnail' && mediaObj.sizes?.thumbnail?.url) {
+    return formatUrl(mediaObj.sizes.thumbnail.url)
+  }
+  if (params.size === 'card' && mediaObj.sizes?.card?.url) {
+    return formatUrl(mediaObj.sizes.card.url)
+  }
+  if (params.size === 'slider' && mediaObj.sizes?.slider?.url) {
+    return formatUrl(mediaObj.sizes.slider.url)
+  }
+  if (params.size === 'big' && mediaObj.sizes?.big?.url) {
+    return formatUrl(mediaObj.sizes.big.url)
+  }
+  if (params.size === 'large' && mediaObj.sizes?.large?.url) {
+    return formatUrl(mediaObj.sizes.large.url)
+  }
+  if (params.size === 'pngSlider' && mediaObj.sizes?.pngSlider?.url) {
+    return formatUrl(mediaObj.sizes.pngSlider.url)
+  }
+  if (params.size === 'pngBig' && mediaObj.sizes?.pngBig?.url) {
+    return formatUrl(mediaObj.sizes.pngBig.url)
   }
 
-  if (
-    params.size === 'pngBig' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.pngBig?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.pngBig?.url}`
-  }
-
-  return `${process.env.NEXT_PUBLIC_SERVER_URL}${params.media.url}`
+  return formatUrl(params.media.url)
 }
 
 export const getPngImageUrl = (params: {
