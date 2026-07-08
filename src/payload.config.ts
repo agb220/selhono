@@ -52,29 +52,27 @@ export default buildConfig({
   sharp,
 
   plugins: [
-    process.env.S3_BUCKET
-      ? s3Storage({
-          collections: {
-            media: {
-              disablePayloadAccessControl: true,
-              generateFileURL: ({ filename }) => {
-                return `${process.env.NEXT_PUBLIC_S3_PUBLIC_URL}/${filename}`
-              },
-            },
+    s3Storage({
+      collections: {
+        media: {
+          disablePayloadAccessControl: true,
+          generateFileURL: ({ filename }) => {
+            return `${process.env.NEXT_PUBLIC_S3_PUBLIC_URL}/${filename}`
           },
-          bucket: process.env.S3_BUCKET || '',
-          config: {
-            endpoint: process.env.S3_ENDPOINT,
-            credentials: {
-              accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-              secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
-            },
-            region: 'auto',
-            forcePathStyle: true,
-          },
-        })
-      : null,
-  ].filter(Boolean) as any,
+        },
+      },
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        endpoint: process.env.S3_ENDPOINT || '',
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+        },
+        region: 'auto',
+        forcePathStyle: true,
+      },
+    }),
+  ],
 
   localization: {
     locales: [
