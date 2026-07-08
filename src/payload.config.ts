@@ -62,12 +62,12 @@ export default buildConfig({
           },
         },
       },
-      bucket: process.env.S3_BUCKET || '',
+      bucket: process.env.S3_BUCKET || 'MISSING_BUCKET',
       config: {
-        endpoint: process.env.S3_ENDPOINT || '',
+        endpoint: process.env.S3_ENDPOINT || 'https://MISSING_ENDPOINT.com',
         credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || 'MISSING_KEY',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'MISSING_SECRET',
         },
         region: 'auto',
         forcePathStyle: true,
