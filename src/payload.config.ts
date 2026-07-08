@@ -21,6 +21,9 @@ import { Reviews } from './app/(payload)/_collections/Reviews'
 import { ReviewsBlock } from './app/(payload)/_globals/ReviewsBlock'
 import Media from './app/(payload)/_collections/Media'
 
+sharp.concurrency(1)
+sharp.cache(false)
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
