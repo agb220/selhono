@@ -8,7 +8,6 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { en } from '@payloadcms/translations/languages/en'
 import { de } from '@payloadcms/translations/languages/de'
 import { Users } from './app/(payload)/_collections/Users'
-import { Media } from './app/(payload)/_collections/Media'
 import { Pages } from './app/(payload)/_collections/Pages'
 import { HomePage } from './app/(payload)/_globals/Homepage'
 import { MainMenu } from './app/(payload)/_globals/MainMenu'
@@ -20,6 +19,7 @@ import { WorkStage } from './app/(payload)/_collections/WorkStage'
 import { PromoBlock } from './app/(payload)/_globals/PromoBlock'
 import { Reviews } from './app/(payload)/_collections/Reviews'
 import { ReviewsBlock } from './app/(payload)/_globals/ReviewsBlock'
+import Media from './app/(payload)/_collections/Media'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
