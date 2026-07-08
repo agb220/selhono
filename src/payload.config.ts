@@ -30,9 +30,6 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    components: {
-      providers: ['@payloadcms/storage-s3#UploadHandlersProvider'],
-    },
   },
   collections: [Users, Media, Pages, Categories, WorkStage, Reviews],
   globals: [
