@@ -61,7 +61,9 @@ export default buildConfig({
           disableLocalStorage: true,
           disablePayloadAccessControl: true,
           generateFileURL: ({ filename }: { filename: string }) => {
-            return `${process.env.NEXT_PUBLIC_S3_PUBLIC_URL}/${filename}`
+            const publicUrl = process.env.NEXT_PUBLIC_S3_PUBLIC_URL
+            console.log('PAYLOAD S3 DEBUG: Generating URL for', filename, 'with base', publicUrl)
+            return `${publicUrl}/${filename}`
           },
         },
       },
