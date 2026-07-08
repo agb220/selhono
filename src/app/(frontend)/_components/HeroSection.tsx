@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { Title } from './Shared/Title'
 import { HeroBlockType } from '@/payload-types'
-import { getImageUrl } from '@/lib/hooks/getURL'
 
 const HeroSection = (props: HeroBlockType) => {
   return (
@@ -9,10 +8,7 @@ const HeroSection = (props: HeroBlockType) => {
       <div className="relative h-105 xl:h-70 overflow-hidden">
         <div className="absolute top-0 bottom-0 right-0 left-0 bg-black/20 z-10"></div>
         <Image
-          src={getImageUrl({
-            media: props.image,
-            size: 'big',
-          })}
+          src={props.image as string}
           alt={props.title}
           fill
           className="object-cover object-center"

@@ -3,7 +3,6 @@ import config from '@/payload.config'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from './ui/ButtonUI'
-import { getImageUrl } from '@/lib/hooks/getURL'
 import { getCurrentLocale } from '../_locales/server'
 import { ArrowSvg, PhoneSvg } from './icons'
 
@@ -24,10 +23,7 @@ const PromoSection = async () => {
       <div className="flex items-stretch">
         <div className="relative w-full shrink-0 aspect-square lg:aspect-[1.15/1] overflow-hidden rounded-tr-[250px] md:rounded-tr-[400px] lg:max-w-130 h-140 max-h-140 lg:max-h-175">
           <Image
-            src={getImageUrl({
-              media: data.leftImage,
-              size: 'big',
-            })}
+            src={data.leftImage as string}
             alt={(data.leftImage as any).alt || 'Promo'}
             fill
             className="object-cover"
@@ -72,7 +68,7 @@ const PromoSection = async () => {
 
         <div className="relative aspect-4/3 lg:aspect-[1.15/1] overflow-hidden clip-promo-section w-full flex-1 z-0 -ml-58 max-h-175 hidden lg:flex">
           <Image
-            src={getImageUrl({ media: data.rightImage, size: 'big' })}
+            src={data.rightImage as string}
             alt="Outdoor dining"
             fill
             className="object-cover"

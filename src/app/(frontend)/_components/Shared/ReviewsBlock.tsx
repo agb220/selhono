@@ -4,7 +4,6 @@ import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Review } from '@/payload-types'
 import { Button } from '../ui/ButtonUI'
-import { getImageUrl } from '@/lib/hooks/getURL'
 import ModalLayout from './Modal'
 import ReviewForm from '../ReviewForm'
 import { useScopedI18n } from '../../_locales/client'
@@ -59,10 +58,7 @@ const ReviewCard = (props: Review) => {
         <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full">
           {props.avatar ? (
             <Image
-              src={getImageUrl({
-                media: props.avatar,
-                size: 'thumbnail',
-              })}
+              src={props.avatar as string}
               alt={props.author || 'Project Selhono'}
               height={77}
               width={77}
