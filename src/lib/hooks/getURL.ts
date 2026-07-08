@@ -30,35 +30,35 @@ export const getClientSideURL = () => {
 }
 
 export const getImageUrl = (params: {
-  media: string | any | null | undefined
-  defaultImage?: { src: string }
-  size?: 'thumbnail' | 'card' | 'slider' | 'big' | 'large' | 'pngSlider' | 'pngBig'
+  media: string | Media | { url: string } | null | undefined
+  defaultImage?: StaticImageData
+  size?:
+    | 'thumbnail'
+    | 'card'
+    | 'slider'
+    | 'big'
+    | 'large'
+    | 'pngCard'
+    | 'pngSlider'
+    | 'pngBig'
+    | 'pngThumbnail'
 }) => {
-  if (!params.media) return params.defaultImage?.src || ''
+  if (!params.media) {
+    return params.defaultImage?.src || ''
+  }
 
   if (typeof params.media === 'string') {
-    if (params.media.startsWith('http://') || params.media.startsWith('https://')) {
-      return params.media
-    }
-    return params.media.startsWith('/') ? params.media : `/${params.media}`
+    return params.media.startsWith('/media') ? params.media : params.defaultImage?.src || ''
   }
 
-  const mediaObj = params.media
+  const media = params.media as Media
+  const mediaUrl = (params.size && media.sizes?.[params.size]?.url) || media.url
 
-  const formatUrl = (url: string | null | undefined) => {
-    if (!url) return params.defaultImage?.src || ''
-    if (url.startsWith('http://') || url.startsWith('https://')) {
-      return url
-    }
-    return url.startsWith('/') ? url : `/${url}`
+  if (!mediaUrl) {
+    return params.defaultImage?.src || ''
   }
 
-  const size = params.size
-  if (size && mediaObj.sizes?.[size]?.url) {
-    return formatUrl(mediaObj.sizes[size].url)
-  }
-
-  return formatUrl(mediaObj.url)
+  return mediaUrl.startsWith('http') ? mediaUrl : `${process.env.NEXT_PUBLIC_SERVER_URL}${mediaUrl}`
 }
 
 export const getPngImageUrl = (params: {

@@ -57,23 +57,23 @@ export default buildConfig({
   plugins: [
     s3Storage({
       collections: {
-        media: {
+        [Media.slug]: {
           disableLocalStorage: true,
           disablePayloadAccessControl: true,
-          generateFileURL: ({ filename }) => {
+          generateFileURL: ({ filename }: { filename: string }) => {
             return `${process.env.NEXT_PUBLIC_S3_PUBLIC_URL}/${filename}`
           },
         },
       },
-      bucket: process.env.S3_BUCKET || 'MISSING_BUCKET',
+      bucket: process.env.S3_BUCKET || '',
       config: {
-        endpoint: process.env.S3_ENDPOINT || 'https://MISSING_ENDPOINT.com',
+        forcePathStyle: true,
+        endpoint: process.env.S3_ENDPOINT || '',
         credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID || 'MISSING_KEY',
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'MISSING_SECRET',
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
         },
         region: 'auto',
-        forcePathStyle: true,
       },
     }),
   ],
