@@ -1,5 +1,4 @@
 import { withPayload } from '@payloadcms/next/withPayload'
-import type { NextConfig } from 'next'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -9,8 +8,9 @@ const S3_PUBLIC_URL = process.env.NEXT_PUBLIC_S3_PUBLIC_URL || ''
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
-const nextConfig: NextConfig = {
-  serverExternalPackages: ['sharp', '@payloadcms/storage-s3'],
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  serverExternalPackages: ['sharp'],
 
   images: {
     remotePatterns: [
@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
 
         return {
           hostname: url.hostname,
-          protocol: url.protocol.replace(':', '') as 'http' | 'https',
+          protocol: url.protocol.replace(':', ''),
           port: url.port || undefined,
         }
       }),
@@ -27,6 +27,7 @@ const nextConfig: NextConfig = {
     loader: 'custom',
     loaderFile: './imageLoader.js',
   },
+
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
@@ -36,6 +37,7 @@ const nextConfig: NextConfig = {
 
     return webpackConfig
   },
+
   turbopack: {
     root: path.resolve(dirname),
   },

@@ -11,6 +11,8 @@ import HeroScrollSection from '../_components/HeroScrollSection'
 import ComingSoon from '../_components/ComingSoon'
 import ReviewsSection from '../_components/ReviewsSection'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const locale = await getCurrentLocale()
 
