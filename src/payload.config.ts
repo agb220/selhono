@@ -33,6 +33,7 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {},
   },
   collections: [Users, Media, Pages, Categories, WorkStage, Reviews],
   globals: [
@@ -52,7 +53,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  sharp,
+  sharp: sharp,
 
   plugins: [
     s3Storage({
