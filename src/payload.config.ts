@@ -69,6 +69,7 @@ export default buildConfig({
       },
       bucket: process.env.S3_BUCKET || '',
       config: {
+        forcePathStyle: true,
         endpoint: process.env.S3_ENDPOINT || '',
         credentials: {
           accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
