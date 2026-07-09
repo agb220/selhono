@@ -53,7 +53,6 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  sharp: sharp,
 
   plugins: [
     s3Storage({
@@ -70,7 +69,6 @@ export default buildConfig({
       },
       bucket: process.env.S3_BUCKET || '',
       config: {
-        forcePathStyle: false,
         endpoint: process.env.S3_ENDPOINT || '',
         credentials: {
           accessKeyId: process.env.S3_ACCESS_KEY_ID || '',

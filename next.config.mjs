@@ -8,14 +8,9 @@ const S3_PUBLIC_URL = process.env.NEXT_PUBLIC_S3_PUBLIC_URL || ''
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
-const externalPackages = ['sharp']
-if (process.env.VERCEL === '1' || process.env.NOW_BUILDER === '1') {
-  externalPackages.push('@payloadcms/storage-s3')
-}
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: externalPackages,
+  serverExternalPackages: ['sharp'],
 
   images: {
     remotePatterns: [
