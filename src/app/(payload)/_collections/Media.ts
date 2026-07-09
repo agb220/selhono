@@ -11,14 +11,6 @@ const Media: CollectionConfig = {
   upload: {
     staticDir: 'media',
     mimeTypes: ['image/*', 'application/pdf'],
-    imageSizes: [
-      {
-        name: 'thumbnail',
-        width: 300,
-        height: 300,
-        position: 'centre',
-      },
-    ],
   },
   access: {
     read: () => true,
