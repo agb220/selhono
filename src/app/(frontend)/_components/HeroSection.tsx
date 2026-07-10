@@ -20,7 +20,7 @@ const HeroSection = (props: HeroBlockType) => {
           />
         )}
 
-        <div className="text-white absolute right-1/2 top-1/2 translate-y-[-50%] translate-x-[50%] z-20">
+        <div className="text-white absolute right-1/2 bottom-1/3 xl:bottom-[15%] translate-y-[-50%] translate-x-[50%] z-20">
           <Title title={props.title} as="h1"></Title>
         </div>
       </div>
