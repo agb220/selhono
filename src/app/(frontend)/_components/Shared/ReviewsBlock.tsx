@@ -7,6 +7,7 @@ import { Button } from '../ui/ButtonUI'
 import ModalLayout from './Modal'
 import ReviewForm from '../ReviewForm'
 import { useScopedI18n } from '../../_locales/client'
+import { getImageUrl } from '@/lib/getImageUrl'
 
 interface ReviewsBlockProps {
   reviews: Review[]
@@ -52,13 +53,14 @@ export default function ReviewsBlock({ reviews, buttonLabel }: ReviewsBlockProps
 
 const ReviewCard = (props: Review) => {
   const firstLetter = props.author ? props.author.charAt(0).toUpperCase() : 'S'
+  const imageUrl = getImageUrl(props.avatar)
   return (
     <div className="bg-white xl:py-13.25 py-8 px-2 xl:px-6 rounded-[30px] shadow-sm h-full flex flex-col gap-6 justify-between">
       <div className="flex gap-6 items-center">
         <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full">
-          {props.avatar ? (
+          {imageUrl ? (
             <Image
-              src={props.avatar as string}
+              src={imageUrl}
               alt={props.author || 'Project Selhono'}
               height={77}
               width={77}

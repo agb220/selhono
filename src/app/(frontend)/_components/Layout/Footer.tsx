@@ -6,6 +6,7 @@ import SocialMediaComp from '../Shared/SocialMediaComp'
 import { getCurrentLocale } from '../../_locales/server'
 
 import { getPayload } from '@/lib/payload'
+import { getImageUrl } from '@/lib/getImageUrl'
 
 const Footer = async () => {
   const payload = await getPayload()
@@ -34,6 +35,8 @@ const Footer = async () => {
 
   const pagesLinks = mainMenu.items || []
 
+  const imageUrl = getImageUrl(logoSettings)
+
   return (
     <footer className="container pt-10">
       <div className="flex flex-col xl:flex-row  mb-16 xl:mb-34.5 justify-between gap-14 xl:gap-25.25">
@@ -43,10 +46,10 @@ const Footer = async () => {
               href="/"
               className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight text-dark-200"
             >
-              {logoSettings.logoType === 'image' && logoSettings.logoImage ? (
+              {imageUrl ? (
                 <div className="max-h-8 md:max-h-12.5 min-w-56.75">
                   <Image
-                    src={(logoSettings.logoImage as any).url}
+                    src={imageUrl}
                     alt={(logoSettings.logoImage as any).alt || 'Logo'}
                     height={50}
                     width={227}

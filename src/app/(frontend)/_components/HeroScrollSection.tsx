@@ -4,6 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
 import { HeroScrollBlockType } from '@/payload-types'
 import { Title } from './Shared/Title'
+import { getImageUrl } from '@/lib/getImageUrl'
 
 export default function HeroScrollSection(props: HeroScrollBlockType) {
   const { title, slides } = props
@@ -45,6 +46,8 @@ export default function HeroScrollSection(props: HeroScrollBlockType) {
           {slides?.map((slide, index) => {
             const isActive = index === selectedIndex
 
+            const slideImageUrl = getImageUrl(slide.image)
+
             return (
               <div
                 key={slide.id || index}
@@ -55,13 +58,18 @@ export default function HeroScrollSection(props: HeroScrollBlockType) {
               >
                 <div className="relative w-full h-full overflow-hidden">
                   <div className="absolute top-0 bottom-0 right-0 left-0 bg-black/20 z-10"></div>
-                  <Image
-                    src={slide.image as string}
-                    alt="Project Selhono"
-                    fill
-                    priority={index === 0}
-                    className="object-cover"
-                  />
+
+                  {slideImageUrl ? (
+                    <Image
+                      src={slideImageUrl}
+                      alt="Project Selhono"
+                      fill
+                      priority={index === 0}
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-zinc-800" />
+                  )}
                 </div>
               </div>
             )

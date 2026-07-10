@@ -6,6 +6,7 @@ import LanguageSwitcher from '../ui/MenuComp/LanguageSwitcher'
 import MobileMenu from '../ui/MenuComp/MobileMenu'
 import { Locales } from '../../_locales/types'
 import { getPayload } from '@/lib/payload'
+import { getImageUrl } from '@/lib/getImageUrl'
 
 export default async function Header() {
   const t = getScopedI18n('menu')
@@ -55,6 +56,8 @@ export default async function Header() {
   const visiblePages = shouldSlice ? allHeaderPages.slice(0, MAX_VISIBLE_ITEMS) : allHeaderPages
   const hasMorePages = shouldSlice ? allHeaderPages.slice(MAX_VISIBLE_ITEMS) : []
 
+  const imageUrl = getImageUrl(logoSettings)
+
   return (
     <header className="w-full fixed top-0 z-40 bg-white">
       <div className="container max-h-12 py-4 md:py-10 flex items-center justify-between">
@@ -62,10 +65,10 @@ export default async function Header() {
           href="/"
           className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight text-dark-200"
         >
-          {logoSettings.logoType === 'image' && logoSettings.logoImage ? (
+          {imageUrl ? (
             <div className="max-h-8 md:max-h-12.5 min-w-56.75">
               <Image
-                src={(logoSettings.logoImage as any).url}
+                src={imageUrl}
                 alt={(logoSettings.logoImage as any).alt || 'Logo'}
                 height={50}
                 width={227}
