@@ -61,7 +61,7 @@ const ReviewCard = (props: Review) => {
           {imageUrl ? (
             <Image
               src={imageUrl}
-              alt={props.author || 'Project Selhono'}
+              alt={props.author || 'Review for Selhono'}
               height={77}
               width={77}
               className="object-cover w-full h-full"

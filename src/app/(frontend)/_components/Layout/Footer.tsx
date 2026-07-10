@@ -35,7 +35,7 @@ const Footer = async () => {
 
   const pagesLinks = mainMenu.items || []
 
-  const imageUrl = getImageUrl(logoSettings)
+  const imageUrl = getImageUrl(logoSettings?.logoImage)
 
   return (
     <footer className="container pt-10">

@@ -56,7 +56,7 @@ export default async function Header() {
   const visiblePages = shouldSlice ? allHeaderPages.slice(0, MAX_VISIBLE_ITEMS) : allHeaderPages
   const hasMorePages = shouldSlice ? allHeaderPages.slice(MAX_VISIBLE_ITEMS) : []
 
-  const imageUrl = getImageUrl(logoSettings)
+  const imageUrl = getImageUrl(logoSettings?.logoImage)
 
   return (
     <header className="w-full fixed top-0 z-40 bg-white">
