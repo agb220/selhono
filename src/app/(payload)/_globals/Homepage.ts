@@ -5,6 +5,7 @@ import { PromoBlockSection } from '../_blocks/PromoBlockSection'
 import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
 import { HeroBlock } from '../_blocks/HeroBlock'
 import { ReviewsSectionBlock } from '../_blocks/ReviewsSectionBlock'
+import { LogoMarqueeBlock } from '../_blocks/LogoMarqueeBlock'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -28,6 +29,7 @@ export const HomePage: GlobalConfig = {
         HeroScrollBlock,
         HeroBlock,
         ReviewsSectionBlock,
+        LogoMarqueeBlock,
       ],
     },
   ],

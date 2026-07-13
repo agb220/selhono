@@ -20,6 +20,7 @@ import { PromoBlock } from './app/(payload)/_globals/PromoBlock'
 import { Reviews } from './app/(payload)/_collections/Reviews'
 import { ReviewsBlock } from './app/(payload)/_globals/ReviewsBlock'
 import Media from './app/(payload)/_collections/Media'
+import { LogoMarquee } from './app/(payload)/_globals/LogoMarquee'
 
 sharp.concurrency(1)
 sharp.cache(false)
@@ -44,6 +45,7 @@ export default buildConfig({
     SocialLinks,
     PromoBlock,
     ReviewsBlock,
+    LogoMarquee,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
