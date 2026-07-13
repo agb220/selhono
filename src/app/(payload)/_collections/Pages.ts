@@ -6,13 +6,14 @@ import { formatSlug } from '@/lib/hooks/formatSlug'
 import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
 import { HeroBlock } from '../_blocks/HeroBlock'
 import { ReviewsSectionBlock } from '../_blocks/ReviewsSectionBlock'
+import { LogoMarqueeBlock } from '../_blocks/LogoMarqueeBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    group: 'Website Content',
+    group: 'Pages',
   },
   fields: [
     {
@@ -57,6 +58,7 @@ export const Pages: CollectionConfig = {
         HeroScrollBlock,
         HeroBlock,
         ReviewsSectionBlock,
+        LogoMarqueeBlock,
       ],
     },
   ],

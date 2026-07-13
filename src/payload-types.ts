@@ -103,6 +103,7 @@ export interface Config {
     'social-links': SocialLink;
     'promo-block': PromoBlock;
     'reviews-block': ReviewsBlock;
+    'logo-marquee': LogoMarquee;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -112,6 +113,7 @@ export interface Config {
     'social-links': SocialLinksSelect<false> | SocialLinksSelect<true>;
     'promo-block': PromoBlockSelect<false> | PromoBlockSelect<true>;
     'reviews-block': ReviewsBlockSelect<false> | ReviewsBlockSelect<true>;
+    'logo-marquee': LogoMarqueeSelect<false> | LogoMarqueeSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -207,6 +209,7 @@ export interface Page {
         | HeroScrollBlockType
         | HeroBlockType
         | ReviewsSectionBlockType
+        | LogoMarqueeBlockType
       )[]
     | null;
   updatedAt: string;
@@ -294,6 +297,15 @@ export interface ReviewsSectionBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'reviews-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoMarqueeBlockType".
+ */
+export interface LogoMarqueeBlockType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logo-merquee-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -469,6 +481,7 @@ export interface PagesSelect<T extends boolean = true> {
         'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
         'hero-block'?: T | HeroBlockTypeSelect<T>;
         'reviews-section'?: T | ReviewsSectionBlockTypeSelect<T>;
+        'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -533,6 +546,14 @@ export interface HeroBlockTypeSelect<T extends boolean = true> {
  * via the `definition` "ReviewsSectionBlockType_select".
  */
 export interface ReviewsSectionBlockTypeSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoMarqueeBlockType_select".
+ */
+export interface LogoMarqueeBlockTypeSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }
@@ -625,6 +646,7 @@ export interface HomePage {
         | HeroScrollBlockType
         | HeroBlockType
         | ReviewsSectionBlockType
+        | LogoMarqueeBlockType
       )[]
     | null;
   updatedAt?: string | null;
@@ -737,6 +759,22 @@ export interface ReviewsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logo-marquee".
+ */
+export interface LogoMarquee {
+  id: string;
+  logos?:
+    | {
+        logoImage: string | Media;
+        brandName: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -749,6 +787,7 @@ export interface HomePageSelect<T extends boolean = true> {
         'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
         'hero-block'?: T | HeroBlockTypeSelect<T>;
         'reviews-section'?: T | ReviewsSectionBlockTypeSelect<T>;
+        'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -858,6 +897,22 @@ export interface ReviewsBlockSelect<T extends boolean = true> {
         label?: T;
       };
   reviews?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "logo-marquee_select".
+ */
+export interface LogoMarqueeSelect<T extends boolean = true> {
+  logos?:
+    | T
+    | {
+        logoImage?: T;
+        brandName?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
