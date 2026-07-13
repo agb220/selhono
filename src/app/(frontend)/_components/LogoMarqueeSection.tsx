@@ -19,13 +19,11 @@ const LogoMarqueeSection = async () => {
 
   if (baseLogos.length === 0) return null
 
-  const duplicatedLogos = [...baseLogos, ...baseLogos]
-
   return (
     <section className="w-full mb-16 md:mb-24 xl:mb-50">
       <div className="relative w-full flex overflow-x-hidden">
         <MarqueeTrack>
-          {duplicatedLogos.map((item, index) => {
+          {baseLogos.map((item, index) => {
             const logoUrl = getImageUrl(item.logoImage)
 
             if (!logoUrl) return null
