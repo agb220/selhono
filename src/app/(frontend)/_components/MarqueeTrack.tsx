@@ -27,7 +27,7 @@ export default function MarqueeTrack({ children }: MarqueeTrackProps) {
 
       gsap.to(list, {
         x: `-${totalWidth}px`,
-        duration: 50,
+        duration: 20,
         ease: 'none',
         repeat: -1,
       })
