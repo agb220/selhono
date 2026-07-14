@@ -11,6 +11,7 @@ import HeroScrollSection from '../_components/HeroScrollSection'
 import ComingSoon from '../_components/ComingSoon'
 import ReviewsSection from '../_components/ReviewsSection'
 import LogoMarqueeSection from '../_components/LogoMarqueeSection'
+import ProjectsSection from '../_components/ProjectsSection'
 
 export const dynamic = 'force-dynamic'
 
@@ -59,6 +60,9 @@ export default async function HomePage() {
             }
             if (section.blockType === 'logo-merquee-section') {
               return <LogoMarqueeSection key={idx} />
+            }
+            if (section.blockType === 'projects-section') {
+              return <ProjectsSection key={idx} {...section} blockType={'projects-section'} />
             }
           })
         )}

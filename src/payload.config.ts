@@ -21,6 +21,7 @@ import { Reviews } from './app/(payload)/_collections/Reviews'
 import { ReviewsBlock } from './app/(payload)/_globals/ReviewsBlock'
 import Media from './app/(payload)/_collections/Media'
 import { LogoMarquee } from './app/(payload)/_globals/LogoMarquee'
+import Projects from './app/(payload)/_collections/Projects'
 
 sharp.concurrency(1)
 sharp.cache(false)
@@ -36,7 +37,7 @@ export default buildConfig({
     },
     components: {},
   },
-  collections: [Users, Media, Pages, Categories, WorkStage, Reviews],
+  collections: [Users, Media, Pages, Categories, WorkStage, Reviews, Projects],
   globals: [
     HomePage,
     MainMenu,

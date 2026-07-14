@@ -6,7 +6,7 @@ export const LogoMarquee: GlobalConfig = {
     read: () => true,
   },
   admin: {
-    group: 'Blocks Content',
+    group: 'Blocks Content (Reusable Components)',
   },
   fields: [
     {
