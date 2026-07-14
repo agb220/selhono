@@ -5,7 +5,7 @@ export const Reviews: CollectionConfig = {
   admin: {
     useAsTitle: 'author',
     defaultColumns: ['author', 'location', 'isApproved', 'createdAt'],
-    group: 'Blocks Content',
+    group: 'Blocks Content (Reusable Components)',
   },
   access: {
     read: () => true,

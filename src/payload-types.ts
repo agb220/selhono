@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     'work-stage': WorkStage;
     reviews: Review;
+    projects: Project;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'work-stage': WorkStageSelect<false> | WorkStageSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -210,6 +212,7 @@ export interface Page {
         | HeroBlockType
         | ReviewsSectionBlockType
         | LogoMarqueeBlockType
+        | ProjectsSectionBlockType
       )[]
     | null;
   updatedAt: string;
@@ -309,6 +312,67 @@ export interface LogoMarqueeBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectsSectionBlockType".
+ */
+export interface ProjectsSectionBlockType {
+  heading: string;
+  subheading?: string | null;
+  populateBy?: ('latest' | 'manual') | null;
+  /**
+   * Drag and drop projects to reorder them in the site grid.
+   */
+  selectedProjects?: (string | Project)[] | null;
+  /**
+   * The number of projects that will automatically be displayed in the section.
+   */
+  limit?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'projects-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: string;
+  title: string;
+  /**
+   * Generated automatically from the project name. Contains only lowercase letters, numbers, and hyphens.
+   */
+  slug: string;
+  /**
+   * Select a category to filter by on the website (Bathroom, Bedroom, etc.)
+   */
+  category: string | Category;
+  mainImage: string | Media;
+  projectDetails?: ProjectDetails;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  gallery?:
+    | {
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
@@ -320,6 +384,18 @@ export interface Category {
   slug: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectDetails".
+ */
+export interface ProjectDetails {
+  client?: string | null;
+  /**
+   * Enter them separated by commas. For example: VIP, Home
+   */
+  tags?: string | null;
+  date?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -382,6 +458,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'reviews';
         value: string | Review;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: string | Project;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -482,6 +562,7 @@ export interface PagesSelect<T extends boolean = true> {
         'hero-block'?: T | HeroBlockTypeSelect<T>;
         'reviews-section'?: T | ReviewsSectionBlockTypeSelect<T>;
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
+        'projects-section'?: T | ProjectsSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -559,6 +640,19 @@ export interface LogoMarqueeBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectsSectionBlockType_select".
+ */
+export interface ProjectsSectionBlockTypeSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  populateBy?: T;
+  selectedProjects?: T;
+  limit?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -591,6 +685,35 @@ export interface ReviewsSelect<T extends boolean = true> {
   isApproved?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  category?: T;
+  mainImage?: T;
+  projectDetails?: T | ProjectDetailsSelect<T>;
+  description?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectDetails_select".
+ */
+export interface ProjectDetailsSelect<T extends boolean = true> {
+  client?: T;
+  tags?: T;
+  date?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -647,6 +770,7 @@ export interface HomePage {
         | HeroBlockType
         | ReviewsSectionBlockType
         | LogoMarqueeBlockType
+        | ProjectsSectionBlockType
       )[]
     | null;
   updatedAt?: string | null;
@@ -788,6 +912,7 @@ export interface HomePageSelect<T extends boolean = true> {
         'hero-block'?: T | HeroBlockTypeSelect<T>;
         'reviews-section'?: T | ReviewsSectionBlockTypeSelect<T>;
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
+        'projects-section'?: T | ProjectsSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;

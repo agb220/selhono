@@ -13,6 +13,7 @@ const Categories: CollectionConfig = {
   slug: 'categories',
   admin: {
     useAsTitle: 'title',
+    group: 'Blocks Content (Reusable Components)',
   },
   access: {
     read: () => true,

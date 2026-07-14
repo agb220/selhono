@@ -76,7 +76,7 @@ svg {
   @apply font-dm text-[22px] leading-normal font-normal;
 }
 
-.h7 {
+@utility h7 {
   @apply font-dm text-xl leading-tight font-normal;
 }
 
@@ -88,7 +88,7 @@ svg {
   @apply font-dm text-[35px] leading-tight font-normal;
 }
 
-.paragraph {
+@utility paragraph {
   @apply font-jost text-[28px] leading-normal font-normal;
 }
 

@@ -4,7 +4,7 @@ export const ReviewsBlock: GlobalConfig = {
   slug: 'reviews-block',
   label: 'Reviews Block',
   admin: {
-    group: 'Blocks Content',
+    group: 'Blocks Content (Reusable Components)',
   },
   fields: [
     {

@@ -6,7 +6,7 @@ export const WorkStage: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'updatedAt'],
-    group: 'Blocks Content',
+    group: 'Blocks Content (Reusable Components)',
   },
 
   labels: {

@@ -4,7 +4,7 @@ export const PromoBlock: GlobalConfig = {
   slug: 'promo-block',
   label: 'Promo Block',
   admin: {
-    group: 'Blocks Content',
+    group: 'Blocks Content (Reusable Components)',
   },
   fields: [
     {

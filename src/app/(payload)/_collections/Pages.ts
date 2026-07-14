@@ -7,6 +7,7 @@ import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
 import { HeroBlock } from '../_blocks/HeroBlock'
 import { ReviewsSectionBlock } from '../_blocks/ReviewsSectionBlock'
 import { LogoMarqueeBlock } from '../_blocks/LogoMarqueeBlock'
+import { ProjectsSectionBlock } from '../_blocks/ProjectsSectionBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -59,6 +60,7 @@ export const Pages: CollectionConfig = {
         HeroBlock,
         ReviewsSectionBlock,
         LogoMarqueeBlock,
+        ProjectsSectionBlock,
       ],
     },
   ],
