@@ -106,6 +106,7 @@ export interface Config {
     'promo-block': PromoBlock;
     'reviews-block': ReviewsBlock;
     'logo-marquee': LogoMarquee;
+    'company-stats': CompanyStat;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -116,6 +117,7 @@ export interface Config {
     'promo-block': PromoBlockSelect<false> | PromoBlockSelect<true>;
     'reviews-block': ReviewsBlockSelect<false> | ReviewsBlockSelect<true>;
     'logo-marquee': LogoMarqueeSelect<false> | LogoMarqueeSelect<true>;
+    'company-stats': CompanyStatsSelect<false> | CompanyStatsSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -213,6 +215,7 @@ export interface Page {
         | ReviewsSectionBlockType
         | LogoMarqueeBlockType
         | ProjectsSectionBlockType
+        | StatsSectionBlockType
       )[]
     | null;
   updatedAt: string;
@@ -399,6 +402,15 @@ export interface ProjectDetails {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsSectionBlockType".
+ */
+export interface StatsSectionBlockType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -563,6 +575,7 @@ export interface PagesSelect<T extends boolean = true> {
         'reviews-section'?: T | ReviewsSectionBlockTypeSelect<T>;
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
         'projects-section'?: T | ProjectsSectionBlockTypeSelect<T>;
+        'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -648,6 +661,14 @@ export interface ProjectsSectionBlockTypeSelect<T extends boolean = true> {
   populateBy?: T;
   selectedProjects?: T;
   limit?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsSectionBlockType_select".
+ */
+export interface StatsSectionBlockTypeSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }
@@ -771,6 +792,7 @@ export interface HomePage {
         | ReviewsSectionBlockType
         | LogoMarqueeBlockType
         | ProjectsSectionBlockType
+        | StatsSectionBlockType
       )[]
     | null;
   updatedAt?: string | null;
@@ -899,6 +921,22 @@ export interface LogoMarquee {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-stats".
+ */
+export interface CompanyStat {
+  id: string;
+  stats?:
+    | {
+        value: number;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -913,6 +951,7 @@ export interface HomePageSelect<T extends boolean = true> {
         'reviews-section'?: T | ReviewsSectionBlockTypeSelect<T>;
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
         'projects-section'?: T | ProjectsSectionBlockTypeSelect<T>;
+        'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1036,6 +1075,22 @@ export interface LogoMarqueeSelect<T extends boolean = true> {
     | {
         logoImage?: T;
         brandName?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-stats_select".
+ */
+export interface CompanyStatsSelect<T extends boolean = true> {
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
         id?: T;
       };
   updatedAt?: T;

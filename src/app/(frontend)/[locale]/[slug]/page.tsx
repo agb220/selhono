@@ -10,6 +10,8 @@ import ComingSoon from '../../_components/ComingSoon'
 import { setStaticParamsLocale } from 'next-international/server'
 import ReviewsSection from '../../_components/ReviewsSection'
 import LogoMarqueeSection from '../../_components/LogoMarqueeSection'
+import StatsSection from '../../_components/StatsSection'
+import ProjectsSection from '../../_components/ProjectsSection'
 
 interface PageProps {
   params: Promise<{
@@ -87,6 +89,12 @@ export default async function DynamicPage({ params }: PageProps) {
             }
             if (section.blockType === 'logo-merquee-section') {
               return <LogoMarqueeSection key={idx} />
+            }
+            if (section.blockType === 'projects-section') {
+              return <ProjectsSection key={idx} {...section} blockType={'projects-section'} />
+            }
+            if (section.blockType === 'stats-section') {
+              return <StatsSection key={idx} />
             }
             return null
           })

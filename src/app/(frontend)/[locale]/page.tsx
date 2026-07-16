@@ -12,6 +12,7 @@ import ComingSoon from '../_components/ComingSoon'
 import ReviewsSection from '../_components/ReviewsSection'
 import LogoMarqueeSection from '../_components/LogoMarqueeSection'
 import ProjectsSection from '../_components/ProjectsSection'
+import StatsSection from '../_components/StatsSection'
 
 export const dynamic = 'force-dynamic'
 
@@ -63,6 +64,9 @@ export default async function HomePage() {
             }
             if (section.blockType === 'projects-section') {
               return <ProjectsSection key={idx} {...section} blockType={'projects-section'} />
+            }
+            if (section.blockType === 'stats-section') {
+              return <StatsSection key={idx} />
             }
           })
         )}
