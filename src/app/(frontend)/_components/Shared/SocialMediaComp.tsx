@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import Link from 'next/dist/client/link'
 
 interface SocialLink {
@@ -32,10 +33,18 @@ const SocialMediaComp = ({ links }: SocialMediaCompProps) => {
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-opacity duration-300 hover:opacity-70 max-w-5.5 max-h-5.5"
+            className="transition-opacity duration-300 hover:opacity-70 max-w-6 max-h-6 overflow-hidden"
             aria-label={social.name}
           >
-            {iconUrl && <img src={iconUrl} alt={social.name} className="object-contain" />}
+            {iconUrl && (
+              <Image
+                src={iconUrl}
+                alt={social.name}
+                width={24}
+                height={24}
+                className="max-w-6 max-h-6 object-contain"
+              />
+            )}
           </Link>
         )
       })}

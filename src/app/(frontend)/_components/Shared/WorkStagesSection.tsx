@@ -6,7 +6,7 @@ import { Button } from '../ui/ButtonUI'
 import { ArrowSvg } from '../icons'
 
 interface WorkStagesSectionProps {
-  items: WorkStage[]
+  items: (string | WorkStage)[]
 }
 
 const WorkStagesSection = (props: WorkStagesSectionProps) => {
@@ -20,9 +20,10 @@ const WorkStagesSection = (props: WorkStagesSectionProps) => {
       <div className="container mx-auto">
         <div className="overflow-hidden" ref={emblaRef}>
           <ul className="flex gap-5 md:gap-10.5 group/list">
-            {props.items.map((item, index) => (
-              <WorkStageCard {...item} key={index} />
-            ))}
+            {props.items.map((item, index) => {
+              if (typeof item === 'string') return null
+              return <WorkStageCard {...item} key={index} />
+            })}
           </ul>
         </div>
       </div>

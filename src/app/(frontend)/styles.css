@@ -92,7 +92,7 @@ svg {
   @apply font-jost text-[28px] leading-normal font-normal;
 }
 
-.text-number {
+@utility text-number {
   @apply font-dm text-[85px] leading-tight font-normal;
 }
 

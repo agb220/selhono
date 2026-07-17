@@ -14,7 +14,7 @@ interface ReviewsBlockProps {
   buttonLabel: string
 }
 
-export default function ReviewsBlock({ reviews, buttonLabel }: ReviewsBlockProps) {
+export default function ReviewsBlockComp({ reviews, buttonLabel }: ReviewsBlockProps) {
   const t = useScopedI18n('modal')
   const [emblaRef] = useEmblaCarousel({ align: 'start', loop: false })
 
