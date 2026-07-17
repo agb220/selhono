@@ -15,12 +15,14 @@ const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-dm',
+  display: 'swap',
 })
 
 const jost = Jost({
   subsets: ['latin'],
   weight: ['300', '400', '500', '700', '800'],
   variable: '--font-jost',
+  display: 'swap',
 })
 
 interface SubLayoutProps {

@@ -19,6 +19,9 @@ const MainHeroSection = (props: MainHeroBlockType) => {
             fill
             className="object-cover object-center"
             priority
+            sizes="100vw"
+            unoptimized
+            fetchPriority="high"
           />
         )}
 

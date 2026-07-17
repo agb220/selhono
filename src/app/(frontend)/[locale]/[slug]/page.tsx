@@ -61,12 +61,18 @@ export default async function DynamicPage({ params }: PageProps) {
     return notFound()
   }
 
-  const page = await payload.findByID({
-    collection: 'pages',
-    id: rawPage.id,
-    locale: locale as any,
-    depth: 2,
-  })
+  const [page, promoData, reviewsData, marqueeData, statsData] = await Promise.all([
+    payload.findByID({
+      collection: 'pages',
+      id: rawPage.id,
+      locale: locale as any,
+      depth: 2,
+    }),
+    payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
+    payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
+    payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
+    payload.findGlobal({ slug: 'company-stats', depth: 1 }),
+  ])
 
   const layout = page.layout || []
 
@@ -83,18 +89,19 @@ export default async function DynamicPage({ params }: PageProps) {
             if (section.blockType === 'hero-block') return <HeroSection key={idx} {...section} />
             if (section.blockType === 'process-section')
               return <WorkStagesSection key={idx} items={section.stages || []} />
-            if (section.blockType === 'promo-section') return <PromoSection key={idx} />
+            if (section.blockType === 'promo-section')
+              return <PromoSection key={idx} {...promoData} />
             if (section.blockType === 'reviews-section') {
-              return <ReviewsSection key={idx} />
+              return <ReviewsSection key={idx} {...reviewsData} />
             }
             if (section.blockType === 'logo-merquee-section') {
-              return <LogoMarqueeSection key={idx} />
+              return <LogoMarqueeSection key={idx} {...marqueeData} />
             }
             if (section.blockType === 'projects-section') {
               return <ProjectsSection key={idx} {...section} blockType={'projects-section'} />
             }
             if (section.blockType === 'stats-section') {
-              return <StatsSection key={idx} />
+              return <StatsSection key={idx} {...statsData} />
             }
             return null
           })

@@ -62,13 +62,11 @@ export const StatsCard = ({ value, label }: StatsCardProps) => {
 
   return (
     <div ref={elementRef} className="flex flex-col items-center justify-center text-center px-4">
-      <span className="text-[64px] md:text-[85px] leading-none font-bold text-gold-300 font-serif mb-4 selection:bg-transparent">
+      <span className="h4 md:text-number leading-none font-bold text-gold-300 font-serif mb-4 selection:bg-transparent">
         <span ref={numberRef}>{value}</span>
       </span>
 
-      <p className="text-dark-200 text-[18px] font-medium leading-relaxed tracking-wide whitespace-pre-line max-w-50">
-        {label}
-      </p>
+      <p className="link-regular tracking-wide whitespace-pre-line max-w-50">{label}</p>
     </div>
   )
 }

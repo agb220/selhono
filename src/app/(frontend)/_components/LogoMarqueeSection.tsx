@@ -1,20 +1,9 @@
 import Image from 'next/image'
-import { getPayload } from 'payload'
-import config from '@/payload.config'
 import { getImageUrl } from '@/lib/getImageUrl'
-import { getCurrentLocale } from '../_locales/server'
 import MarqueeTrack from './MarqueeTrack'
+import { LogoMarquee } from '@/payload-types'
 
-const LogoMarqueeSection = async () => {
-  const locale = await getCurrentLocale()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-
-  const data = await payload.findGlobal({
-    slug: 'logo-marquee',
-    locale: locale as any,
-  })
-
+const LogoMarqueeSection = async (data: LogoMarquee) => {
   const baseLogos = data?.logos || []
 
   if (baseLogos.length === 0) return null

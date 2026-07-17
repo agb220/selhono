@@ -73,6 +73,7 @@ export default async function Header() {
                 height={50}
                 width={227}
                 className="object-cover object-center"
+                unoptimized
               />
             </div>
           ) : (

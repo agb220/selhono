@@ -32,7 +32,7 @@ const ProjectsSection = async (props: ProjectsSectionBlockType) => {
   }
 
   return (
-    <section className="container mb-14 md:mb-25 xl:mb-43">
+    <section className="container mb-20 md:mb-25 xl:mb-43">
       <div className="mx-auto max-w-130 mb-6 md:mb-10 xl:mb-14">
         <h2 className="text-dark-200 text-accent xl:h2 text-center mb-2">{props.heading}</h2>
         {props.subheading && <p className="md:paragraph text-center">{props.subheading}</p>}

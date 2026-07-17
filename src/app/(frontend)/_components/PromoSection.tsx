@@ -1,24 +1,11 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from './ui/ButtonUI'
-import { getCurrentLocale } from '../_locales/server'
 import { ArrowSvg, PhoneSvg } from './icons'
 import { getImageUrl } from '@/lib/getImageUrl'
+import { PromoBlock } from '@/payload-types'
 
-const PromoSection = async () => {
-  const locale = await getCurrentLocale()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-
-  const data = await payload.findGlobal({
-    slug: 'promo-block',
-    locale: locale as any,
-  })
-
-  if (!data || !data.leftImage) return null
-
+const PromoSection = (data: PromoBlock) => {
   const imageUrlLeft = getImageUrl(data.leftImage)
   const imageUrlRight = getImageUrl(data.rightImage)
 
@@ -33,6 +20,7 @@ const PromoSection = async () => {
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           )}
           <div className="absolute inset-0 bg-black/30" />
@@ -80,6 +68,7 @@ const PromoSection = async () => {
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           )}
         </div>
