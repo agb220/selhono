@@ -325,6 +325,10 @@ export interface LogoMarqueeBlockType {
 export interface ProjectsSectionBlockType {
   heading: string;
   subheading?: string | null;
+  /**
+   * Button text, e.g., "View All Articles".
+   */
+  viewAllText?: string | null;
   populateBy?: ('latest' | 'manual') | null;
   /**
    * Drag and drop projects to reorder them in the site grid.
@@ -750,6 +754,7 @@ export interface LogoMarqueeBlockTypeSelect<T extends boolean = true> {
 export interface ProjectsSectionBlockTypeSelect<T extends boolean = true> {
   heading?: T;
   subheading?: T;
+  viewAllText?: T;
   populateBy?: T;
   selectedProjects?: T;
   limit?: T;

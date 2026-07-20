@@ -14,7 +14,7 @@ import LogoMarqueeSection from '../_components/LogoMarqueeSection'
 import ProjectsSection from '../_components/ProjectsSection'
 import StatsSection from '../_components/StatsSection'
 import BlogsSection from '../_components/BlogsSection'
-import { Post } from '@/payload-types'
+import { Post, Project, ProjectsSectionBlockType } from '@/payload-types'
 
 export const revalidate = 3600
 
@@ -36,6 +36,27 @@ export default async function HomePageComponent() {
   }
 
   const layout = homePageData.layout || []
+
+  const projectSectionConfig = layout.find((s) => s.blockType === 'projects-section') as
+    ProjectsSectionBlockType | undefined
+  let projectItems: Project[] = []
+
+  if (projectSectionConfig) {
+    if (projectSectionConfig.populateBy === 'manual' && projectSectionConfig.selectedProjects) {
+      projectItems = projectSectionConfig.selectedProjects.filter(
+        (p): p is Project => typeof p === 'object' && p !== null,
+      )
+    } else {
+      const response = await payload.find({
+        collection: 'projects',
+        limit: projectSectionConfig.limit || 4,
+        locale: locale as any,
+        sort: '-createdAt',
+        depth: 1,
+      })
+      projectItems = response.docs
+    }
+  }
 
   const blogSectionConfig = layout.find((s) => s.blockType === 'blog-section')
 
@@ -88,7 +109,7 @@ export default async function HomePageComponent() {
                 return <LogoMarqueeSection key={idx} {...marqueeData} />
 
               case 'projects-section':
-                return <ProjectsSection key={idx} {...section} />
+                return <ProjectsSection key={idx} {...section} projects={projectItems} />
 
               case 'stats-section':
                 return <StatsSection key={idx} {...statsData} />

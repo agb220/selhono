@@ -13,7 +13,7 @@ import LogoMarqueeSection from '../../_components/LogoMarqueeSection'
 import StatsSection from '../../_components/StatsSection'
 import ProjectsSection from '../../_components/ProjectsSection'
 import BlogsSection from '../../_components/BlogsSection'
-import { Post, BlogSectionBlockType } from '@/payload-types'
+import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@/payload-types'
 
 interface PageProps {
   params: Promise<{
@@ -78,6 +78,27 @@ export default async function DynamicPage({ params }: PageProps) {
 
   const layout = page.layout || []
 
+  const projectSectionConfig = layout.find((s: any) => s.blockType === 'projects-section') as
+    ProjectsSectionBlockType | undefined
+  let projectItems: Project[] = []
+
+  if (projectSectionConfig) {
+    if (projectSectionConfig.populateBy === 'manual' && projectSectionConfig.selectedProjects) {
+      projectItems = projectSectionConfig.selectedProjects.filter(
+        (p): p is Project => typeof p === 'object' && p !== null,
+      )
+    } else {
+      const response = await payload.find({
+        collection: 'projects',
+        limit: projectSectionConfig.limit || 4,
+        locale: locale as any,
+        sort: '-createdAt',
+        depth: 1,
+      })
+      projectItems = response.docs
+    }
+  }
+
   const blogSectionConfig = layout.find((s: any) => s.blockType === 'blog-section') as
     BlogSectionBlockType | undefined
 
@@ -130,7 +151,7 @@ export default async function DynamicPage({ params }: PageProps) {
                 return <LogoMarqueeSection key={idx} {...marqueeData} />
 
               case 'projects-section':
-                return <ProjectsSection key={idx} {...section} blockType="projects-section" />
+                return <ProjectsSection key={idx} {...section} projects={projectItems} />
 
               case 'stats-section':
                 return <StatsSection key={idx} {...statsData} />
