@@ -1,9 +1,9 @@
 'use client'
 import useEmblaCarousel from 'embla-carousel-react'
-import { BlogSectionBlockType, Post } from '@/payload-types'
+import Link from 'next/link'
 import { BlogCard } from './Shared/BlogCard'
 import { Button } from './ui/ButtonUI'
-import Link from 'next/link'
+import { BlogSectionBlockType, Post } from '@/payload-types'
 
 interface BlogsSectionProps extends BlogSectionBlockType {
   posts?: Post[]

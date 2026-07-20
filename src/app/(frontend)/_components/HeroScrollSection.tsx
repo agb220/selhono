@@ -65,7 +65,7 @@ export default function HeroScrollSection(props: HeroScrollBlockType) {
                       alt="Project Selhono"
                       fill
                       priority={index === 0}
-                      className="object-cover"
+                      className="object-cover select-none pointer-events-none"
                     />
                   ) : (
                     <div className="absolute inset-0 bg-zinc-800" />

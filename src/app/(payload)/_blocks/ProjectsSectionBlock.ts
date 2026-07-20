@@ -35,6 +35,14 @@ export const ProjectsSectionBlock: Block = {
       localized: true,
     },
     {
+      name: 'viewAllText',
+      type: 'text',
+      localized: true,
+      admin: {
+        description: 'Button text, e.g., "View All Articles".',
+      },
+    },
+    {
       name: 'populateBy',
       type: 'select',
       label: 'Populate By',
@@ -66,6 +74,7 @@ export const ProjectsSectionBlock: Block = {
       type: 'number',
       label: 'Limit Projects',
       defaultValue: 4,
+      min: 4,
       admin: {
         condition: (_, siblingData) => siblingData?.populateBy === 'latest',
         description: 'The number of projects that will automatically be displayed in the section.',
