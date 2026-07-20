@@ -23,6 +23,8 @@ import Media from './app/(payload)/_collections/Media'
 import { LogoMarquee } from './app/(payload)/_globals/LogoMarquee'
 import Projects from './app/(payload)/_collections/Projects'
 import { CompanyStats } from './app/(payload)/_globals/CompanyStats'
+import { BlogCategories } from './app/(payload)/_collections/BlogCategories'
+import { Posts } from './app/(payload)/_collections/Posts'
 
 sharp.concurrency(1)
 sharp.cache(false)
@@ -38,7 +40,17 @@ export default buildConfig({
     },
     components: {},
   },
-  collections: [Users, Media, Pages, Categories, WorkStage, Reviews, Projects],
+  collections: [
+    Users,
+    Media,
+    Pages,
+    Categories,
+    WorkStage,
+    Reviews,
+    Projects,
+    BlogCategories,
+    Posts,
+  ],
   globals: [
     HomePage,
     MainMenu,

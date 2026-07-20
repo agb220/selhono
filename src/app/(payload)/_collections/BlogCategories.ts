@@ -1,22 +1,14 @@
 import { formatSlug } from '@/lib/hooks/formatSlug'
 import { CollectionConfig } from 'payload'
 
-const Categories: CollectionConfig = {
-  slug: 'categories',
+export const BlogCategories: CollectionConfig = {
+  slug: 'blog-categories',
   admin: {
     useAsTitle: 'title',
-    group: 'Blocks Content (Reusable Components)',
-  },
-  access: {
-    read: () => true,
+    group: 'Blog',
   },
   fields: [
-    {
-      name: 'title',
-      type: 'text',
-      required: true,
-      localized: true,
-    },
+    { name: 'title', type: 'text', required: true, localized: true },
     {
       name: 'slug',
       type: 'text',
@@ -33,5 +25,3 @@ const Categories: CollectionConfig = {
     },
   ],
 }
-
-export default Categories

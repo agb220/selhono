@@ -8,6 +8,7 @@ import { ReviewsSectionBlock } from '../_blocks/ReviewsSectionBlock'
 import { LogoMarqueeBlock } from '../_blocks/LogoMarqueeBlock'
 import { ProjectsSectionBlock } from '../_blocks/ProjectsSectionBlock'
 import { StatsSectionBlock } from '../_blocks/StatsSectionBlock'
+import { BlogSectionBlock } from '../_blocks/BlogSectionBlock'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -34,6 +35,7 @@ export const HomePage: GlobalConfig = {
         LogoMarqueeBlock,
         ProjectsSectionBlock,
         StatsSectionBlock,
+        BlogSectionBlock,
       ],
     },
   ],

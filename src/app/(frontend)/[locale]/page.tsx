@@ -13,6 +13,8 @@ import ReviewsSection from '../_components/ReviewsSection'
 import LogoMarqueeSection from '../_components/LogoMarqueeSection'
 import ProjectsSection from '../_components/ProjectsSection'
 import StatsSection from '../_components/StatsSection'
+import BlogsSection from '../_components/BlogsSection'
+import { Post } from '@/payload-types'
 
 export const revalidate = 3600
 
@@ -34,6 +36,27 @@ export default async function HomePageComponent() {
   }
 
   const layout = homePageData.layout || []
+
+  const blogSectionConfig = layout.find((s) => s.blockType === 'blog-section')
+
+  let blogPosts: Post[] = []
+
+  if (blogSectionConfig) {
+    if (blogSectionConfig.selectionType === 'manual' && blogSectionConfig.manualPosts) {
+      blogPosts = blogSectionConfig.manualPosts.filter(
+        (p): p is Post => typeof p === 'object' && p !== null,
+      )
+    } else {
+      const response = await payload.find({
+        collection: 'posts',
+        limit: blogSectionConfig.limit || 3,
+        locale: locale as any,
+        sort: '-publishedDate',
+        depth: 2,
+      })
+      blogPosts = response.docs
+    }
+  }
 
   return (
     <LayoutWrapper>
@@ -69,6 +92,9 @@ export default async function HomePageComponent() {
 
               case 'stats-section':
                 return <StatsSection key={idx} {...statsData} />
+
+              case 'blog-section':
+                return <BlogsSection key={idx} {...section} posts={blogPosts} />
 
               default:
                 return null
