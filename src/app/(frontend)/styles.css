@@ -72,7 +72,7 @@ svg {
   @apply font-dm text-[25px] leading-tight font-normal;
 }
 
-.h6 {
+@utility h6 {
   @apply font-dm text-[22px] leading-normal font-normal;
 }
 
@@ -100,11 +100,11 @@ svg {
   @apply font-dm text-[250px] leading-tight font-normal;
 }
 
-.text-number-small {
+@utility text-number-small {
   @apply font-jost text-[15px] leading-normal font-medium;
 }
 
-.text-small {
+@utility text-small {
   @apply font-jost text-base leading-normal font-normal;
 }
 

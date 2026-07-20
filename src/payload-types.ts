@@ -74,6 +74,8 @@ export interface Config {
     'work-stage': WorkStage;
     reviews: Review;
     projects: Project;
+    'blog-categories': BlogCategory;
+    posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +90,8 @@ export interface Config {
     'work-stage': WorkStageSelect<false> | WorkStageSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -216,6 +220,7 @@ export interface Page {
         | LogoMarqueeBlockType
         | ProjectsSectionBlockType
         | StatsSectionBlockType
+        | BlogSectionBlockType
       )[]
     | null;
   updatedAt: string;
@@ -411,6 +416,84 @@ export interface StatsSectionBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogSectionBlockType".
+ */
+export interface BlogSectionBlockType {
+  heading: string;
+  subheading?: string | null;
+  cardVariant: 'default' | 'simple';
+  /**
+   * Button text, e.g., "View All Articles".
+   */
+  viewAllText?: string | null;
+  selectionType: 'latest' | 'manual';
+  /**
+   * How many posts to display automatically
+   */
+  limit?: number | null;
+  /**
+   * Choose specific posts to display in this section
+   */
+  manualPosts?: (string | Post)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'blog-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: string;
+  title: string;
+  slug?: string | null;
+  publishedDate: string;
+  /**
+   * Short description for cards and the Latest Post section
+   */
+  excerpt?: string | null;
+  mainImage: string | Media;
+  category: string | BlogCategory;
+  tags?:
+    | {
+        tag?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-categories".
+ */
+export interface BlogCategory {
+  id: string;
+  title: string;
+  /**
+   * is automatically generated from the English page title
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -474,6 +557,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: string | Project;
+      } | null)
+    | ({
+        relationTo: 'blog-categories';
+        value: string | BlogCategory;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: string | Post;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -576,6 +667,7 @@ export interface PagesSelect<T extends boolean = true> {
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
         'projects-section'?: T | ProjectsSectionBlockTypeSelect<T>;
         'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
+        'blog-section'?: T | BlogSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -674,6 +766,21 @@ export interface StatsSectionBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogSectionBlockType_select".
+ */
+export interface BlogSectionBlockTypeSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  cardVariant?: T;
+  viewAllText?: T;
+  selectionType?: T;
+  limit?: T;
+  manualPosts?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -738,6 +845,37 @@ export interface ProjectDetailsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-categories_select".
+ */
+export interface BlogCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  publishedDate?: T;
+  excerpt?: T;
+  mainImage?: T;
+  category?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -793,6 +931,7 @@ export interface HomePage {
         | LogoMarqueeBlockType
         | ProjectsSectionBlockType
         | StatsSectionBlockType
+        | BlogSectionBlockType
       )[]
     | null;
   updatedAt?: string | null;
@@ -952,6 +1091,7 @@ export interface HomePageSelect<T extends boolean = true> {
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
         'projects-section'?: T | ProjectsSectionBlockTypeSelect<T>;
         'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
+        'blog-section'?: T | BlogSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
