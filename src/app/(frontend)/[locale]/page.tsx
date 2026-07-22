@@ -28,7 +28,7 @@ export default async function HomePageComponent() {
     payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
     payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
     payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
-    payload.findGlobal({ slug: 'company-stats', depth: 1 }),
+    payload.findGlobal({ slug: 'company-stats', locale: locale as any, depth: 1 }),
   ])
 
   if (!homePageData) {
