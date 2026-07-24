@@ -27,4 +27,16 @@ export default {
     uploadingImage: 'Wird hochgeladen...',
     isSubmitting: 'Wird gespeichert...',
   },
+  modalContact: {
+    title: 'Kontaktieren Sie uns',
+    description: 'Hinterlassen Sie Ihre Kontaktdaten, wir melden uns kürze bei Ihnen.',
+    inputName: 'Vollständiger Name',
+    inputPhone: 'Telefonnummer',
+    inputMessage: 'Nachricht',
+    btnTitle: 'Senden',
+    successTitle: 'Vielen Dank!',
+    successDesc: 'Wir werden uns kürze bei Ihnen melden.',
+    errorTitle: 'Fehler',
+    errorDesc: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
+  },
 } as const

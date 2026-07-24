@@ -24,7 +24,9 @@ export default function ModalLayout({
           <Dialog.Title className="text-medium-bold text-center mb-1">{title}</Dialog.Title>
 
           {description && (
-            <Dialog.Description className="text-gold-300 mb-6 ">{description}</Dialog.Description>
+            <Dialog.Description className="text-gold-300 mb-6 text-center">
+              {description}
+            </Dialog.Description>
           )}
 
           {children}
