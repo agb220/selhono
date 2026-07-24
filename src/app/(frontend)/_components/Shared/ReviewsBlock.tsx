@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { Review } from '@/payload-types'
 import { Button } from '../ui/ButtonUI'
 import ModalLayout from './Modal'
-import ReviewForm from '../ReviewForm'
+import ReviewForm from './Forms/ReviewForm'
 import { useScopedI18n } from '../../_locales/client'
 import { getImageUrl } from '@/lib/getImageUrl'
 

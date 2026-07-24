@@ -25,6 +25,8 @@ import Projects from './app/(payload)/_collections/Projects'
 import { CompanyStats } from './app/(payload)/_globals/CompanyStats'
 import { BlogCategories } from './app/(payload)/_collections/BlogCategories'
 import { Posts } from './app/(payload)/_collections/Posts'
+import { CTASection } from './app/(payload)/_globals/CTASection'
+import { ContactRequests } from './app/(payload)/_collections/ContactRequests'
 
 sharp.concurrency(1)
 sharp.cache(false)
@@ -50,6 +52,7 @@ export default buildConfig({
     Projects,
     BlogCategories,
     Posts,
+    ContactRequests,
   ],
   globals: [
     HomePage,
@@ -61,6 +64,7 @@ export default buildConfig({
     ReviewsBlock,
     LogoMarquee,
     CompanyStats,
+    CTASection,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

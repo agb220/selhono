@@ -27,4 +27,16 @@ export default {
     uploadingImage: 'Uploading photo...',
     isSubmitting: 'Saving review...',
   },
+  modalContact: {
+    title: 'Get in Touch',
+    description: 'Leave your details and we will contact you shortly.',
+    inputName: 'Full Name',
+    inputPhone: 'Phone Number',
+    inputMessage: 'Message',
+    btnTitle: 'Send',
+    successTitle: 'Thank you!',
+    successDesc: 'We will contact you shortly.',
+    errorTitle: 'Error',
+    errorDesc: 'Something went wrong. Please try again.',
+  },
 } as const

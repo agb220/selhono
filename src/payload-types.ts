@@ -76,6 +76,7 @@ export interface Config {
     projects: Project;
     'blog-categories': BlogCategory;
     posts: Post;
+    'contact-requests': ContactRequest;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    'contact-requests': ContactRequestsSelect<false> | ContactRequestsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -111,6 +113,7 @@ export interface Config {
     'reviews-block': ReviewsBlock;
     'logo-marquee': LogoMarquee;
     'company-stats': CompanyStat;
+    'cta-section': CtaSection;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -122,6 +125,7 @@ export interface Config {
     'reviews-block': ReviewsBlockSelect<false> | ReviewsBlockSelect<true>;
     'logo-marquee': LogoMarqueeSelect<false> | LogoMarqueeSelect<true>;
     'company-stats': CompanyStatsSelect<false> | CompanyStatsSelect<true>;
+    'cta-section': CtaSectionSelect<false> | CtaSectionSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -221,6 +225,7 @@ export interface Page {
         | ProjectsSectionBlockType
         | StatsSectionBlockType
         | BlogSectionBlockType
+        | CTABlockSectionType
       )[]
     | null;
   updatedAt: string;
@@ -498,6 +503,15 @@ export interface BlogCategory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlockSectionType".
+ */
+export interface CTABlockSectionType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta-block-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -507,6 +521,29 @@ export interface Review {
   avatar?: (string | null) | Media;
   text: string;
   isApproved?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-requests".
+ */
+export interface ContactRequest {
+  id: string;
+  name: string;
+  phone: string;
+  message?: string | null;
+  status: 'new' | 'in_progress' | 'completed' | 'closed';
+  /**
+   * Please add comments regarding the process of communicating with the client (for example: “Quotation sent,” “Awaiting feedback”)
+   */
+  adminNotes?:
+    | {
+        date?: string | null;
+        comment: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -569,6 +606,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: string | Post;
+      } | null)
+    | ({
+        relationTo: 'contact-requests';
+        value: string | ContactRequest;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -672,6 +713,7 @@ export interface PagesSelect<T extends boolean = true> {
         'projects-section'?: T | ProjectsSectionBlockTypeSelect<T>;
         'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
         'blog-section'?: T | BlogSectionBlockTypeSelect<T>;
+        'cta-block-section'?: T | CTABlockSectionTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -786,6 +828,14 @@ export interface BlogSectionBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlockSectionType_select".
+ */
+export interface CTABlockSectionTypeSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -881,6 +931,25 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-requests_select".
+ */
+export interface ContactRequestsSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  message?: T;
+  status?: T;
+  adminNotes?:
+    | T
+    | {
+        date?: T;
+        comment?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -937,6 +1006,7 @@ export interface HomePage {
         | ProjectsSectionBlockType
         | StatsSectionBlockType
         | BlogSectionBlockType
+        | CTABlockSectionType
       )[]
     | null;
   updatedAt?: string | null;
@@ -1081,6 +1151,19 @@ export interface CompanyStat {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cta-section".
+ */
+export interface CtaSection {
+  id: string;
+  title: string;
+  description?: string | null;
+  backgroundImage: string | Media;
+  buttonText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -1097,6 +1180,7 @@ export interface HomePageSelect<T extends boolean = true> {
         'projects-section'?: T | ProjectsSectionBlockTypeSelect<T>;
         'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
         'blog-section'?: T | BlogSectionBlockTypeSelect<T>;
+        'cta-block-section'?: T | CTABlockSectionTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1238,6 +1322,19 @@ export interface CompanyStatsSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cta-section_select".
+ */
+export interface CtaSectionSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  backgroundImage?: T;
+  buttonText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

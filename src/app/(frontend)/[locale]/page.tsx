@@ -15,6 +15,7 @@ import ProjectsSection from '../_components/ProjectsSection'
 import StatsSection from '../_components/StatsSection'
 import BlogsSection from '../_components/BlogsSection'
 import { Post, Project, ProjectsSectionBlockType } from '@/payload-types'
+import ContactUsSection from '../_components/ContactUsSection'
 
 export const revalidate = 3600
 
@@ -23,13 +24,16 @@ export default async function HomePageComponent() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  const [homePageData, promoData, reviewsData, marqueeData, statsData] = await Promise.all([
-    payload.findGlobal({ slug: 'home-page', locale: locale as any, depth: 2 }),
-    payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
-    payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
-    payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
-    payload.findGlobal({ slug: 'company-stats', locale: locale as any, depth: 1 }),
-  ])
+  const [homePageData, promoData, reviewsData, marqueeData, statsData, ctaData] = await Promise.all(
+    [
+      payload.findGlobal({ slug: 'home-page', locale: locale as any, depth: 2 }),
+      payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
+      payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
+      payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
+      payload.findGlobal({ slug: 'company-stats', locale: locale as any, depth: 1 }),
+      payload.findGlobal({ slug: 'cta-section', locale: locale as any, depth: 1 }),
+    ],
+  )
 
   if (!homePageData) {
     return notFound()
@@ -116,6 +120,9 @@ export default async function HomePageComponent() {
 
               case 'blog-section':
                 return <BlogsSection key={idx} {...section} posts={blogPosts} />
+
+              case 'cta-block-section':
+                return <ContactUsSection key={idx} {...ctaData} />
 
               default:
                 return null

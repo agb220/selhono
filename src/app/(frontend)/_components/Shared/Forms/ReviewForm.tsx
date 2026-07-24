@@ -1,9 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { toast as sonnerToast } from 'sonner'
-import { Button } from './ui/ButtonUI'
-import { createReviewOnlyAction } from '../_actions/reviews'
-import { useScopedI18n } from '../_locales/client'
+import { Button } from '../../ui/ButtonUI'
+import { createReviewOnlyAction } from '../../../_actions/reviews'
+import { useScopedI18n } from '../../../_locales/client'
+import Input from '../Input'
 
 interface ReviewFormProps {
   onSuccess: () => void
@@ -27,6 +28,8 @@ export default function ReviewForm({ onSuccess }: ReviewFormProps) {
   const [text, setText] = useState('')
   const [errors, setErrors] = useState<FormErrors>({})
   const [isFormValid, setIsFormValid] = useState(false)
+
+  const isDisabled = isSubmitting || uploadingImage
 
   useEffect(() => {
     if (author.trim() && location.trim() && text.trim()) {
@@ -118,86 +121,69 @@ export default function ReviewForm({ onSuccess }: ReviewFormProps) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
       <div className="flex flex-col gap-1">
-        <label className="text-sm font-medium text-dark-200">{t('inputName')}</label>
-        <input
+        <Input
+          label={t('inputName')}
           name="author"
           type="text"
           value={author}
+          error={errors.author}
+          disabled={isDisabled}
           onChange={(e) => {
             setAuthor(e.target.value)
             if (errors.author) setErrors((prev) => ({ ...prev, author: undefined }))
           }}
-          disabled={isSubmitting || uploadingImage}
-          className={`px-4 py-2.5 rounded-xl border text-sm focus:outline-none transition-colors ${
-            errors.author ? 'border-red-500' : 'border-gray-200 focus:border-gold-100'
-          }`}
         />
-        {errors.author && <span className="text-xs text-red-500 mt-0.5 pl-1">{errors.author}</span>}
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <label className="text-sm font-medium text-dark-200">{t('inputLocation')}</label>
-        <input
+        <Input
+          label={t('inputLocation')}
           name="location"
           type="text"
           value={location}
+          error={errors.location}
+          disabled={isDisabled}
           onChange={(e) => {
             setLocation(e.target.value)
             if (errors.location) setErrors((prev) => ({ ...prev, location: undefined }))
           }}
-          disabled={isSubmitting || uploadingImage}
-          className={`px-4 py-2.5 rounded-xl border text-sm focus:outline-none transition-colors ${
-            errors.location ? 'border-red-500' : 'border-gray-200 focus:border-gold-100'
-          }`}
         />
-        {errors.location && (
-          <span className="text-xs text-red-500 mt-0.5 pl-1">{errors.location}</span>
-        )}
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <label className="text-sm font-medium text-dark-200">{t('avatarInput')}</label>
-        <div className="relative flex items-center gap-3">
-          <input
-            type="file"
-            accept="image/*"
-            disabled={isSubmitting || uploadingImage}
-            onChange={(e) => {
-              const file = e.target.files?.[0] || null
-              setSelectedFile(file)
-              setFileName(file ? file.name : null)
-            }}
-            className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10 disabled:pointer-events-none"
-          />
-          <div className="px-4 py-2 bg-gold-100/10 text-gold-100 font-semibold text-sm rounded-xl border-0 transition-colors pointer-events-none">
-            {t('fileBtn')}
+        <div className="flex flex-col gap-1">
+          <label className="text-sm font-medium text-dark-200">{t('avatarInput')}</label>
+          <div className="relative flex items-center gap-3">
+            <input
+              type="file"
+              accept="image/*"
+              disabled={isDisabled}
+              onChange={(e) => {
+                const file = e.target.files?.[0] || null
+                setSelectedFile(file)
+                setFileName(file ? file.name : null)
+              }}
+              className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10 disabled:pointer-events-none"
+            />
+            <div className="px-4 py-2 bg-gold-100/10 text-gold-100 font-semibold text-sm rounded-xl border-0 transition-colors pointer-events-none">
+              {t('fileBtn')}
+            </div>
+            <span className="text-sm text-gray-400 truncate max-w-50">
+              {fileName || t('fileNoFile')}
+            </span>
           </div>
-          <span className="text-sm text-gray-400 truncate max-w-50">
-            {fileName || t('fileNoFile')}
-          </span>
         </div>
-      </div>
 
-      <div className="flex flex-col gap-1">
-        <label className="text-sm font-medium text-dark-200">{t('inputReview')}</label>
-        <textarea
+        <Input
+          as="textarea"
+          label={t('inputReview')}
           name="text"
           rows={4}
           maxLength={180}
           placeholder={t('placeholderReview')}
           value={text}
+          error={errors.text}
+          disabled={isDisabled}
           onChange={(e) => {
             setText(e.target.value)
             if (errors.text) setErrors((prev) => ({ ...prev, text: undefined }))
           }}
-          disabled={isSubmitting || uploadingImage}
-          className={`px-4 py-2.5 rounded-xl border text-sm resize-none focus:outline-none transition-colors ${
-            errors.text ? 'border-red-500' : 'border-gray-200 focus:border-gold-100'
-          }`}
         />
-        {errors.text && <span className="text-xs text-red-500 mt-0.5 pl-1">{errors.text}</span>}
       </div>
-
       <div className="flex justify-center gap-3 mt-2">
         <Button type="submit" disabled={isSubmitting || uploadingImage || !isFormValid}>
           {uploadingImage ? t('uploadingImage') : isSubmitting ? t('isSubmitting') : t('btnTitle')}
