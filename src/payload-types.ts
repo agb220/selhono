@@ -226,6 +226,7 @@ export interface Page {
         | StatsSectionBlockType
         | BlogSectionBlockType
         | CTABlockSectionType
+        | SloganBlockType
       )[]
     | null;
   updatedAt: string;
@@ -512,6 +513,17 @@ export interface CTABlockSectionType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SloganBlockType".
+ */
+export interface SloganBlockType {
+  quote: string;
+  author?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'slogan-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -714,6 +726,7 @@ export interface PagesSelect<T extends boolean = true> {
         'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
         'blog-section'?: T | BlogSectionBlockTypeSelect<T>;
         'cta-block-section'?: T | CTABlockSectionTypeSelect<T>;
+        'slogan-block'?: T | SloganBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -831,6 +844,16 @@ export interface BlogSectionBlockTypeSelect<T extends boolean = true> {
  * via the `definition` "CTABlockSectionType_select".
  */
 export interface CTABlockSectionTypeSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SloganBlockType_select".
+ */
+export interface SloganBlockTypeSelect<T extends boolean = true> {
+  quote?: T;
+  author?: T;
   id?: T;
   blockName?: T;
 }

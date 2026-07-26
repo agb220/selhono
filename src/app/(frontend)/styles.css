@@ -91,6 +91,10 @@ svg {
   @apply font-dm text-[35px] leading-tight font-normal;
 }
 
+@utility text-uppercase {
+  @apply font-jost text-[25px] leading-tight font-normal uppercase;
+}
+
 @utility paragraph {
   @apply font-jost text-[28px] leading-normal font-normal;
 }
