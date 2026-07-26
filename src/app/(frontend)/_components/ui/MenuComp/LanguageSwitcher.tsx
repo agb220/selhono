@@ -13,7 +13,7 @@ export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProp
 
   return (
     <div className="pl-6 flex items-center">
-      <DropdownMenu.Root>
+      <DropdownMenu.Root modal={false}>
         <DropdownMenu.Trigger className="flex items-center gap-1.5 link  hover:text-gold-300 transition-colors uppercase outline-none select-none cursor-pointer group">
           {currentLocale}
           <DropDownSvg

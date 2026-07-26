@@ -25,7 +25,7 @@ const MainHeroSection = (props: MainHeroBlockType) => {
           />
         )}
 
-        <div className="relative z-20 max-w-175 pl-4 md:pl-6 pt-8 md:pt-18">
+        <div className="relative z-20 max-w-140 pl-4 md:pl-6 pt-8 md:pt-18">
           <Title
             title={props.title}
             description={props.subtitle}
