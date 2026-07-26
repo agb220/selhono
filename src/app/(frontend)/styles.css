@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-dm: var(--font-dm);
-  --font-jost: var(--font-jost);
+  --font-dm: var(--font-dm), serif;
+  --font-jost: var(--font-jost), sans-serif;
 
   --color-dark-100: #4d5053;
   --color-dark-200: #292f36;
@@ -16,12 +16,15 @@
 
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   font-size: 22px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  scrollbar-gutter: stable;
 }
 
 html,
@@ -53,7 +56,7 @@ svg {
 }
 
 @utility h1 {
-  @apply font-dm text-[70px] leading-tight font-normal;
+  @apply font-dm text-[65px] leading-tight font-normal;
 }
 
 @utility h2 {

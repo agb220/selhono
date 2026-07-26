@@ -39,7 +39,11 @@ export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
   }
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={(open) => (open ? setIsOpen(true) : handleClose())}>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={(open) => (open ? setIsOpen(true) : handleClose())}
+      modal={false}
+    >
       <Dialog.Trigger asChild>
         <button
           className="p-2 text-dark-200 outline-none cursor-pointer group"
