@@ -227,6 +227,7 @@ export interface Page {
         | BlogSectionBlockType
         | CTABlockSectionType
         | SloganBlockType
+        | FeatureCardsBlockType
       )[]
     | null;
   updatedAt: string;
@@ -524,6 +525,27 @@ export interface SloganBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureCardsBlockType".
+ */
+export interface FeatureCardsBlockType {
+  items?:
+    | {
+        title: string;
+        description: string;
+        image: string | Media;
+        button: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'feature-cards-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -727,6 +749,7 @@ export interface PagesSelect<T extends boolean = true> {
         'blog-section'?: T | BlogSectionBlockTypeSelect<T>;
         'cta-block-section'?: T | CTABlockSectionTypeSelect<T>;
         'slogan-block'?: T | SloganBlockTypeSelect<T>;
+        'feature-cards-block'?: T | FeatureCardsBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -854,6 +877,28 @@ export interface CTABlockSectionTypeSelect<T extends boolean = true> {
 export interface SloganBlockTypeSelect<T extends boolean = true> {
   quote?: T;
   author?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureCardsBlockType_select".
+ */
+export interface FeatureCardsBlockTypeSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        button?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
