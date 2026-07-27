@@ -11,24 +11,24 @@ export const FeatureCardsSection: React.FC<FeatureCardsBlockType> = ({ items }) 
 
   return (
     <section className="py-16 md:py-24">
-      <div className="container mx-auto px-4 flex flex-col gap-20 md:gap-32">
+      <ul className="container mx-auto px-4 flex flex-col gap-20 md:gap-32">
         {items.map((item, index) => {
           const isReversed = index % 2 !== 0
           return (
-            <div
+            <li
               key={item.id || index}
-              className={`flex flex-col-reverse md:flex-row items-center gap-10 lg:gap-19 ${
-                isReversed ? 'md:flex-row-reverse' : ''
+              className={`flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-19 ${
+                isReversed ? 'lg:flex-row-reverse' : ''
               }`}
             >
-              <div className="flex flex-col md:w-[40%]">
+              <div className="flex flex-col lg:w-[40%]">
                 <h2 className="text-accent md:h4 mb-2 md:mb-6 text-dark-200">{item.title}</h2>
                 <p className="mb-4 md:mb-10">{item.description}</p>
-                <Button asChild icon={ArrowSvg} variant="primary" className="max-w-55">
+                <Button asChild icon={ArrowSvg} variant="primary" className="lg:max-w-55">
                   <Link href={item.button.url}>{item.button.label}</Link>
                 </Button>
               </div>
-              <div className="w-full md:w-[60%] relative aspect-4/3">
+              <div className="w-full lg:w-[60%] relative aspect-4/3">
                 <Image
                   src={getImageUrl(item.image)}
                   alt={`${item.title} "Selhono"`}
@@ -40,10 +40,10 @@ export const FeatureCardsSection: React.FC<FeatureCardsBlockType> = ({ items }) 
                   }`}
                 />
               </div>
-            </div>
+            </li>
           )
         })}
-      </div>
+      </ul>
     </section>
   )
 }
