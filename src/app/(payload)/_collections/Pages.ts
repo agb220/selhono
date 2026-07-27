@@ -12,6 +12,7 @@ import { StatsSectionBlock } from '../_blocks/StatsSectionBlock'
 import { BlogSectionBlock } from '../_blocks/BlogSectionBlock'
 import { CTABlock } from '../_blocks/CTABlock'
 import { SloganBlock } from '../_blocks/SloganBlock'
+import { FeatureCardsBlock } from '../_blocks/FeatureCardsBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -69,6 +70,7 @@ export const Pages: CollectionConfig = {
         BlogSectionBlock,
         CTABlock,
         SloganBlock,
+        FeatureCardsBlock,
       ],
     },
   ],
