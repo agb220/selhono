@@ -4,7 +4,7 @@ import configPromise from '@payload-config'
 
 interface CreateContactDto {
   name: string
-  phoneNumber: string
+  email: string
   text: string
 }
 
@@ -16,7 +16,7 @@ export async function createContactRequestAction(data: CreateContactDto) {
       collection: 'contact-requests',
       data: {
         name: data.name,
-        phone: data.phoneNumber,
+        email: data.email,
         message: data.text,
         status: 'new',
       },

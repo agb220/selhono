@@ -28,13 +28,14 @@ const ContactUsSection = (props: CtaSection) => {
         )}
         <div className="container mx-auto flex flex-col items-center justify-center text-center">
           <h2 className="h4 mb-3 max-w-2xl">{props.title}</h2>
-          <p className=" mb-8 max-w-xl input-medium">{props.description}</p>
+          <p className="mb-8 max-w-xl input-medium">{props.description}</p>
           <Button
             variant="default"
             className="mt-5 md:mt-7 max-h-12 md:max-h-18.75"
             iconPlacement="end"
             icon={ArrowSvg}
             onClick={() => setIsModalOpen(true)}
+            size="sm"
           >
             {props.buttonText}
           </Button>

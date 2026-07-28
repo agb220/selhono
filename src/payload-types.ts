@@ -228,6 +228,7 @@ export interface Page {
         | CTABlockSectionType
         | SloganBlockType
         | FeatureCardsBlockType
+        | ContactFormInlineBlockType
       )[]
     | null;
   updatedAt: string;
@@ -546,6 +547,16 @@ export interface FeatureCardsBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormInlineBlockType".
+ */
+export interface ContactFormInlineBlockType {
+  title: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact-form-inline-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -565,7 +576,7 @@ export interface Review {
 export interface ContactRequest {
   id: string;
   name: string;
-  phone: string;
+  email: string;
   message?: string | null;
   status: 'new' | 'in_progress' | 'completed' | 'closed';
   /**
@@ -750,6 +761,7 @@ export interface PagesSelect<T extends boolean = true> {
         'cta-block-section'?: T | CTABlockSectionTypeSelect<T>;
         'slogan-block'?: T | SloganBlockTypeSelect<T>;
         'feature-cards-block'?: T | FeatureCardsBlockTypeSelect<T>;
+        'contact-form-inline-block'?: T | ContactFormInlineBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -904,6 +916,15 @@ export interface FeatureCardsBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormInlineBlockType_select".
+ */
+export interface ContactFormInlineBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -1003,7 +1024,7 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface ContactRequestsSelect<T extends boolean = true> {
   name?: T;
-  phone?: T;
+  email?: T;
   message?: T;
   status?: T;
   adminNotes?:

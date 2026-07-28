@@ -28,10 +28,10 @@ export const ContactRequests: CollectionConfig = {
       },
     },
     {
-      name: 'phone',
+      name: 'email',
       type: 'text',
       required: true,
-      label: 'Phone Number',
+      label: 'Email',
       admin: {
         readOnly: true,
       },

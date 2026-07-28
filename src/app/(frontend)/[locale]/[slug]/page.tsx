@@ -16,6 +16,7 @@ import BlogsSection from '../../_components/BlogsSection'
 import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@/payload-types'
 import SloganSection from '../../_components/SloganSection'
 import FeatureCardsSection from '../../_components/FeatureCardsSection'
+import ContactFormInlineSection from '../../_components/ContactFormInlineSection'
 
 interface PageProps {
   params: Promise<{
@@ -166,6 +167,9 @@ export default async function DynamicPage({ params }: PageProps) {
 
               case 'feature-cards-block':
                 return <FeatureCardsSection key={idx} {...section} />
+
+              case 'contact-form-inline-block':
+                return <ContactFormInlineSection key={idx} {...section} />
 
               default:
                 return null
