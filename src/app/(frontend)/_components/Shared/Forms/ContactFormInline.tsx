@@ -1,13 +1,15 @@
 'use client'
+
+import { createContactRequestAction } from '@/app/(frontend)/_actions/contact'
+import { useScopedI18n } from '@/app/(frontend)/_locales/client'
 import { useState, useEffect } from 'react'
 import { toast as sonnerToast } from 'sonner'
-import { Button } from '../../ui/ButtonUI'
-import { createContactRequestAction } from '../../../_actions/contact'
-import { useScopedI18n } from '../../../_locales/client'
 import Input from '../Input'
+import { Button } from '../../ui/ButtonUI'
+import { ArrowSvg } from '../../icons'
 
-interface ContactFormProps {
-  onSuccess: () => void
+interface ContactFormInlineProps {
+  onSuccess?: () => void
 }
 
 interface ContactFormErrors {
@@ -16,7 +18,7 @@ interface ContactFormErrors {
   text?: string
 }
 
-export default function ContactForm({ onSuccess }: ContactFormProps) {
+export default function ContactFormInline({ onSuccess }: ContactFormInlineProps) {
   const t = useScopedI18n('modalContact')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -33,12 +35,19 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
   const validateForm = (): boolean => {
     const newErrors: ContactFormErrors = {}
     if (!name.trim()) newErrors.name = 'Please enter your name'
-    if (!email.trim()) newErrors.email = 'Please enter your email'
+
+    if (!email.trim()) {
+      newErrors.email = 'Please enter your email'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Invalid email address'
+    }
+
     if (!text.trim()) {
       newErrors.text = 'Message text cannot be empty'
     } else if (text.length < 10) {
       newErrors.text = 'Message must be at least 10 characters long'
     }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -55,7 +64,7 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
         name,
         email,
         text,
-      })
+      } as any)
 
       if (!result.success) {
         throw new Error(result.error || 'Failed to send request')
@@ -65,14 +74,15 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
       setEmail('')
       setText('')
       setErrors({})
-      onSuccess()
+
+      if (onSuccess) onSuccess()
 
       sonnerToast.success(t('successTitle'), {
         description: t('successDesc'),
         icon: '✨',
       })
     } catch (error: any) {
-      console.error('Error submitting contact form:', error)
+      console.error('Error submitting inline contact form:', error)
       sonnerToast.error(t('errorTitle'), {
         description: error.message || t('errorDesc'),
       })
@@ -82,36 +92,46 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-      <Input
-        label={t('inputName')}
-        name="name"
-        type="text"
-        value={name}
-        error={errors.name}
-        disabled={isSubmitting}
-        onChange={(e) => {
-          setName(e.target.value)
-          if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }))
-        }}
-      />
-      <Input
-        label={t('inputEmail')}
-        name="email"
-        type="email"
-        value={email}
-        error={errors.email}
-        disabled={isSubmitting}
-        onChange={(e) => {
-          setEmail(e.target.value)
-          if (errors.email) setErrors((prev) => ({ ...prev, phoneNumber: undefined }))
-        }}
-      />
+    <form
+      onSubmit={handleSubmit}
+      className="w-full max-w-4xl mx-auto flex flex-col gap-10"
+      noValidate
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <Input
+          variant="inline"
+          placeholder="Name"
+          name="name"
+          type="text"
+          value={name}
+          error={errors.name}
+          disabled={isSubmitting}
+          onChange={(e) => {
+            setName(e.target.value)
+            if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }))
+          }}
+        />
+        <Input
+          variant="inline"
+          placeholder="Email"
+          name="email"
+          type="email"
+          value={email}
+          error={errors.email}
+          disabled={isSubmitting}
+          onChange={(e) => {
+            setEmail(e.target.value)
+            if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }))
+          }}
+        />
+      </div>
+
       <Input
         as="textarea"
-        label={t('inputMessage')}
+        variant="inline"
+        placeholder="Message"
         name="text"
-        rows={4}
+        rows={1}
         value={text}
         error={errors.text}
         disabled={isSubmitting}
@@ -120,9 +140,10 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
           if (errors.text) setErrors((prev) => ({ ...prev, text: undefined }))
         }}
       />
-      <div className="flex justify-center gap-3 mt-2">
-        <Button type="submit" disabled={isSubmitting || !isFormValid}>
-          {isSubmitting ? 'Sending...' : t('btnTitle')}
+
+      <div className="flex justify-center mt-4">
+        <Button type="submit" disabled={isSubmitting} variant="primary" icon={ArrowSvg} size="sm">
+          <span>{isSubmitting ? 'Sending...' : 'Send Now'}</span>
         </Button>
       </div>
     </form>

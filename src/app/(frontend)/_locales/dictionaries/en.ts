@@ -31,7 +31,7 @@ export default {
     title: 'Get in Touch',
     description: 'Leave your details and we will contact you shortly.',
     inputName: 'Full Name',
-    inputPhone: 'Phone Number',
+    inputEmail: 'Email',
     inputMessage: 'Message',
     btnTitle: 'Send',
     successTitle: 'Thank you!',

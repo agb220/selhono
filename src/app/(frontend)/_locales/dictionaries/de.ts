@@ -31,7 +31,7 @@ export default {
     title: 'Kontaktieren Sie uns',
     description: 'Hinterlassen Sie Ihre Kontaktdaten, wir melden uns kürze bei Ihnen.',
     inputName: 'Vollständiger Name',
-    inputPhone: 'Telefonnummer',
+    inputEmail: 'Email',
     inputMessage: 'Nachricht',
     btnTitle: 'Senden',
     successTitle: 'Vielen Dank!',
