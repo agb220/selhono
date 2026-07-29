@@ -142,7 +142,13 @@ export default async function DynamicPage({ params }: PageProps) {
                 return <HeroSection key={idx} {...section} />
 
               case 'process-section':
-                return <WorkStagesSection key={idx} items={section.stages || []} />
+                return (
+                  <WorkStagesSection
+                    key={idx}
+                    items={section.stages || []}
+                    className="grid md:grid-cols-2 xl:grid-cols-3"
+                  />
+                )
 
               case 'promo-section':
                 return <PromoSection key={idx} {...promoData} />

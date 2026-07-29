@@ -7,7 +7,7 @@ const HeroSection = (props: HeroBlockType) => {
   const imageUrl = getImageUrl(props.image)
   return (
     <section>
-      <div className="relative h-105 xl:h-70 overflow-hidden">
+      <div className="relative h-105 xl:h-70 overflow-hidden mb-8  md:mb-14 xl:mb-20">
         <div className="absolute top-0 bottom-0 right-0 left-0 bg-black/20 z-10"></div>
         {imageUrl && (
           <Image

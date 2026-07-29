@@ -4,9 +4,11 @@ import { WorkStage } from '@/payload-types'
 import Link from 'next/dist/client/link'
 import { Button } from '../ui/ButtonUI'
 import { ArrowSvg } from '../icons'
+import { cn } from '@/lib/utils'
 
 interface WorkStagesSectionProps {
   items: (string | WorkStage)[]
+  className?: string
 }
 
 const WorkStagesSection = (props: WorkStagesSectionProps) => {
@@ -19,7 +21,7 @@ const WorkStagesSection = (props: WorkStagesSectionProps) => {
     <section className="overflow-hidden mb-8 md:mb-12 xl:mb-20">
       <div className="container mx-auto">
         <div className="overflow-hidden" ref={emblaRef}>
-          <ul className="flex gap-5 md:gap-10.5 group/list">
+          <ul className={cn('flex gap-5 md:gap-10.5 group/list', props.className)}>
             {props.items.map((item, index) => {
               if (typeof item === 'string') return null
               return <WorkStageCard {...item} key={index} />
