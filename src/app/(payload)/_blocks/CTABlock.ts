@@ -8,8 +8,7 @@ export const CTABlock: Block = {
     plural: 'CTA Form  [Global]',
   },
   admin: {
-    group: 'CTA Forms ',
-
+    group: 'CTA Forms',
     images: {
       thumbnail: {
         url: '/blocks/CTABlockEx.png',
