@@ -8,7 +8,7 @@ export const ContactFormInlineBlock: Block = {
     plural: 'Inline Contact Forms',
   },
   admin: {
-    group: 'Page Builder',
+    group: 'CTA Forms',
     images: {
       thumbnail: {
         url: '/blocks/ctainlinenlockex.avif',

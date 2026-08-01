@@ -18,6 +18,7 @@ import SloganSection from '../../_components/SloganSection'
 import FeatureCardsSection from '../../_components/FeatureCardsSection'
 import ContactFormInlineSection from '../../_components/ContactFormInlineSection'
 import ProcessStepsSection from '../../_components/ProcessStepsSection'
+import ContactUsSection from '../../_components/ContactUsSection'
 
 interface PageProps {
   params: Promise<{
@@ -67,7 +68,7 @@ export default async function DynamicPage({ params }: PageProps) {
     return notFound()
   }
 
-  const [page, promoData, reviewsData, marqueeData, statsData] = await Promise.all([
+  const [page, promoData, reviewsData, marqueeData, statsData, ctaData] = await Promise.all([
     payload.findByID({
       collection: 'pages',
       id: rawPage.id,
@@ -78,6 +79,7 @@ export default async function DynamicPage({ params }: PageProps) {
     payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
     payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
     payload.findGlobal({ slug: 'company-stats', depth: 1 }),
+    payload.findGlobal({ slug: 'cta-section', locale: locale as any, depth: 1 }),
   ])
 
   const layout = page.layout || []
@@ -177,6 +179,9 @@ export default async function DynamicPage({ params }: PageProps) {
 
               case 'contact-form-inline-block':
                 return <ContactFormInlineSection key={idx} {...section} />
+
+              case 'cta-block-section':
+                return <ContactUsSection key={idx} {...ctaData} />
 
               case 'process-steps-block':
                 return <ProcessStepsSection key={idx} {...section} />
