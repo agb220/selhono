@@ -17,6 +17,7 @@ import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@
 import SloganSection from '../../_components/SloganSection'
 import FeatureCardsSection from '../../_components/FeatureCardsSection'
 import ContactFormInlineSection from '../../_components/ContactFormInlineSection'
+import ProcessStepsSection from '../../_components/ProcessStepsSection'
 
 interface PageProps {
   params: Promise<{
@@ -176,6 +177,9 @@ export default async function DynamicPage({ params }: PageProps) {
 
               case 'contact-form-inline-block':
                 return <ContactFormInlineSection key={idx} {...section} />
+
+              case 'process-steps-block':
+                return <ProcessStepsSection key={idx} {...section} />
 
               default:
                 return null
