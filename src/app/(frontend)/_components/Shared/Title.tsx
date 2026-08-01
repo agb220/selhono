@@ -21,7 +21,7 @@ export const Title = ({
 }: TitleProps) => {
   const titleSizes = {
     hero: 'h4 md:h1',
-    section: 'h4 md:h2',
+    section: 'text-accent-lg md:h4',
     sub: '',
   }
 

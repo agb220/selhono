@@ -14,6 +14,7 @@ import { CTABlock } from '../_blocks/CTABlock'
 import { SloganBlock } from '../_blocks/SloganBlock'
 import { FeatureCardsBlock } from '../_blocks/FeatureCardsBlock'
 import { ContactFormInlineBlock } from '../_blocks/CTAInlineBlock'
+import { ProcessStepsBlock } from '../_blocks/ProcessStepsBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -73,6 +74,7 @@ export const Pages: CollectionConfig = {
         SloganBlock,
         FeatureCardsBlock,
         ContactFormInlineBlock,
+        ProcessStepsBlock,
       ],
     },
   ],

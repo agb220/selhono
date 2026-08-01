@@ -229,6 +229,7 @@ export interface Page {
         | SloganBlockType
         | FeatureCardsBlockType
         | ContactFormInlineBlockType
+        | ProcessStepsBlockType
       )[]
     | null;
   updatedAt: string;
@@ -557,6 +558,25 @@ export interface ContactFormInlineBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessStepsBlockType".
+ */
+export interface ProcessStepsBlockType {
+  title: string;
+  description?: string | null;
+  steps?:
+    | {
+        title: string;
+        description: string;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'process-steps-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -762,6 +782,7 @@ export interface PagesSelect<T extends boolean = true> {
         'slogan-block'?: T | SloganBlockTypeSelect<T>;
         'feature-cards-block'?: T | FeatureCardsBlockTypeSelect<T>;
         'contact-form-inline-block'?: T | ContactFormInlineBlockTypeSelect<T>;
+        'process-steps-block'?: T | ProcessStepsBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -920,6 +941,24 @@ export interface FeatureCardsBlockTypeSelect<T extends boolean = true> {
  */
 export interface ContactFormInlineBlockTypeSelect<T extends boolean = true> {
   title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessStepsBlockType_select".
+ */
+export interface ProcessStepsBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
