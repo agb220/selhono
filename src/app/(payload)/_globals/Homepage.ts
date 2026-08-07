@@ -1,6 +1,6 @@
 import { GlobalConfig } from 'payload'
 import { MainHeroBlock } from '../_blocks/MainHeroBlock'
-import { ProcessSectionBlock } from '../_blocks/ProcessSectionBlock'
+import { ServicesBlock } from '../_blocks/ServicesBlock'
 import { PromoBlockSection } from '../_blocks/PromoBlockSection'
 import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
 import { HeroBlock } from '../_blocks/HeroBlock'
@@ -9,7 +9,6 @@ import { LogoMarqueeBlock } from '../_blocks/LogoMarqueeBlock'
 import { ProjectsSectionBlock } from '../_blocks/ProjectsSectionBlock'
 import { StatsSectionBlock } from '../_blocks/StatsSectionBlock'
 import { BlogSectionBlock } from '../_blocks/BlogSectionBlock'
-import { CTASection } from './CTASection'
 import { CTABlock } from '../_blocks/CTABlock'
 
 export const HomePage: GlobalConfig = {
@@ -29,7 +28,7 @@ export const HomePage: GlobalConfig = {
       minRows: 1,
       blocks: [
         MainHeroBlock,
-        ProcessSectionBlock,
+        ServicesBlock,
         PromoBlockSection,
         HeroScrollBlock,
         HeroBlock,

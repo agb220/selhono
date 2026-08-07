@@ -71,7 +71,7 @@ export interface Config {
     media: Media;
     pages: Page;
     categories: Category;
-    'work-stage': WorkStage;
+    services: Service;
     reviews: Review;
     projects: Project;
     'blog-categories': BlogCategory;
@@ -88,7 +88,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    'work-stage': WorkStageSelect<false> | WorkStageSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
@@ -216,7 +216,7 @@ export interface Page {
   layout?:
     | (
         | MainHeroBlockType
-        | ProcessSectionBlockType
+        | ServicesBlockType
         | PromoBlockSectionType
         | HeroScrollBlockType
         | HeroBlockType
@@ -254,24 +254,27 @@ export interface MainHeroBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessSectionBlockType".
+ * via the `definition` "ServicesBlockType".
  */
-export interface ProcessSectionBlockType {
-  stages: (string | WorkStage)[];
+export interface ServicesBlockType {
+  services: (string | Service)[];
   id?: string | null;
   blockName?: string | null;
-  blockType: 'process-section';
+  blockType: 'services-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "work-stage".
+ * via the `definition` "services".
  */
-export interface WorkStage {
+export interface Service {
   id: string;
   title: string;
+  /**
+   * Generates automatically from title, or enter a custom one.
+   */
+  slug: string;
   description: string;
   nameLink: string;
-  link: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -653,8 +656,8 @@ export interface PayloadLockedDocument {
         value: string | Category;
       } | null)
     | ({
-        relationTo: 'work-stage';
-        value: string | WorkStage;
+        relationTo: 'services';
+        value: string | Service;
       } | null)
     | ({
         relationTo: 'reviews';
@@ -769,7 +772,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         'main-hero'?: T | MainHeroBlockTypeSelect<T>;
-        'process-section'?: T | ProcessSectionBlockTypeSelect<T>;
+        'services-section'?: T | ServicesBlockTypeSelect<T>;
         'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
         'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
         'hero-block'?: T | HeroBlockTypeSelect<T>;
@@ -802,10 +805,10 @@ export interface MainHeroBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessSectionBlockType_select".
+ * via the `definition` "ServicesBlockType_select".
  */
-export interface ProcessSectionBlockTypeSelect<T extends boolean = true> {
-  stages?: T;
+export interface ServicesBlockTypeSelect<T extends boolean = true> {
+  services?: T;
   id?: T;
   blockName?: T;
 }
@@ -974,13 +977,13 @@ export interface CategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "work-stage_select".
+ * via the `definition` "services_select".
  */
-export interface WorkStageSelect<T extends boolean = true> {
+export interface ServicesSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   description?: T;
   nameLink?: T;
-  link?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1125,7 +1128,7 @@ export interface HomePage {
   layout?:
     | (
         | MainHeroBlockType
-        | ProcessSectionBlockType
+        | ServicesBlockType
         | PromoBlockSectionType
         | HeroScrollBlockType
         | HeroBlockType
@@ -1299,7 +1302,7 @@ export interface HomePageSelect<T extends boolean = true> {
     | T
     | {
         'main-hero'?: T | MainHeroBlockTypeSelect<T>;
-        'process-section'?: T | ProcessSectionBlockTypeSelect<T>;
+        'services-section'?: T | ServicesBlockTypeSelect<T>;
         'promo-section'?: T | PromoBlockSectionTypeSelect<T>;
         'hero-scroll'?: T | HeroScrollBlockTypeSelect<T>;
         'hero-block'?: T | HeroBlockTypeSelect<T>;

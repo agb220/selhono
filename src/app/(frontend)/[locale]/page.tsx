@@ -6,7 +6,7 @@ import LayoutWrapper from '../_components/Layout/LayoutWrapper'
 import MainHeroSection from '../_components/MainHeroSection'
 import HeroScrollSection from '../_components/HeroScrollSection'
 import HeroSection from '../_components/HeroSection'
-import WorkStagesSection from '../_components/Shared/WorkStagesSection'
+import WorkStagesSection from '../_components/Shared/ServicesSection'
 import ComingSoon from '../_components/ComingSoon'
 import PromoSection from '../_components/PromoSection'
 import ReviewsSection from '../_components/ReviewsSection'
@@ -16,6 +16,7 @@ import StatsSection from '../_components/StatsSection'
 import BlogsSection from '../_components/BlogsSection'
 import { Post, Project, ProjectsSectionBlockType } from '@/payload-types'
 import ContactUsSection from '../_components/ContactUsSection'
+import ServicesSection from '../_components/Shared/ServicesSection'
 
 export const revalidate = 3600
 
@@ -100,8 +101,14 @@ export default async function HomePageComponent() {
               case 'hero-block':
                 return <HeroSection key={idx} {...section} />
 
-              case 'process-section':
-                return <WorkStagesSection key={idx} items={section.stages || []} />
+              case 'services-section':
+                return (
+                  <ServicesSection
+                    key={idx}
+                    items={section.services || []}
+                    className="grid md:grid-cols-2 xl:grid-cols-3"
+                  />
+                )
 
               case 'promo-section':
                 return <PromoSection key={idx} {...promoData} />

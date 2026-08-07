@@ -2,7 +2,6 @@ import { getPayload as getCachedPayload } from '@/lib/payload'
 import { notFound } from 'next/navigation'
 import LayoutWrapper from '../../_components/Layout/LayoutWrapper'
 import MainHeroSection from '../../_components/MainHeroSection'
-import WorkStagesSection from '../../_components/Shared/WorkStagesSection'
 import PromoSection from '../../_components/PromoSection'
 import HeroScrollSection from '../../_components/HeroScrollSection'
 import HeroSection from '../../_components/HeroSection'
@@ -19,6 +18,7 @@ import FeatureCardsSection from '../../_components/FeatureCardsSection'
 import ContactFormInlineSection from '../../_components/ContactFormInlineSection'
 import ProcessStepsSection from '../../_components/ProcessStepsSection'
 import ContactUsSection from '../../_components/ContactUsSection'
+import ServicesSection from '../../_components/Shared/ServicesSection'
 
 interface PageProps {
   params: Promise<{
@@ -144,11 +144,11 @@ export default async function DynamicPage({ params }: PageProps) {
               case 'hero-block':
                 return <HeroSection key={idx} {...section} />
 
-              case 'process-section':
+              case 'services-section':
                 return (
-                  <WorkStagesSection
+                  <ServicesSection
                     key={idx}
-                    items={section.stages || []}
+                    items={section.services || []}
                     className="grid md:grid-cols-2 xl:grid-cols-3"
                   />
                 )

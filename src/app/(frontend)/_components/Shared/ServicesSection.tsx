@@ -1,17 +1,17 @@
 'use client'
 import useEmblaCarousel from 'embla-carousel-react'
-import { WorkStage } from '@/payload-types'
 import Link from 'next/dist/client/link'
 import { Button } from '../ui/ButtonUI'
 import { ArrowSvg } from '../icons'
 import { cn } from '@/lib/utils'
+import { Service } from '@/payload-types'
 
-interface WorkStagesSectionProps {
-  items: (string | WorkStage)[]
+interface ServicesSectionProps {
+  items: (string | Service)[]
   className?: string
 }
 
-const WorkStagesSection = (props: WorkStagesSectionProps) => {
+const ServicesSection = (props: ServicesSectionProps) => {
   const [emblaRef] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
@@ -24,7 +24,7 @@ const WorkStagesSection = (props: WorkStagesSectionProps) => {
           <ul className={cn('flex gap-4 md:gap-10 group/list', props.className)}>
             {props.items.map((item, index) => {
               if (typeof item === 'string') return null
-              return <WorkStageCard {...item} key={index} />
+              return <ServiceCard {...item} key={index} />
             })}
           </ul>
         </div>
@@ -33,9 +33,9 @@ const WorkStagesSection = (props: WorkStagesSectionProps) => {
   )
 }
 
-export default WorkStagesSection
+export default ServicesSection
 
-const WorkStageCard = (props: WorkStage) => {
+const ServiceCard = (props: Service) => {
   return (
     <li
       className="w-full min-w-[320px] max-w-89.5 list-none mx-auto transition-all duration-300 bg-transparent
@@ -52,7 +52,7 @@ const WorkStageCard = (props: WorkStage) => {
           icon={ArrowSvg}
           className="button-semmibold group-hover/list:text-gold-200"
         >
-          <Link href={'/'}>{props.nameLink}</Link>
+          <Link href={`/services/${props.slug}`}>{props.nameLink}</Link>
         </Button>
       </div>
     </li>
