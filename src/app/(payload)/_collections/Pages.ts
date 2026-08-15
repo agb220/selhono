@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
 import { MainHeroBlock } from '../_blocks/MainHeroBlock'
-import { ProcessSectionBlock } from '../_blocks/ProcessSectionBlock'
+import { ServicesBlock } from '../_blocks/ServicesBlock'
 import { PromoBlockSection } from '../_blocks/PromoBlockSection'
 import { formatSlug } from '@/lib/hooks/formatSlug'
 import { HeroScrollBlock } from '../_blocks/HeroScrollBlock'
@@ -61,7 +61,7 @@ export const Pages: CollectionConfig = {
       },
       blocks: [
         MainHeroBlock,
-        ProcessSectionBlock,
+        ServicesBlock,
         PromoBlockSection,
         HeroScrollBlock,
         HeroBlock,

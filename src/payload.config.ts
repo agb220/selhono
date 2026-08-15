@@ -15,7 +15,7 @@ import { LogoSettings } from './app/(payload)/_globals/LogoSettings'
 import Categories from './app/(payload)/_collections/Categories'
 import { FooterSettings } from './app/(payload)/_globals/FooterSettings'
 import { SocialLinks } from './app/(payload)/_globals/SocialLinks'
-import { WorkStage } from './app/(payload)/_collections/WorkStage'
+
 import { PromoBlock } from './app/(payload)/_globals/PromoBlock'
 import { Reviews } from './app/(payload)/_collections/Reviews'
 import { ReviewsBlock } from './app/(payload)/_globals/ReviewsBlock'
@@ -27,6 +27,7 @@ import { BlogCategories } from './app/(payload)/_collections/BlogCategories'
 import { Posts } from './app/(payload)/_collections/Posts'
 import { CTASection } from './app/(payload)/_globals/CTASection'
 import { ContactRequests } from './app/(payload)/_collections/ContactRequests'
+import { Services } from './app/(payload)/_collections/Services'
 
 sharp.concurrency(1)
 sharp.cache(false)
@@ -47,7 +48,7 @@ export default buildConfig({
     Media,
     Pages,
     Categories,
-    WorkStage,
+    Services,
     Reviews,
     Projects,
     BlogCategories,
