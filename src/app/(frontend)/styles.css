@@ -95,6 +95,10 @@ svg {
   @apply font-jost text-[25px] leading-tight font-normal uppercase;
 }
 
+@utility text-md {
+  @apply font-jost text-[25px] leading-1.5 font-normal;
+}
+
 @utility paragraph {
   @apply font-jost text-[28px] leading-normal font-normal;
 }

@@ -275,7 +275,7 @@ export interface Service {
   slug: string;
   description: string;
   nameLink: string;
-  layout?: HeroBlockType[] | null;
+  layout?: (HeroBlockType | ServiceIntroBlockType)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -289,6 +289,18 @@ export interface HeroBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceIntroBlockType".
+ */
+export interface ServiceIntroBlockType {
+  title: string;
+  subtitle?: string | null;
+  content?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'service-intro-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -989,9 +1001,21 @@ export interface ServicesSelect<T extends boolean = true> {
     | T
     | {
         'hero-block'?: T | HeroBlockTypeSelect<T>;
+        'service-intro-block'?: T | ServiceIntroBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceIntroBlockType_select".
+ */
+export interface ServiceIntroBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  content?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
