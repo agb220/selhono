@@ -275,7 +275,7 @@ export interface Service {
   slug: string;
   description: string;
   nameLink: string;
-  layout?: (HeroBlockType | ServiceIntroBlockType)[] | null;
+  layout?: (HeroBlockType | ServiceIntroBlockType | LogoMarqueeBlockType)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -301,6 +301,15 @@ export interface ServiceIntroBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'service-intro-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoMarqueeBlockType".
+ */
+export interface LogoMarqueeBlockType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logo-merquee-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -333,15 +342,6 @@ export interface ReviewsSectionBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'reviews-section';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "LogoMarqueeBlockType".
- */
-export interface LogoMarqueeBlockType {
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'logo-merquee-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1002,6 +1002,7 @@ export interface ServicesSelect<T extends boolean = true> {
     | {
         'hero-block'?: T | HeroBlockTypeSelect<T>;
         'service-intro-block'?: T | ServiceIntroBlockTypeSelect<T>;
+        'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;

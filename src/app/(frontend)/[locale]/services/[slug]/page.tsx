@@ -5,6 +5,7 @@ import LayoutWrapper from '../../../_components/Layout/LayoutWrapper'
 import ComingSoon from '@/app/(frontend)/_components/ComingSoon'
 import HeroSection from '@/app/(frontend)/_components/HeroSection'
 import ServiceIntroSection from '@/app/(frontend)/_components/ServiceIntroSection'
+import LogoMarqueeSection from '@/app/(frontend)/_components/LogoMarqueeSection'
 
 interface ServicePageProps {
   params: Promise<{
@@ -49,12 +50,18 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
     return notFound()
   }
 
-  const service = await payload.findByID({
-    collection: 'services',
-    id: rawService.id,
-    locale: locale as any,
-    depth: 3,
-  })
+  const [service, marqueeData] = await Promise.all([
+    payload.findByID({
+      collection: 'services',
+      id: rawService.id,
+      locale: locale as any,
+      depth: 3,
+    }),
+    payload.findGlobal({
+      slug: 'logo-marquee',
+      locale: locale as any,
+    }),
+  ])
 
   const layout = (service as any).layout || []
 
@@ -71,6 +78,9 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
 
               case 'service-intro-block':
                 return <ServiceIntroSection key={idx} {...section} />
+
+              case 'logo-merquee-section':
+                return <LogoMarqueeSection key={idx} {...marqueeData} />
 
               default:
                 return null
