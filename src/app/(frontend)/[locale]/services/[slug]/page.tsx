@@ -6,6 +6,7 @@ import ComingSoon from '@/app/(frontend)/_components/ComingSoon'
 import HeroSection from '@/app/(frontend)/_components/HeroSection'
 import ServiceIntroSection from '@/app/(frontend)/_components/ServiceIntroSection'
 import LogoMarqueeSection from '@/app/(frontend)/_components/LogoMarqueeSection'
+import { YoutubeVideoSection } from '@/app/(frontend)/_components/YoutubeVideoSection'
 
 interface ServicePageProps {
   params: Promise<{
@@ -81,6 +82,9 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
 
               case 'logo-merquee-section':
                 return <LogoMarqueeSection key={idx} {...marqueeData} />
+
+              case 'youtube-video-block':
+                return <YoutubeVideoSection key={idx} url={section.youtubeUrl} />
 
               default:
                 return null

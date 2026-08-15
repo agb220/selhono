@@ -275,7 +275,7 @@ export interface Service {
   slug: string;
   description: string;
   nameLink: string;
-  layout?: (HeroBlockType | ServiceIntroBlockType | LogoMarqueeBlockType)[] | null;
+  layout?: (HeroBlockType | ServiceIntroBlockType | LogoMarqueeBlockType | YoutubeVideoBlockType)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -310,6 +310,16 @@ export interface LogoMarqueeBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'logo-merquee-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YoutubeVideoBlockType".
+ */
+export interface YoutubeVideoBlockType {
+  youtubeUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'youtube-video-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1003,6 +1013,7 @@ export interface ServicesSelect<T extends boolean = true> {
         'hero-block'?: T | HeroBlockTypeSelect<T>;
         'service-intro-block'?: T | ServiceIntroBlockTypeSelect<T>;
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
+        'youtube-video-block'?: T | YoutubeVideoBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1015,6 +1026,15 @@ export interface ServiceIntroBlockTypeSelect<T extends boolean = true> {
   title?: T;
   subtitle?: T;
   content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YoutubeVideoBlockType_select".
+ */
+export interface YoutubeVideoBlockTypeSelect<T extends boolean = true> {
+  youtubeUrl?: T;
   id?: T;
   blockName?: T;
 }

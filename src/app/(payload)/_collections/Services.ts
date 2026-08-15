@@ -3,6 +3,7 @@ import { formatSlug } from '@/lib/hooks/formatSlug'
 import { HeroBlock } from '../_blocks/HeroBlock'
 import { ServiceIntroBlock } from '../_blocks/ServiceIntro'
 import { LogoMarqueeBlock } from '../_blocks/LogoMarqueeBlock'
+import { YoutubeVideoBlock } from '../_blocks/YoutubeVideoBlock'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -65,7 +66,7 @@ export const Services: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       label: 'Single Service Page Layout',
-      blocks: [HeroBlock, ServiceIntroBlock, LogoMarqueeBlock],
+      blocks: [HeroBlock, ServiceIntroBlock, LogoMarqueeBlock, YoutubeVideoBlock],
     },
   ],
 }
