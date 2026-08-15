@@ -39,4 +39,8 @@ export default {
     errorTitle: 'Error',
     errorDesc: 'Something went wrong. Please try again.',
   },
+  serviceIntro: {
+    btnMore: 'Show More',
+    btnLess: 'Show Less',
+  },
 } as const

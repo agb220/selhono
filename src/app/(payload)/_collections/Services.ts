@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload'
 import { formatSlug } from '@/lib/hooks/formatSlug'
 import { HeroBlock } from '../_blocks/HeroBlock'
+import { ServiceIntroBlock } from '../_blocks/ServiceIntro'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -63,7 +64,7 @@ export const Services: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       label: 'Single Service Page Layout',
-      blocks: [HeroBlock],
+      blocks: [HeroBlock, ServiceIntroBlock],
     },
   ],
 }

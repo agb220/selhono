@@ -39,4 +39,8 @@ export default {
     errorTitle: 'Fehler',
     errorDesc: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
   },
+  serviceIntro: {
+    btnMore: 'Mehr anzeigen',
+    btnLess: 'Weniger anzeigen',
+  },
 } as const
