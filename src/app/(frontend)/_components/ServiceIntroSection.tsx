@@ -9,12 +9,10 @@ export default function ServiceIntroSection({ title, subtitle, content }: Servic
   const t = useI18n()
 
   return (
-    <section className="py-16 md:py-24 container">
+    <section className="pb-16 md:pb-24 container">
       <div className="mx-auto text-center px-2 xl:px-0">
         <h2 className="text-accent md:h4 mb-6 xl:mb-8 max-w-129 mx-auto">{title}</h2>
-
-        <p className="mb-8 xl:mb-12 md:text-md text-gold-300">{subtitle}</p>
-
+        <p className="mb-6 xl:mb-12 xl:text-md text-gold-300">{subtitle}</p>
         <div className="relative md:text-left">
           <div
             className={`text-slate-600 text-sm md:text-base leading-relaxed columns-1 md:columns-2 gap-8 md:gap-12 [column-fill:balance] transition-all duration-300 md:max-h-none md:overflow-visible ${

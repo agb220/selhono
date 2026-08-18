@@ -275,7 +275,11 @@ export interface Service {
   slug: string;
   description: string;
   nameLink: string;
-  layout?: (HeroBlockType | ServiceIntroBlockType | LogoMarqueeBlockType | YoutubeVideoBlockType)[] | null;
+  layout?:
+    | (
+        HeroBlockType | ServiceIntroBlockType | LogoMarqueeBlockType | YoutubeVideoBlockType | ServiceFeaturesBlockType
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -320,6 +324,25 @@ export interface YoutubeVideoBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'youtube-video-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceFeaturesBlockType".
+ */
+export interface ServiceFeaturesBlockType {
+  columns?:
+    | {
+        title: string;
+        /**
+         * Enter each list item on a new line
+         */
+        items: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'service-features-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1014,6 +1037,7 @@ export interface ServicesSelect<T extends boolean = true> {
         'service-intro-block'?: T | ServiceIntroBlockTypeSelect<T>;
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
         'youtube-video-block'?: T | YoutubeVideoBlockTypeSelect<T>;
+        'service-features-block'?: T | ServiceFeaturesBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1035,6 +1059,21 @@ export interface ServiceIntroBlockTypeSelect<T extends boolean = true> {
  */
 export interface YoutubeVideoBlockTypeSelect<T extends boolean = true> {
   youtubeUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceFeaturesBlockType_select".
+ */
+export interface ServiceFeaturesBlockTypeSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        title?: T;
+        items?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
