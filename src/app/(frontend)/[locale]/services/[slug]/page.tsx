@@ -8,6 +8,8 @@ import ServiceIntroSection from '@/app/(frontend)/_components/ServiceIntroSectio
 import LogoMarqueeSection from '@/app/(frontend)/_components/LogoMarqueeSection'
 import { YoutubeVideoSection } from '@/app/(frontend)/_components/YoutubeVideoSection'
 import ServiceFeaturesSection from '@/app/(frontend)/_components/ServiceFeaturesSection'
+import ServicePromoSection from '@/app/(frontend)/_components/ServicePromoSection'
+import StatsSection from '@/app/(frontend)/_components/StatsSection'
 
 interface ServicePageProps {
   params: Promise<{
@@ -52,7 +54,7 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
     return notFound()
   }
 
-  const [service, marqueeData] = await Promise.all([
+  const [service, marqueeData, statsData] = await Promise.all([
     payload.findByID({
       collection: 'services',
       id: rawService.id,
@@ -61,6 +63,10 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
     }),
     payload.findGlobal({
       slug: 'logo-marquee',
+      locale: locale as any,
+    }),
+    payload.findGlobal({
+      slug: 'company-stats',
       locale: locale as any,
     }),
   ])
@@ -89,6 +95,12 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
 
               case 'service-features-block':
                 return <ServiceFeaturesSection key={idx} {...section} />
+
+              case 'service-promo-block':
+                return <ServicePromoSection key={idx} {...section} />
+
+              case 'stats-section':
+                return <StatsSection key={idx} {...statsData} />
 
               default:
                 return null

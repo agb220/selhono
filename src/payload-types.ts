@@ -277,7 +277,13 @@ export interface Service {
   nameLink: string;
   layout?:
     | (
-        HeroBlockType | ServiceIntroBlockType | LogoMarqueeBlockType | YoutubeVideoBlockType | ServiceFeaturesBlockType
+        | HeroBlockType
+        | ServiceIntroBlockType
+        | LogoMarqueeBlockType
+        | YoutubeVideoBlockType
+        | ServiceFeaturesBlockType
+        | ServicePromoBlockType
+        | StatsSectionBlockType
       )[]
     | null;
   updatedAt: string;
@@ -343,6 +349,28 @@ export interface ServiceFeaturesBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'service-features-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicePromoBlockType".
+ */
+export interface ServicePromoBlockType {
+  title: string;
+  description: string;
+  image: string | Media;
+  buttonText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'service-promo-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsSectionBlockType".
+ */
+export interface StatsSectionBlockType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -466,15 +494,6 @@ export interface ProjectDetails {
    */
   tags?: string | null;
   date?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StatsSectionBlockType".
- */
-export interface StatsSectionBlockType {
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'stats-section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1038,6 +1057,8 @@ export interface ServicesSelect<T extends boolean = true> {
         'logo-merquee-section'?: T | LogoMarqueeBlockTypeSelect<T>;
         'youtube-video-block'?: T | YoutubeVideoBlockTypeSelect<T>;
         'service-features-block'?: T | ServiceFeaturesBlockTypeSelect<T>;
+        'service-promo-block'?: T | ServicePromoBlockTypeSelect<T>;
+        'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1074,6 +1095,18 @@ export interface ServiceFeaturesBlockTypeSelect<T extends boolean = true> {
         items?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicePromoBlockType_select".
+ */
+export interface ServicePromoBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  buttonText?: T;
   id?: T;
   blockName?: T;
 }
