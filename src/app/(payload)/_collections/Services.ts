@@ -5,6 +5,8 @@ import { ServiceIntroBlock } from '../_blocks/ServiceIntro'
 import { LogoMarqueeBlock } from '../_blocks/LogoMarqueeBlock'
 import { YoutubeVideoBlock } from '../_blocks/YoutubeVideoBlock'
 import { ServiceFeaturesBlock } from '../_blocks/ServiceFeaturesBlock'
+import { ServicePromoBlock } from '../_blocks/ServicePromoBlock'
+import { StatsSectionBlock } from '../_blocks/StatsSectionBlock'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -73,6 +75,8 @@ export const Services: CollectionConfig = {
         LogoMarqueeBlock,
         YoutubeVideoBlock,
         ServiceFeaturesBlock,
+        ServicePromoBlock,
+        StatsSectionBlock,
       ],
     },
   ],
