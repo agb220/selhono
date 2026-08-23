@@ -9,7 +9,13 @@ export const Payments: CollectionConfig = {
   admin: {
     useAsTitle: 'stripeSubscriptionId',
     group: 'Billing & Payments',
-    defaultColumns: ['planTitle', 'status', 'amount', 'paidAt', 'periodEnd'],
+    defaultColumns: ['customerEmail', 'planTitle', 'status', 'amount', 'paidAt', 'periodEnd'],
+    listSearchableFields: [
+      'customerEmail',
+      'planTitle',
+      'stripeSubscriptionId',
+      'stripeCustomerId',
+    ],
   },
   access: {
     create: () => false,
