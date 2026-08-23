@@ -17,6 +17,7 @@ import BlogsSection from '../_components/BlogsSection'
 import { Post, Project, ProjectsSectionBlockType } from '@/payload-types'
 import ContactUsSection from '../_components/ContactUsSection'
 import ServicesSection from '../_components/Shared/ServicesSection'
+import PricingSection from '../_components/PricingSection'
 
 export const revalidate = 3600
 
@@ -25,16 +26,16 @@ export default async function HomePageComponent() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  const [homePageData, promoData, reviewsData, marqueeData, statsData, ctaData] = await Promise.all(
-    [
+  const [homePageData, promoData, reviewsData, marqueeData, statsData, ctaData, pricingData] =
+    await Promise.all([
       payload.findGlobal({ slug: 'home-page', locale: locale as any, depth: 2 }),
       payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
       payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
       payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
       payload.findGlobal({ slug: 'company-stats', locale: locale as any, depth: 1 }),
       payload.findGlobal({ slug: 'cta-section', locale: locale as any, depth: 1 }),
-    ],
-  )
+      payload.findGlobal({ slug: 'pricing-global', locale: locale as any, depth: 1 }),
+    ])
 
   if (!homePageData) {
     return notFound()
@@ -127,6 +128,9 @@ export default async function HomePageComponent() {
 
               case 'blog-section':
                 return <BlogsSection key={idx} {...section} posts={blogPosts} />
+
+              case 'pricing-block':
+                return <PricingSection key={idx} {...pricingData} />
 
               case 'cta-block-section':
                 return <ContactUsSection key={idx} {...ctaData} />

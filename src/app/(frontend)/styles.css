@@ -127,7 +127,7 @@ svg {
   @apply font-jost text-lg leading-tight font-medium;
 }
 
-.button-semmibold {
+@utility button-semmibold {
   @apply font-jost text-lg leading-tight font-semibold;
 }
 
@@ -139,7 +139,7 @@ svg {
   @apply font-jost text-xl leading-tight font-medium;
 }
 
-.link-regular {
+@utility link-regular {
   @apply font-jost text-xl leading-normal font-normal;
 }
 

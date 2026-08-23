@@ -77,6 +77,7 @@ export interface Config {
     'blog-categories': BlogCategory;
     posts: Post;
     'contact-requests': ContactRequest;
+    payments: Payment;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +95,7 @@ export interface Config {
     'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'contact-requests': ContactRequestsSelect<false> | ContactRequestsSelect<true>;
+    payments: PaymentsSelect<false> | PaymentsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -114,6 +116,7 @@ export interface Config {
     'logo-marquee': LogoMarquee;
     'company-stats': CompanyStat;
     'cta-section': CtaSection;
+    'pricing-global': PricingGlobal;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -126,6 +129,7 @@ export interface Config {
     'logo-marquee': LogoMarqueeSelect<false> | LogoMarqueeSelect<true>;
     'company-stats': CompanyStatsSelect<false> | CompanyStatsSelect<true>;
     'cta-section': CtaSectionSelect<false> | CtaSectionSelect<true>;
+    'pricing-global': PricingGlobalSelect<false> | PricingGlobalSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -230,6 +234,7 @@ export interface Page {
         | FeatureCardsBlockType
         | ContactFormInlineBlockType
         | ProcessStepsBlockType
+        | PricingBlockType
       )[]
     | null;
   updatedAt: string;
@@ -645,6 +650,15 @@ export interface ProcessStepsBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingBlockType".
+ */
+export interface PricingBlockType {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -677,6 +691,26 @@ export interface ContactRequest {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payments".
+ */
+export interface Payment {
+  id: string;
+  user?: (string | null) | User;
+  planTitle: string;
+  status: 'active' | 'canceled' | 'past_due' | 'incomplete';
+  amount: number;
+  currency: string;
+  paidAt: string;
+  periodStart: string;
+  periodEnd: string;
+  stripeCustomerId?: string | null;
+  stripeSubscriptionId?: string | null;
+  customerEmail?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -743,6 +777,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-requests';
         value: string | ContactRequest;
+      } | null)
+    | ({
+        relationTo: 'payments';
+        value: string | Payment;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -851,6 +889,7 @@ export interface PagesSelect<T extends boolean = true> {
         'feature-cards-block'?: T | FeatureCardsBlockTypeSelect<T>;
         'contact-form-inline-block'?: T | ContactFormInlineBlockTypeSelect<T>;
         'process-steps-block'?: T | ProcessStepsBlockTypeSelect<T>;
+        'pricing-block'?: T | PricingBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1032,6 +1071,14 @@ export interface ProcessStepsBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingBlockType_select".
+ */
+export interface PricingBlockTypeSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -1204,6 +1251,25 @@ export interface ContactRequestsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payments_select".
+ */
+export interface PaymentsSelect<T extends boolean = true> {
+  user?: T;
+  planTitle?: T;
+  status?: T;
+  amount?: T;
+  currency?: T;
+  paidAt?: T;
+  periodStart?: T;
+  periodEnd?: T;
+  stripeCustomerId?: T;
+  stripeSubscriptionId?: T;
+  customerEmail?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -1261,6 +1327,7 @@ export interface HomePage {
         | StatsSectionBlockType
         | BlogSectionBlockType
         | CTABlockSectionType
+        | PricingBlockType
       )[]
     | null;
   updatedAt?: string | null;
@@ -1418,6 +1485,37 @@ export interface CtaSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pricing-global".
+ */
+export interface PricingGlobal {
+  id: string;
+  title?: string | null;
+  subtitle?: string | null;
+  plans?:
+    | {
+        title: string;
+        /**
+         * Отримайте Price ID з панелі Stripe Dashboard
+         */
+        stripePriceId: string;
+        price: string;
+        currency?: string | null;
+        period?: string | null;
+        badge?: string | null;
+        isPopular?: boolean | null;
+        /**
+         * Enter each feature on a new line
+         */
+        features: string;
+        buttonText?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -1435,6 +1533,7 @@ export interface HomePageSelect<T extends boolean = true> {
         'stats-section'?: T | StatsSectionBlockTypeSelect<T>;
         'blog-section'?: T | BlogSectionBlockTypeSelect<T>;
         'cta-block-section'?: T | CTABlockSectionTypeSelect<T>;
+        'pricing-block'?: T | PricingBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1589,6 +1688,31 @@ export interface CtaSectionSelect<T extends boolean = true> {
   description?: T;
   backgroundImage?: T;
   buttonText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pricing-global_select".
+ */
+export interface PricingGlobalSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  plans?:
+    | T
+    | {
+        title?: T;
+        stripePriceId?: T;
+        price?: T;
+        currency?: T;
+        period?: T;
+        badge?: T;
+        isPopular?: T;
+        features?: T;
+        buttonText?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

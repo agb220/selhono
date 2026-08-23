@@ -15,7 +15,6 @@ import { LogoSettings } from './app/(payload)/_globals/LogoSettings'
 import Categories from './app/(payload)/_collections/Categories'
 import { FooterSettings } from './app/(payload)/_globals/FooterSettings'
 import { SocialLinks } from './app/(payload)/_globals/SocialLinks'
-
 import { PromoBlock } from './app/(payload)/_globals/PromoBlock'
 import { Reviews } from './app/(payload)/_collections/Reviews'
 import { ReviewsBlock } from './app/(payload)/_globals/ReviewsBlock'
@@ -28,6 +27,8 @@ import { Posts } from './app/(payload)/_collections/Posts'
 import { CTASection } from './app/(payload)/_globals/CTASection'
 import { ContactRequests } from './app/(payload)/_collections/ContactRequests'
 import { Services } from './app/(payload)/_collections/Services'
+import { PricingGlobal } from './app/(payload)/_globals/Pricing'
+import { Payments } from './app/(payload)/_collections/Payments'
 
 sharp.concurrency(1)
 sharp.cache(false)
@@ -54,6 +55,7 @@ export default buildConfig({
     BlogCategories,
     Posts,
     ContactRequests,
+    Payments,
   ],
   globals: [
     HomePage,
@@ -66,6 +68,7 @@ export default buildConfig({
     LogoMarquee,
     CompanyStats,
     CTASection,
+    PricingGlobal,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
