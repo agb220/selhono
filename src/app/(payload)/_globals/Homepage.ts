@@ -10,6 +10,7 @@ import { ProjectsSectionBlock } from '../_blocks/ProjectsSectionBlock'
 import { StatsSectionBlock } from '../_blocks/StatsSectionBlock'
 import { BlogSectionBlock } from '../_blocks/BlogSectionBlock'
 import { CTABlock } from '../_blocks/CTABlock'
+import { PricingBlock } from '../_blocks/PricingBlock'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -38,6 +39,7 @@ export const HomePage: GlobalConfig = {
         StatsSectionBlock,
         BlogSectionBlock,
         CTABlock,
+        PricingBlock,
       ],
     },
   ],

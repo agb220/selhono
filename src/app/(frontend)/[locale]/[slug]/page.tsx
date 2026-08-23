@@ -19,6 +19,7 @@ import ContactFormInlineSection from '../../_components/ContactFormInlineSection
 import ProcessStepsSection from '../../_components/ProcessStepsSection'
 import ContactUsSection from '../../_components/ContactUsSection'
 import ServicesSection from '../../_components/Shared/ServicesSection'
+import PricingSection from '../../_components/PricingSection'
 
 interface PageProps {
   params: Promise<{
@@ -68,19 +69,21 @@ export default async function DynamicPage({ params }: PageProps) {
     return notFound()
   }
 
-  const [page, promoData, reviewsData, marqueeData, statsData, ctaData] = await Promise.all([
-    payload.findByID({
-      collection: 'pages',
-      id: rawPage.id,
-      locale: locale as any,
-      depth: 3,
-    }),
-    payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
-    payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
-    payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
-    payload.findGlobal({ slug: 'company-stats', depth: 1 }),
-    payload.findGlobal({ slug: 'cta-section', locale: locale as any, depth: 1 }),
-  ])
+  const [page, promoData, reviewsData, marqueeData, statsData, ctaData, pricingData] =
+    await Promise.all([
+      payload.findByID({
+        collection: 'pages',
+        id: rawPage.id,
+        locale: locale as any,
+        depth: 3,
+      }),
+      payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
+      payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
+      payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
+      payload.findGlobal({ slug: 'company-stats', depth: 1 }),
+      payload.findGlobal({ slug: 'cta-section', locale: locale as any, depth: 1 }),
+      payload.findGlobal({ slug: 'pricing-global', locale: locale as any, depth: 1 }),
+    ])
 
   const layout = page.layout || []
 
@@ -185,6 +188,9 @@ export default async function DynamicPage({ params }: PageProps) {
 
               case 'process-steps-block':
                 return <ProcessStepsSection key={idx} {...section} />
+
+              case 'pricing-block':
+                return <PricingSection key={idx} {...pricingData} />
 
               default:
                 return null
