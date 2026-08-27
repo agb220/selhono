@@ -51,6 +51,7 @@ export async function POST(req: Request) {
         periodEnd: periodEnd.toISOString(),
         stripeCustomerId: session.customer as string,
         stripeSubscriptionId: (session.subscription as string) || session.id,
+        customerName: session.customer_details?.name || undefined,
         customerEmail: session.customer_details?.email || undefined,
       },
     })

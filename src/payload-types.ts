@@ -700,7 +700,8 @@ export interface ContactRequest {
  */
 export interface Payment {
   id: string;
-  user?: (string | null) | User;
+  customerName?: string | null;
+  customerEmail?: string | null;
   planTitle: string;
   status: 'active' | 'canceled' | 'past_due' | 'incomplete';
   amount: number;
@@ -710,7 +711,6 @@ export interface Payment {
   periodEnd: string;
   stripeCustomerId?: string | null;
   stripeSubscriptionId?: string | null;
-  customerEmail?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1254,7 +1254,8 @@ export interface ContactRequestsSelect<T extends boolean = true> {
  * via the `definition` "payments_select".
  */
 export interface PaymentsSelect<T extends boolean = true> {
-  user?: T;
+  customerName?: T;
+  customerEmail?: T;
   planTitle?: T;
   status?: T;
   amount?: T;
@@ -1264,7 +1265,6 @@ export interface PaymentsSelect<T extends boolean = true> {
   periodEnd?: T;
   stripeCustomerId?: T;
   stripeSubscriptionId?: T;
-  customerEmail?: T;
   updatedAt?: T;
   createdAt?: T;
 }

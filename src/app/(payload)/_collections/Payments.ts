@@ -7,10 +7,19 @@ export const Payments: CollectionConfig = {
     plural: 'Payments',
   },
   admin: {
-    useAsTitle: 'stripeSubscriptionId',
+    useAsTitle: 'customerName',
     group: 'Billing & Payments',
-    defaultColumns: ['customerEmail', 'planTitle', 'status', 'amount', 'paidAt', 'periodEnd'],
+    defaultColumns: [
+      'customerName',
+      'customerEmail',
+      'planTitle',
+      'status',
+      'amount',
+      'paidAt',
+      'periodEnd',
+    ],
     listSearchableFields: [
+      'customerName',
       'customerEmail',
       'planTitle',
       'stripeSubscriptionId',
@@ -24,10 +33,21 @@ export const Payments: CollectionConfig = {
   },
   fields: [
     {
-      name: 'user',
-      type: 'relationship',
-      relationTo: 'users',
-      label: 'Customer / User',
+      type: 'row',
+      fields: [
+        {
+          name: 'customerName',
+          type: 'text',
+          label: 'Customer Name',
+          admin: { width: '50%', readOnly: true },
+        },
+        {
+          name: 'customerEmail',
+          type: 'text',
+          label: 'Customer Email',
+          admin: { width: '50%', readOnly: true },
+        },
+      ],
     },
     {
       name: 'planTitle',
@@ -46,6 +66,11 @@ export const Payments: CollectionConfig = {
         { label: 'Incomplete', value: 'incomplete' },
       ],
       defaultValue: 'active',
+      admin: {
+        components: {
+          Cell: '@/app/(frontend)/_components/Admin/StatusBadgeCell',
+        },
+      },
     },
     {
       type: 'row',
@@ -112,11 +137,6 @@ export const Payments: CollectionConfig = {
       type: 'text',
       label: 'Stripe Subscription / Checkout ID',
       admin: { readOnly: true },
-    },
-    {
-      name: 'customerEmail',
-      type: 'text',
-      label: 'Customer Email',
     },
   ],
 }
