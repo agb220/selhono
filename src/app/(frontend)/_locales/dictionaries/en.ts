@@ -43,4 +43,9 @@ export default {
     btnMore: 'Show More',
     btnLess: 'Show Less',
   },
+  payments: {
+    title: 'Payment Successful!',
+    desc: 'Thank you for your order. We have sent a confirmation email to',
+    titleBtn: 'Back to Home',
+  },
 } as const

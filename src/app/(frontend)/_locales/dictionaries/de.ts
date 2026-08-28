@@ -43,4 +43,9 @@ export default {
     btnMore: 'Mehr anzeigen',
     btnLess: 'Weniger anzeigen',
   },
+  payments: {
+    title: 'Zahlung erfolgreich!',
+    desc: 'Vielen Dank für Ihre Bestellung. Wir haben eine Bestätigungs-E-Mail gesendet an',
+    titleBtn: 'Zurück zur Startseite',
+  },
 } as const
