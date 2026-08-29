@@ -1,8 +1,8 @@
 'use client'
-
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { cn } from '@/lib/utils'
 import { Button } from './ui/ButtonUI'
+import { useScopedI18n } from '../_locales/client'
+import { cn } from '@/lib/utils'
 
 export interface CategoryItem {
   id: string
@@ -19,6 +19,7 @@ export default function ProjectTabs({ categories = [], currentCategory = '' }: P
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const t = useScopedI18n('projects')
 
   const handleCategoryChange = (slug: string) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -34,7 +35,7 @@ export default function ProjectTabs({ categories = [], currentCategory = '' }: P
     router.push(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
-  const allCategories = [{ id: 'all', title: 'All Categories', slug: '' }, ...categories]
+  const allCategories = [{ id: 'all', title: t('all'), slug: '' }, ...categories]
 
   return (
     <div className="w-full my-8 border border-gold-300 rounded-[18px] overflow-hidden">

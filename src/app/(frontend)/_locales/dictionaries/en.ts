@@ -48,4 +48,8 @@ export default {
     desc: 'Thank you for your order. We have sent a confirmation email to',
     titleBtn: 'Back to Home',
   },
+  projects: {
+    all: 'All Categories',
+    noProject: 'No projects found.',
+  },
 } as const

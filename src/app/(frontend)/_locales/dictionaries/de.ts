@@ -48,4 +48,8 @@ export default {
     desc: 'Vielen Dank für Ihre Bestellung. Wir haben eine Bestätigungs-E-Mail gesendet an',
     titleBtn: 'Zurück zur Startseite',
   },
+  projects: {
+    all: 'Alle Kategorien',
+    noProject: 'Keine Projekte gefunden.',
+  },
 } as const

@@ -5,6 +5,7 @@ import ProjectCard from './Shared/ProjectCard'
 import { Button } from './ui/ButtonUI'
 import ProjectTabs, { CategoryItem } from './ProjectTabs'
 import ProjectPagination from './ProjectPagination'
+import { useScopedI18n } from '../_locales/client'
 import { Project, ProjectsSectionBlockType } from '@/payload-types'
 
 interface ProjectsSectionProps extends ProjectsSectionBlockType {
@@ -31,6 +32,8 @@ const ProjectsSection = ({
     containScroll: 'trimSnaps',
   })
 
+  const t = useScopedI18n('projects')
+
   if (displayMode === 'fullPage') {
     return (
       <section className="container mb-20 md:mb-25 xl:mb-43">
@@ -43,7 +46,7 @@ const ProjectsSection = ({
             ))}
           </ul>
         ) : (
-          <p className="text-center text-stone-500 py-12">No projects found.</p>
+          <p className="text-center text-stone-500 py-12">{t('noProject')}</p>
         )}
 
         <ProjectPagination currentPage={currentPage} totalPages={totalPages} />
