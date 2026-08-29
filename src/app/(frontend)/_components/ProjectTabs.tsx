@@ -37,8 +37,8 @@ export default function ProjectTabs({ categories = [], currentCategory = '' }: P
   const allCategories = [{ id: 'all', title: 'All Categories', slug: '' }, ...categories]
 
   return (
-    <div className="w-full no-scrollbar my-8 overflow-hidden">
-      <div className="flex items-center gap-2 border border-gold-300 rounded-[18px] justify-between overflow-x-auto ">
+    <div className="w-full my-8 border border-gold-300 rounded-[18px] overflow-hidden">
+      <div className="flex items-center justify-between gap-2 overflow-x-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {allCategories.map((cat) => {
           const isActive = (currentCategory || '') === cat.slug
 
