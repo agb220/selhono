@@ -414,7 +414,11 @@ export interface ReviewsSectionBlockType {
  * via the `definition` "ProjectsSectionBlockType".
  */
 export interface ProjectsSectionBlockType {
-  heading: string;
+  /**
+   * Select "Full Page" for a full projects page with filters and pagination.
+   */
+  displayMode?: ('grid' | 'fullPage') | null;
+  heading?: string | null;
   subheading?: string | null;
   /**
    * Button text, e.g., "View All Articles".
@@ -426,7 +430,7 @@ export interface ProjectsSectionBlockType {
    */
   selectedProjects?: (string | Project)[] | null;
   /**
-   * The number of projects that will automatically be displayed in the section.
+   * The number of projects displayed per page (for Full Page) or total displayed (for Standard Grid).
    */
   limit?: number | null;
   id?: string | null;
@@ -970,6 +974,7 @@ export interface LogoMarqueeBlockTypeSelect<T extends boolean = true> {
  * via the `definition` "ProjectsSectionBlockType_select".
  */
 export interface ProjectsSectionBlockTypeSelect<T extends boolean = true> {
+  displayMode?: T;
   heading?: T;
   subheading?: T;
   viewAllText?: T;

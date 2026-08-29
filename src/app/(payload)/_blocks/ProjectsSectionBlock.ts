@@ -9,7 +9,6 @@ export const ProjectsSectionBlock: Block = {
   },
   admin: {
     group: 'Page Builder',
-
     images: {
       thumbnail: {
         url: '/blocks/projectsex.png',
@@ -19,12 +18,33 @@ export const ProjectsSectionBlock: Block = {
   },
   fields: [
     {
+      name: 'displayMode',
+      type: 'select',
+      label: 'Display Mode',
+      defaultValue: 'grid',
+      options: [
+        {
+          label: 'Standard Grid / Home Section',
+          value: 'grid',
+        },
+        {
+          label: 'Full Page (Tabs Filter + Pagination)',
+          value: 'fullPage',
+        },
+      ],
+      admin: {
+        description: 'Select "Full Page" for a full projects page with filters and pagination.',
+      },
+    },
+    {
       name: 'heading',
       type: 'text',
-      required: true,
       label: 'Section Heading',
       defaultValue: 'Follow Our Projects',
       localized: true,
+      admin: {
+        condition: (_, siblingData) => siblingData?.displayMode !== 'fullPage',
+      },
     },
     {
       name: 'subheading',
@@ -33,6 +53,9 @@ export const ProjectsSectionBlock: Block = {
       defaultValue:
         'It is a long established fact that a reader will be distracted by the readable content of page lookings at its layouts points.',
       localized: true,
+      admin: {
+        condition: (_, siblingData) => siblingData?.displayMode !== 'fullPage',
+      },
     },
     {
       name: 'viewAllText',
@@ -40,6 +63,7 @@ export const ProjectsSectionBlock: Block = {
       localized: true,
       admin: {
         description: 'Button text, e.g., "View All Articles".',
+        condition: (_, siblingData) => siblingData?.displayMode !== 'fullPage',
       },
     },
     {
@@ -57,6 +81,9 @@ export const ProjectsSectionBlock: Block = {
           value: 'manual',
         },
       ],
+      admin: {
+        condition: (_, siblingData) => siblingData?.displayMode !== 'fullPage',
+      },
     },
     {
       name: 'selectedProjects',
@@ -65,7 +92,8 @@ export const ProjectsSectionBlock: Block = {
       hasMany: true,
       label: 'Select Projects Manually',
       admin: {
-        condition: (_, siblingData) => siblingData?.populateBy === 'manual',
+        condition: (_, siblingData) =>
+          siblingData?.displayMode !== 'fullPage' && siblingData?.populateBy === 'manual',
         description: 'Drag and drop projects to reorder them in the site grid.',
       },
     },
@@ -74,10 +102,10 @@ export const ProjectsSectionBlock: Block = {
       type: 'number',
       label: 'Limit Projects',
       defaultValue: 4,
-      min: 4,
+      min: 1,
       admin: {
-        condition: (_, siblingData) => siblingData?.populateBy === 'latest',
-        description: 'The number of projects that will automatically be displayed in the section.',
+        description:
+          'The number of projects displayed per page (for Full Page) or total displayed (for Standard Grid).',
       },
     },
   ],

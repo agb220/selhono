@@ -26,6 +26,10 @@ interface PageProps {
     locale: string
     slug: string
   }>
+  searchParams: Promise<{
+    category?: string
+    page?: string
+  }>
 }
 
 export async function generateStaticParams() {
@@ -46,8 +50,10 @@ export async function generateStaticParams() {
   )
 }
 
-export default async function DynamicPage({ params }: PageProps) {
+export default async function DynamicPage({ params, searchParams }: PageProps) {
   const { slug, locale } = await params
+  const { category: selectedCategory, page: currentPageParam } = await searchParams
+  const pageNumber = Number(currentPageParam) || 1
 
   setStaticParamsLocale(locale)
 
@@ -88,26 +94,59 @@ export default async function DynamicPage({ params }: PageProps) {
   const layout = page.layout || []
 
   const projectSectionConfig = layout.find((s: any) => s.blockType === 'projects-section') as
-    ProjectsSectionBlockType | undefined
+    (ProjectsSectionBlockType & { displayMode?: 'grid' | 'fullPage' }) | undefined
+
   let projectItems: Project[] = []
+  let totalPages = 1
+  let categoriesList: any[] = []
 
   if (projectSectionConfig) {
-    if (projectSectionConfig.populateBy === 'manual' && projectSectionConfig.selectedProjects) {
-      projectItems = projectSectionConfig.selectedProjects.filter(
-        (p): p is Project => typeof p === 'object' && p !== null,
-      )
+    const isFullPage = projectSectionConfig.displayMode === 'fullPage'
+
+    if (isFullPage) {
+      const whereQuery: any = {}
+      if (selectedCategory) {
+        whereQuery['category.slug'] = { equals: selectedCategory }
+      }
+
+      const [projectsRes, categoriesRes] = await Promise.all([
+        payload.find({
+          collection: 'projects',
+          limit: projectSectionConfig.limit || 4,
+          page: pageNumber,
+          locale: locale as any,
+          sort: '-createdAt',
+          depth: 1,
+          where: whereQuery,
+        }),
+        payload.find({
+          collection: 'categories',
+          limit: 100,
+          locale: locale as any,
+          sort: 'title',
+        }),
+      ])
+
+      projectItems = projectsRes.docs
+      totalPages = projectsRes.totalPages
+      categoriesList = categoriesRes.docs
     } else {
-      const response = await payload.find({
-        collection: 'projects',
-        limit: projectSectionConfig.limit || 4,
-        locale: locale as any,
-        sort: '-createdAt',
-        depth: 1,
-      })
-      projectItems = response.docs
+      if (projectSectionConfig.populateBy === 'manual' && projectSectionConfig.selectedProjects) {
+        projectItems = projectSectionConfig.selectedProjects.filter(
+          (p): p is Project => typeof p === 'object' && p !== null,
+        )
+      } else {
+        const response = await payload.find({
+          collection: 'projects',
+          limit: projectSectionConfig.limit || 4,
+          locale: locale as any,
+          sort: '-createdAt',
+          depth: 1,
+        })
+        projectItems = response.docs
+      }
     }
   }
-
   const blogSectionConfig = layout.find((s: any) => s.blockType === 'blog-section') as
     BlogSectionBlockType | undefined
 
@@ -166,7 +205,17 @@ export default async function DynamicPage({ params }: PageProps) {
                 return <LogoMarqueeSection key={idx} {...marqueeData} />
 
               case 'projects-section':
-                return <ProjectsSection key={idx} {...section} projects={projectItems} />
+                return (
+                  <ProjectsSection
+                    key={idx}
+                    {...section}
+                    projects={projectItems}
+                    totalPages={totalPages}
+                    currentPage={pageNumber}
+                    currentCategory={selectedCategory}
+                    categories={categoriesList}
+                  />
+                )
 
               case 'stats-section':
                 return <StatsSection key={idx} {...statsData} />
