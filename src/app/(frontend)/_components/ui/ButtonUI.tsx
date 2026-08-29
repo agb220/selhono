@@ -15,7 +15,7 @@ const buttonVariants = cva(
 
         // icon in circle
         'circle-white': 'bg-white text-gold-300 hover:bg-gold-300 hover:text-white',
-        'circle-light': 'bg-light-200 text-dark-200 hover:bg-gold-300 hover:text-white',
+        'circle-light': 'bg-light-200 text-dark-200 hover:bg-gold-300 hover:!text-white',
         'circle-gold': 'hover:bg-gold-200 text-white bg-gold-300 hover:text-white',
         'circle-outline':
           'border border-gold-300 bg-transparent hover:border-transparent text-dark-200 hover:bg-light-200 aria-current:text-light-200 aria-current:border-transparent',
