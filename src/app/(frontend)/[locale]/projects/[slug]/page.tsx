@@ -8,6 +8,8 @@ import ContactFormInlineSection from '@/app/(frontend)/_components/ContactFormIn
 import ProjectDetailsSection from '@/app/(frontend)/_components/ProjectDetailsSection'
 import React from 'react'
 
+export const dynamic = 'force-dynamic'
+
 interface ServicePageProps {
   params: Promise<{
     locale: string
