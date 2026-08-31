@@ -1,3 +1,4 @@
+import React from 'react'
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import { notFound } from 'next/navigation'
 import { setStaticParamsLocale } from 'next-international/server'
@@ -6,7 +7,6 @@ import ComingSoon from '@/app/(frontend)/_components/ComingSoon'
 import HeroSection from '@/app/(frontend)/_components/HeroSection'
 import ContactFormInlineSection from '@/app/(frontend)/_components/ContactFormInlineSection'
 import ProjectDetailsSection from '@/app/(frontend)/_components/ProjectDetailsSection'
-import React from 'react'
 
 export const dynamic = 'force-dynamic'
 

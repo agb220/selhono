@@ -11,6 +11,8 @@ import ServiceFeaturesSection from '@/app/(frontend)/_components/ServiceFeatures
 import ServicePromoSection from '@/app/(frontend)/_components/ServicePromoSection'
 import StatsSection from '@/app/(frontend)/_components/StatsSection'
 
+export const dynamic = 'force-dynamic'
+
 interface ServicePageProps {
   params: Promise<{
     locale: string
