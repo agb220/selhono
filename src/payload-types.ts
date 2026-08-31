@@ -475,6 +475,7 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  layout?: (HeroBlockType | ContactFormInlineBlockType)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -503,6 +504,16 @@ export interface ProjectDetails {
    */
   tags?: string | null;
   date?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormInlineBlockType".
+ */
+export interface ContactFormInlineBlockType {
+  title: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact-form-inline-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -622,16 +633,6 @@ export interface FeatureCardsBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'feature-cards-block';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactFormInlineBlockType".
- */
-export interface ContactFormInlineBlockType {
-  title: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'contact-form-inline-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1191,6 +1192,12 @@ export interface ProjectsSelect<T extends boolean = true> {
     | {
         image?: T;
         id?: T;
+      };
+  layout?:
+    | T
+    | {
+        'hero-block'?: T | HeroBlockTypeSelect<T>;
+        'contact-form-inline-block'?: T | ContactFormInlineBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;

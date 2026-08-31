@@ -1,5 +1,7 @@
 import { CollectionConfig } from 'payload'
 import { formatSlug } from '@/lib/hooks/formatSlug'
+import { HeroBlock } from '../_blocks/HeroBlock'
+import { ContactFormInlineBlock } from '../_blocks/CTAInlineBlock'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -109,6 +111,12 @@ export const Projects: CollectionConfig = {
           required: true,
         },
       ],
+    },
+    {
+      name: 'layout',
+      type: 'blocks',
+      label: 'Single Project Page Layout',
+      blocks: [HeroBlock, ContactFormInlineBlock],
     },
   ],
 }
