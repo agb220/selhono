@@ -52,4 +52,10 @@ export default {
     all: 'All Categories',
     noProject: 'No projects found.',
   },
+  projectDetail: {
+    clientname: 'Client ',
+    category: 'Category ',
+    tags: 'Tags',
+    date: 'Date',
+  },
 } as const
