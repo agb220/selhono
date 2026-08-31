@@ -113,7 +113,7 @@ export default function ProjectDetailsSection({ project }: ProjectDetailsSection
               {imagesList.map((img, idx) => (
                 <div
                   key={idx}
-                  className="relative flex-[0_0_100%] h-[350px] sm:h-[450px] md:h-[600px] group cursor-pointer"
+                  className="relative flex-[0_0_100%] h-87.5 sm:h-112.5 md:h-150 group cursor-pointer"
                   onClick={() => openLightbox(idx)}
                 >
                   <Image
