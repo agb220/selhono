@@ -1,6 +1,7 @@
 import React from 'react'
 import { DM_Serif_Display, Jost } from 'next/font/google'
 import { Toaster } from 'sonner'
+import { I18nProviderClient } from './_locales/client'
 import './styles.css'
 
 export const metadata = {
@@ -25,16 +26,21 @@ const jost = Jost({
   display: 'swap',
 })
 
-interface SubLayoutProps {
+interface FrontendLayoutProps {
   children: React.ReactNode
+  params: Promise<{ locale?: string }>
 }
 
-export default async function FrontendLayout({ children }: SubLayoutProps) {
+export default async function FrontendLayout({ children, params }: FrontendLayoutProps) {
+  const resolvedParams = await params
+  const locale = resolvedParams?.locale || 'en'
+
   return (
-    <html className={`${dmSerif.variable} ${jost.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${dmSerif.variable} ${jost.variable}`} suppressHydrationWarning>
       <head></head>
       <body>
-        {children}
+        <I18nProviderClient locale={locale}>{children}</I18nProviderClient>
+
         <Toaster
           position="bottom-right"
           toastOptions={{

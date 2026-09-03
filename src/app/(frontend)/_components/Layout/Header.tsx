@@ -50,7 +50,7 @@ export default async function Header() {
 
   const allHeaderPages = [homePage, ...dynamicItems]
 
-  const MAX_VISIBLE_ITEMS = 4
+  const MAX_VISIBLE_ITEMS = 6
   const shouldSlice = allHeaderPages.length > MAX_VISIBLE_ITEMS + 1
 
   const visiblePages = shouldSlice ? allHeaderPages.slice(0, MAX_VISIBLE_ITEMS) : allHeaderPages
