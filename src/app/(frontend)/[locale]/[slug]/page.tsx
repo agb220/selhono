@@ -20,6 +20,7 @@ import ProcessStepsSection from '../../_components/ProcessStepsSection'
 import ContactUsSection from '../../_components/ContactUsSection'
 import ServicesSection from '../../_components/Shared/ServicesSection'
 import PricingSection from '../../_components/PricingSection'
+import BlogsSearchSection from '../../_components/BlogsSearchSection'
 
 interface PageProps {
   params: Promise<{
@@ -29,6 +30,7 @@ interface PageProps {
   searchParams: Promise<{
     category?: string
     page?: string
+    q?: string
   }>
 }
 
@@ -52,7 +54,7 @@ export async function generateStaticParams() {
 
 export default async function DynamicPage({ params, searchParams }: PageProps) {
   const { slug, locale } = await params
-  const { category: selectedCategory, page: currentPageParam } = await searchParams
+  const { category: selectedCategory, page: currentPageParam, q: searchQuery } = await searchParams
   const pageNumber = Number(currentPageParam) || 1
 
   setStaticParamsLocale(locale)
@@ -147,27 +149,32 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
       }
     }
   }
+
+  const hasBlogSection = layout.some((s: any) => s.blockType === 'blog-section')
+  const hasBlogSearchSection = layout.some((s: any) => s.blockType === 'blog-search-section')
   const blogSectionConfig = layout.find((s: any) => s.blockType === 'blog-section') as
     BlogSectionBlockType | undefined
 
   let blogPosts: Post[] = []
 
-  if (blogSectionConfig) {
-    if (blogSectionConfig.selectionType === 'manual' && blogSectionConfig.manualPosts) {
-      blogPosts = blogSectionConfig.manualPosts.filter(
-        (p): p is Post => typeof p === 'object' && p !== null,
-      )
-    } else {
+  if (hasBlogSection || hasBlogSearchSection) {
+    if (!blogSectionConfig || blogSectionConfig.selectionType !== 'manual') {
       const response = await payload.find({
         collection: 'posts',
-        limit: blogSectionConfig.limit || 3,
+        limit: blogSectionConfig?.limit || 10,
         locale: locale as any,
         sort: '-publishedDate',
         depth: 2,
       })
       blogPosts = response.docs
+    } else if (blogSectionConfig.selectionType === 'manual' && blogSectionConfig.manualPosts) {
+      blogPosts = blogSectionConfig.manualPosts.filter(
+        (p): p is Post => typeof p === 'object' && p !== null,
+      )
     }
   }
+
+  const latestPostItem = blogPosts[0] || null
 
   return (
     <LayoutWrapper>
@@ -240,6 +247,9 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
 
               case 'pricing-block':
                 return <PricingSection key={idx} {...pricingData} />
+
+              case 'blog-search-section':
+                return <BlogsSearchSection key={idx} {...section} latestPost={latestPostItem} />
 
               default:
                 return null

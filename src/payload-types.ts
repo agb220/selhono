@@ -235,6 +235,7 @@ export interface Page {
         | ContactFormInlineBlockType
         | ProcessStepsBlockType
         | PricingBlockType
+        | BlogSearchBlockType
       )[]
     | null;
   updatedAt: string;
@@ -664,6 +665,16 @@ export interface PricingBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogSearchBlockType".
+ */
+export interface BlogSearchBlockType {
+  title: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'blog-search-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -895,6 +906,7 @@ export interface PagesSelect<T extends boolean = true> {
         'contact-form-inline-block'?: T | ContactFormInlineBlockTypeSelect<T>;
         'process-steps-block'?: T | ProcessStepsBlockTypeSelect<T>;
         'pricing-block'?: T | PricingBlockTypeSelect<T>;
+        'blog-search-section'?: T | BlogSearchBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1080,6 +1092,15 @@ export interface ProcessStepsBlockTypeSelect<T extends boolean = true> {
  * via the `definition` "PricingBlockType_select".
  */
 export interface PricingBlockTypeSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogSearchBlockType_select".
+ */
+export interface BlogSearchBlockTypeSelect<T extends boolean = true> {
+  title?: T;
   id?: T;
   blockName?: T;
 }

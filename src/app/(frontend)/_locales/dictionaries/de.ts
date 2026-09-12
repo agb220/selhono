@@ -58,4 +58,10 @@ export default {
     tags: 'Tags',
     date: 'Datum',
   },
+  posts: {
+    postTitle: 'Beiträge',
+    search: 'Suchen...',
+    notFound: 'Keine Treffer gefunden',
+    input: 'Suche',
+  },
 } as const

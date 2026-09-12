@@ -25,16 +25,17 @@ const jost = Jost({
   display: 'swap',
 })
 
-interface SubLayoutProps {
+interface FrontendLayoutProps {
   children: React.ReactNode
 }
 
-export default async function FrontendLayout({ children }: SubLayoutProps) {
+export default function FrontendLayout({ children }: FrontendLayoutProps) {
   return (
     <html className={`${dmSerif.variable} ${jost.variable}`} suppressHydrationWarning>
       <head></head>
       <body>
         {children}
+
         <Toaster
           position="bottom-right"
           toastOptions={{

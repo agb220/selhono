@@ -1,5 +1,4 @@
 'use client'
-
 import { createContactRequestAction } from '@/app/(frontend)/_actions/contact'
 import { useScopedI18n } from '@/app/(frontend)/_locales/client'
 import { useState, useEffect } from 'react'
