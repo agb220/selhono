@@ -115,7 +115,7 @@ export default function BlogSearch({ labels }: BlogSearchProps) {
                   key={post.id}
                   href={`/${locale}/blog/${post.slug}`}
                   onClick={() => setIsOpen(false)}
-                  className="block px-6 py-3 hover:bg-light-100 transition-colors duration-500 border-b border-gold-100 last:border-none"
+                  className="block px-6 py-3 hover:bg-light-200 transition-colors duration-500 border-b border-gold-100 last:border-none"
                 >
                   <div className="text-base mb-1">{post.title}</div>
                   {post.excerpt && (
