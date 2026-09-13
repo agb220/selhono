@@ -50,7 +50,7 @@ export const Posts: CollectionConfig = {
       relationTo: 'blog-categories',
       required: true,
     },
-    { name: 'tags', type: 'array', fields: [{ name: 'tag', type: 'text' }] },
+    { name: 'tags', type: 'array', localized: true, fields: [{ name: 'tag', type: 'text' }] },
     {
       name: 'content',
       type: 'richText',
