@@ -1,5 +1,7 @@
 import { formatSlug } from '@/lib/hooks/formatSlug'
 import { CollectionConfig } from 'payload'
+import { HeroBlock } from '../_blocks/HeroBlock'
+import { ContactFormInlineBlock } from '../_blocks/CTAInlineBlock'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -53,6 +55,12 @@ export const Posts: CollectionConfig = {
       name: 'content',
       type: 'richText',
       localized: true,
+    },
+    {
+      name: 'layout',
+      type: 'blocks',
+      label: 'Single Blog Page Layout',
+      blocks: [HeroBlock, ContactFormInlineBlock],
     },
   ],
 }

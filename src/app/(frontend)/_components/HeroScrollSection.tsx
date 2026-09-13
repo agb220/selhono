@@ -37,6 +37,7 @@ export default function HeroScrollSection(props: HeroScrollBlockType) {
         <Title
           as="h1"
           title={title}
+          titleVariant="white"
           className="absolute bottom-1/3 md:bottom-20 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none drop-shadow-md text-4xl md:text-6xl font-light"
         />
       )}

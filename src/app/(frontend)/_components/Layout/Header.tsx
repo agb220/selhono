@@ -60,13 +60,13 @@ export default async function Header() {
 
   return (
     <header className="w-full fixed top-0 z-40 bg-white">
-      <div className="container max-h-12 py-4 md:py-10 flex items-center justify-between">
+      <div className="container max-h-12 gap-2 py-4 md:py-10 flex items-center justify-between">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight text-dark-200"
         >
           {imageUrl ? (
-            <div className="max-h-8 md:max-h-12.5 min-w-56.75">
+            <div className="max-h-8 md:max-h-12.5 md:min-w-56.75">
               <Image
                 src={imageUrl}
                 alt={(logoSettings.logoImage as any).alt || 'Logo'}

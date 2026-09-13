@@ -46,7 +46,7 @@ export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
     >
       <Dialog.Trigger asChild>
         <button
-          className="p-2 text-dark-200 outline-none cursor-pointer group"
+          className="py-2 text-dark-200 outline-none cursor-pointer group"
           aria-label="Toggle menu"
         >
           <svg

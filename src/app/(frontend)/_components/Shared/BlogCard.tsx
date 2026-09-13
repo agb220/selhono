@@ -32,7 +32,7 @@ export const BlogCard = ({ post, variant, locale = 'en-US' }: BlogCardProps) => 
         <div className="group block h-full">
           <article className="relative h-full flex flex-col bg-white border border-gray-100 rounded-[62px] p-5 shadow-card hover:border-gold-200  group-hover:bg-light-200 transition-colors duration-500">
             <Link
-              href={`/posts/${slug}`}
+              href={`/blog/${slug}`}
               className="relative aspect-340/290 rounded-t-[50px] overflow-hidden mb-5"
             >
               <Image
@@ -53,7 +53,7 @@ export const BlogCard = ({ post, variant, locale = 'en-US' }: BlogCardProps) => 
 
             <div className="grow flex flex-col">
               <h3 className="text-dark-200 h7 md:h5 mb-4 xl:mb-7 transition-colors group-hover:text-gold-200">
-                <Link href={`/posts/${slug}`}> {title}</Link>
+                <Link href={`/blog/${slug}`}> {title}</Link>
               </h3>
 
               <div className="mt-auto flex items-center justify-between gap-4 pt-1">
@@ -65,7 +65,7 @@ export const BlogCard = ({ post, variant, locale = 'en-US' }: BlogCardProps) => 
                   icon={ArrowShortSvg}
                   className="group-hover:bg-gold-200"
                 >
-                  <Link href={`/posts/${slug}`}></Link>
+                  <Link href={`/blog/${slug}`}></Link>
                 </Button>
               </div>
             </div>
@@ -80,7 +80,7 @@ export const BlogCard = ({ post, variant, locale = 'en-US' }: BlogCardProps) => 
       <div className="group block h-full">
         <article className="h-full flex flex-col pb-5 border-b border-gray-100 hover:border-gold-200 transition-colors duration-300">
           <Link
-            href={`/posts/${slug}`}
+            href={`/blog/${slug}`}
             className="relative aspect-380/290 rounded-[30px] overflow-hidden mb-7"
           >
             <Image
@@ -94,7 +94,7 @@ export const BlogCard = ({ post, variant, locale = 'en-US' }: BlogCardProps) => 
 
           <div className="grow flex flex-col px-1">
             <h3 className="text-dark-200 text-lg md:text-xl font-dm-serif leading-tight mb-5 transition-colors group-hover:text-gold-200">
-              <Link href={`/posts/${slug}`}> {title}</Link>
+              <Link href={`/blog/${slug}`}> {title}</Link>
             </h3>
 
             <div className="mt-auto flex items-center justify-between gap-4">
@@ -108,7 +108,7 @@ export const BlogCard = ({ post, variant, locale = 'en-US' }: BlogCardProps) => 
                 icon={ArrowShortSvg}
                 className="group-hover:bg-gold-200"
               >
-                <Link href={`/posts/${slug}`}></Link>
+                <Link href={`/blog/${slug}`}></Link>
               </Button>
             </div>
           </div>

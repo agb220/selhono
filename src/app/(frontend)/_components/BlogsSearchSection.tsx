@@ -32,7 +32,7 @@ export default function BlogsSearchSection({ title, latestPost }: BlogsSearchSec
         </div>
         {latestPost && (
           <div>
-            {title && <Title title={title} as="h2" className="mb-8"></Title>}
+            {title && <Title title={title} as="h2" size="hero" className="mb-8"></Title>}
             <div className="group flex flex-col lg:flex-row gap-8 items-center">
               <div className="w-full lg:w-1/2 aspect-16/10 relative rounded-[30px] overflow-hidden">
                 <Image

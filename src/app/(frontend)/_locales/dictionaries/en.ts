@@ -63,5 +63,12 @@ export default {
     search: 'Searching...',
     notFound: 'No matches found',
     input: 'Search',
+    notCategory: 'No posts found in category:',
+    btnTitle: 'View All',
+  },
+  blog: {
+    last: 'Latest News',
+    categories: 'Categories',
+    tags: 'Tags',
   },
 } as const
