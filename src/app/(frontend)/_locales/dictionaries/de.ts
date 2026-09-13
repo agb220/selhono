@@ -63,6 +63,8 @@ export default {
     search: 'Suchen...',
     notFound: 'Keine Treffer gefunden',
     input: 'Suche',
+    notCategory: 'Keine Beiträge gefunden in der Kategorie:',
+    btnTitle: 'Alle anzeigen',
   },
   blog: {
     last: 'Aktuelle Nachrichten',

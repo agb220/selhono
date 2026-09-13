@@ -152,19 +152,40 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
 
   const hasBlogSection = layout.some((s: any) => s.blockType === 'blog-section')
   const hasBlogSearchSection = layout.some((s: any) => s.blockType === 'blog-search-section')
+
   const blogSectionConfig = layout.find((s: any) => s.blockType === 'blog-section') as
     BlogSectionBlockType | undefined
 
   let blogPosts: Post[] = []
+  let latestPostItem: Post | null = null
 
-  if (hasBlogSection || hasBlogSearchSection) {
+  // Отримуємо найновішу статтю (для hero/search блоку, без урахування фільтру)
+  if (hasBlogSearchSection) {
+    const latestRes = await payload.find({
+      collection: 'posts',
+      limit: 1,
+      locale: locale as any,
+      sort: '-publishedDate',
+      depth: 2,
+    })
+    latestPostItem = latestRes.docs[0] || null
+  }
+
+  // Отримуємо статті для blog-section (з урахуванням selectedCategory!)
+  if (hasBlogSection) {
     if (!blogSectionConfig || blogSectionConfig.selectionType !== 'manual') {
+      const postsWhereQuery: any = {}
+      if (selectedCategory) {
+        postsWhereQuery['category.slug'] = { equals: selectedCategory }
+      }
+
       const response = await payload.find({
         collection: 'posts',
         limit: blogSectionConfig?.limit || 10,
         locale: locale as any,
         sort: '-publishedDate',
         depth: 2,
+        where: postsWhereQuery, // 👈 Фільтрація статей за категорією
       })
       blogPosts = response.docs
     } else if (blogSectionConfig.selectionType === 'manual' && blogSectionConfig.manualPosts) {
@@ -173,8 +194,6 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
       )
     }
   }
-
-  const latestPostItem = blogPosts[0] || null
 
   return (
     <LayoutWrapper>
@@ -228,7 +247,14 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
                 return <StatsSection key={idx} {...statsData} />
 
               case 'blog-section':
-                return <BlogsSection key={idx} {...section} posts={blogPosts} />
+                return (
+                  <BlogsSection
+                    key={idx}
+                    {...section}
+                    posts={blogPosts}
+                    selectedCategory={selectedCategory}
+                  />
+                )
 
               case 'slogan-block':
                 return <SloganSection key={idx} {...section} />
