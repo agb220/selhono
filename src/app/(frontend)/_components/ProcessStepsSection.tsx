@@ -12,6 +12,7 @@ export const ProcessStepsSection = (props: ProcessStepsBlockType) => {
           <Title
             title={props.title}
             description={props.description ? props.description : ''}
+            as="h2"
             size="section"
           />
         </div>

@@ -4,6 +4,7 @@ interface TitleProps {
   title: string
   as?: 'h1' | 'h2' | 'h3'
   size?: 'hero' | 'section' | 'sub'
+  titleVariant?: 'dark' | 'white'
   description?: string
   descVariant?: 'light' | 'muted'
   className?: string
@@ -14,6 +15,7 @@ export const Title = ({
   title,
   as: Tag = 'h2',
   size = 'section',
+  titleVariant = 'dark',
   description,
   descVariant = 'light',
   className = '',
@@ -25,14 +27,19 @@ export const Title = ({
     sub: '',
   }
 
+  const titleVariants = {
+    dark: 'text-dark-200',
+    white: 'text-white',
+  }
+
   const descVariants = {
     light: 'font-medium',
     muted: 'paragraph',
   }
 
   return (
-    <div className={`flex flex-col ${className}`}>
-      <Tag className={titleSizes[size]}>{title}</Tag>
+    <div className={cn('flex flex-col', className)}>
+      <Tag className={cn(titleSizes[size], titleVariants[titleVariant])}>{title}</Tag>
 
       {description && <p className={cn(descVariants[descVariant], classNameDesc)}>{description}</p>}
     </div>

@@ -64,4 +64,9 @@ export default {
     notFound: 'Keine Treffer gefunden',
     input: 'Suche',
   },
+  blog: {
+    last: 'Aktuelle Nachrichten',
+    categories: 'Kategorien',
+    tags: 'Tags',
+  },
 } as const

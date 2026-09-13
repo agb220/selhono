@@ -577,6 +577,7 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
+  layout?: (HeroBlockType | ContactFormInlineBlockType)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1260,6 +1261,12 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
       };
   content?: T;
+  layout?:
+    | T
+    | {
+        'hero-block'?: T | HeroBlockTypeSelect<T>;
+        'contact-form-inline-block'?: T | ContactFormInlineBlockTypeSelect<T>;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

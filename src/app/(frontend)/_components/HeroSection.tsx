@@ -21,7 +21,7 @@ const HeroSection = (props: HeroBlockType) => {
         )}
 
         <div className="text-white absolute right-1/2 bottom-1/3 xl:bottom-[15%] translate-y-[-50%] translate-x-[50%] z-20 text-center">
-          <Title title={props.title} as="h1"></Title>
+          <Title title={props.title} as="h1" size="hero" titleVariant="white"></Title>
         </div>
       </div>
     </section>

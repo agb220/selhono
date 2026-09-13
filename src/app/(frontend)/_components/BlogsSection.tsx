@@ -37,9 +37,11 @@ const BlogsSection = ({
             </ul>
           )}
         </div>
-        <Button asChild className="md:self-center md:max-w-[320px]">
-          <Link href={`/posts`}> {viewAllText}</Link>
-        </Button>
+        {viewAllText && (
+          <Button asChild className="md:self-center md:max-w-[320px]">
+            <Link href={`/posts`}> {viewAllText}</Link>
+          </Button>
+        )}
       </div>
     </section>
   )

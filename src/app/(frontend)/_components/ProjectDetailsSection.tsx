@@ -99,7 +99,7 @@ export default function ProjectDetailsSection({ project }: ProjectDetailsSection
         </div>
 
         <div className=" ">
-          <Title title={title} />
+          <Title title={title} as="h2" size="hero" />
           <div className="prose max-w-none [&_.payload-richtext]:space-y-2">
             {description && <RichText data={description} />}
           </div>

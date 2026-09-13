@@ -6,25 +6,19 @@ import { getImageUrl } from '@/lib/getImageUrl'
 import { PromoBlock } from '@/payload-types'
 
 const PromoSection = (data: PromoBlock) => {
-  const imageUrlLeft = getImageUrl(data.leftImage)
-  const imageUrlRight = getImageUrl(data.rightImage)
-
   return (
     <section className="container mb-12 md:mb-24 xl:mb-48.5">
       <div className="flex items-stretch">
         <div className="relative w-full shrink-0 aspect-square lg:aspect-[1.15/1] overflow-hidden rounded-tr-[250px] md:rounded-tr-[400px] lg:max-w-130 h-140 max-h-140 lg:max-h-175">
-          {imageUrlLeft && (
-            <Image
-              src={imageUrlLeft}
-              alt={(data.leftImage as any).alt || 'Promo'}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          )}
+          <Image
+            src={getImageUrl(data.leftImage)}
+            alt={(data.leftImage as any).alt || 'Promo'}
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
           <div className="absolute inset-0 bg-black/30" />
-
           <div className="absolute inset-0 p-3 md:p-12 flex flex-col justify-center text-white">
             <h2 className="text-accent-lg md:h3 mb-2 md:mb-5 lg:max-w-92">{data.title}</h2>
             <p className="input-medium mb-2 md:mb-5 lg:max-w-81">{data.description}</p>
@@ -45,7 +39,6 @@ const PromoSection = (data: PromoBlock) => {
                 </div>
               </div>
             )}
-
             {data.ctaButton?.link && (
               <Button
                 asChild
@@ -59,18 +52,15 @@ const PromoSection = (data: PromoBlock) => {
             )}
           </div>
         </div>
-
         <div className="relative aspect-4/3 lg:aspect-[1.15/1] overflow-hidden clip-promo-section w-full flex-1 z-0 -ml-58 max-h-175 hidden lg:flex">
-          {imageUrlRight && (
-            <Image
-              src={imageUrlRight}
-              alt={(data.rightImage as any).alt || 'Promo'}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          )}
+          <Image
+            src={getImageUrl(data.rightImage)}
+            alt={(data.rightImage as any).alt || 'Promo'}
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
       </div>
     </section>
