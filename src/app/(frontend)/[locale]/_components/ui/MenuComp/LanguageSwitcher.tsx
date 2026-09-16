@@ -1,8 +1,8 @@
 'use client'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { useChangeLocale } from '../../../_locales/client'
-import { Locales } from '../../../_locales/types'
 import { DropDownSvg } from '../../icons'
+import { useChangeLocale } from '@/app/(frontend)/_locales/client'
+import { Locales } from '@/app/(frontend)/_locales/types'
 
 interface LanguageSwitcherProps {
   currentLocale: string

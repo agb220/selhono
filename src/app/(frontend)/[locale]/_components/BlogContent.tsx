@@ -4,7 +4,7 @@ import { BlogCategory, Post } from '@/payload-types'
 import BlogSearch from './BlogSearch'
 import { Title } from './Shared/Title'
 import { lexicalConverters } from '@/lib/richTextConverters'
-import { getCurrentLocale, getScopedI18n } from '../_locales/server'
+import { getCurrentLocale, getScopedI18n } from '../../_locales/server'
 import { cn } from '@/lib/utils'
 
 interface BlogContentProps {

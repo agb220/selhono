@@ -5,8 +5,8 @@ import ProjectCard from './Shared/ProjectCard'
 import { Button } from './ui/ButtonUI'
 import ProjectTabs, { CategoryItem } from './ProjectTabs'
 import ProjectPagination from './ProjectPagination'
-import { useScopedI18n } from '../_locales/client'
 import { Project, ProjectsSectionBlockType } from '@/payload-types'
+import { useScopedI18n } from '../../_locales/client'
 
 interface ProjectsSectionProps extends ProjectsSectionBlockType {
   projects?: Project[]

@@ -1,4 +1,3 @@
-import React from 'react'
 import { ServiceFeaturesBlockType } from '@/payload-types'
 
 export default function ServiceFeaturesSection({ columns }: ServiceFeaturesBlockType) {

@@ -2,9 +2,9 @@
 import { useState, useEffect } from 'react'
 import { toast as sonnerToast } from 'sonner'
 import { Button } from '../../ui/ButtonUI'
-import { createReviewOnlyAction } from '../../../_actions/reviews'
-import { useScopedI18n } from '../../../_locales/client'
 import Input from '../Input'
+import { createReviewOnlyAction } from '@/app/(frontend)/_actions/reviews'
+import { useScopedI18n } from '@/app/(frontend)/_locales/client'
 
 interface ReviewFormProps {
   onSuccess: () => void

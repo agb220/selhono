@@ -3,11 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import BlogSearch from './BlogSearch'
 import { getImageUrl } from '@/lib/getImageUrl'
-import { useCurrentLocale } from '../_locales/client'
 import { BlogSearchBlockType, Post } from '@/payload-types'
 import { Title } from './Shared/Title'
 import { Button } from './ui/ButtonUI'
 import { ArrowShortSvg } from './icons'
+import { useCurrentLocale } from '../../_locales/client'
 
 interface BlogsSearchSectionProps extends BlogSearchBlockType {
   latestPost?: Post | null

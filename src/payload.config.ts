@@ -106,20 +106,12 @@ export default buildConfig({
   ],
 
   localization: {
-    locales: [
-      {
-        label: 'English',
-        code: 'en',
-      },
-      {
-        label: 'Deutsch',
-        code: 'de',
-      },
-    ],
+    locales: ['en', 'de'],
     defaultLocale: 'en',
     fallback: true,
   },
   i18n: {
     supportedLanguages: { en, de },
   },
+  sharp,
 })

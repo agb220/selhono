@@ -11,7 +11,7 @@ import SearchSvg from './icons/SearchSvg'
 import { ArrowShortSvg } from './icons'
 import { Button } from './ui/ButtonUI'
 import { Title } from './Shared/Title'
-import { useScopedI18n } from '../_locales/client'
+import { useScopedI18n } from '../../_locales/client'
 
 interface ProjectDetailsSectionProps {
   project: Project

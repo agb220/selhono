@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { BlogCard } from './Shared/BlogCard'
 import { Button } from './ui/ButtonUI'
 import { BlogSectionBlockType, Post } from '@/payload-types'
-import { useCurrentLocale, useScopedI18n } from '../_locales/client'
+import { useCurrentLocale, useScopedI18n } from '../../_locales/client'
 
 interface BlogsSectionProps extends BlogSectionBlockType {
   posts?: Post[]

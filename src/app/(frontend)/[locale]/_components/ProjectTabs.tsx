@@ -1,8 +1,8 @@
 'use client'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Button } from './ui/ButtonUI'
-import { useScopedI18n } from '../_locales/client'
 import { cn } from '@/lib/utils'
+import { useScopedI18n } from '../../_locales/client'
 
 export interface CategoryItem {
   id: string

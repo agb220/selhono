@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ServicePromoBlockType, Media } from '@/payload-types'
+import { ServicePromoBlockType } from '@/payload-types'
 import { Button } from './ui/ButtonUI'
 import { ArrowSvg } from './icons'
 import { getImageUrl } from '@/lib/getImageUrl'

@@ -1,18 +1,18 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getCurrentLocale, getScopedI18n } from '../../_locales/server'
+import { Key } from 'react'
 import NavLink from '../ui/MenuComp/NavLink'
 import LanguageSwitcher from '../ui/MenuComp/LanguageSwitcher'
 import MobileMenu from '../ui/MenuComp/MobileMenu'
-import { Locales } from '../../_locales/types'
-import { getPayload } from '@/lib/payload'
 import { getImageUrl } from '@/lib/getImageUrl'
+import { getCachedGlobal } from '@/lib/data'
+import { getCurrentLocale } from '@/app/(frontend)/_locales/server'
+import { Locales } from '@/app/(frontend)/_locales/types'
 
 export default async function Header() {
-  const t = getScopedI18n('menu')
-  const payload = await getPayload()
-
   const locale = await getCurrentLocale()
+  const logoSettings = await getCachedGlobal('logo-settings', locale)
+  const mainMenu = await getCachedGlobal('main-menu', locale)
 
   // const MENU_MOCK = [
   //   { id: '1', title: locale === Locales.DE ? 'Über uns' : 'About Us', slug: 'about' },
@@ -23,15 +23,6 @@ export default async function Header() {
   //   { id: '6', title: locale === Locales.DE ? 'Preise' : 'Pricing', slug: 'pricing' },
   //   { id: '7', title: locale === Locales.DE ? 'Kontakt' : 'Contact', slug: 'contact' },
   // ]
-
-  const logoSettings = await payload.findGlobal({
-    slug: 'logo-settings',
-  })
-
-  const mainMenu = await payload.findGlobal({
-    slug: 'main-menu',
-    locale: locale,
-  })
 
   const dynamicItems =
     (mainMenu as any)?.items?.map((pageData: any) => {
@@ -62,14 +53,14 @@ export default async function Header() {
     <header className="w-full fixed top-0 z-40 bg-white">
       <div className="container max-h-12 gap-2 py-4 md:py-10 flex items-center justify-between">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight text-dark-200"
         >
           {imageUrl ? (
             <div className="max-h-8 md:max-h-12.5 md:min-w-56.75">
               <Image
                 src={imageUrl}
-                alt={(logoSettings.logoImage as any).alt || 'Logo'}
+                alt={(logoSettings?.logoImage as any)?.alt || 'Logo'}
                 height={50}
                 width={227}
                 className="object-cover object-center"
@@ -77,22 +68,19 @@ export default async function Header() {
               />
             </div>
           ) : (
-            <>{logoSettings.logoText || 'SELHONO'}</>
+            <>{logoSettings?.logoText || 'SELHONO'}</>
           )}
         </Link>
-
         <div className="hidden xl:flex items-center gap-8">
           <nav className="flex items-center gap-6">
-            {visiblePages.map((page) => {
+            {visiblePages.map((page: { slug: any; id: Key | null | undefined; title: string }) => {
               const pageHref = `/${locale}${page.slug ? `/${page.slug}` : ''}`
 
               return <NavLink key={page.id} href={pageHref} title={page.title} />
             })}
           </nav>
-
           <LanguageSwitcher currentLocale={locale} />
         </div>
-
         <div className={hasMorePages ? 'block' : 'block xl:hidden'}>
           <MobileMenu allPages={allHeaderPages} locale={locale} />
         </div>

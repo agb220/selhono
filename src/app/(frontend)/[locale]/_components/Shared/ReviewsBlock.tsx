@@ -6,8 +6,8 @@ import { Review } from '@/payload-types'
 import { Button } from '../ui/ButtonUI'
 import ModalLayout from './Modal'
 import ReviewForm from './Forms/ReviewForm'
-import { useScopedI18n } from '../../_locales/client'
 import { getImageUrl } from '@/lib/getImageUrl'
+import { useScopedI18n } from '@/app/(frontend)/_locales/client'
 
 interface ReviewsBlockProps {
   reviews: Review[]

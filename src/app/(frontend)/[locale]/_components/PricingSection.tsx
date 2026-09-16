@@ -4,8 +4,7 @@ import { Button } from './ui/ButtonUI'
 import { ArrowSvg } from './icons'
 import { PricingGlobal } from '@/payload-types'
 import { useTransition } from 'react'
-import { createCheckoutSession } from '../_actions/checkout'
-import { cn } from '@/lib/utils'
+import { createCheckoutSession } from '../../_actions/checkout'
 
 export default function PricingSection({ plans }: PricingGlobal) {
   const [isPending, startTransition] = useTransition()

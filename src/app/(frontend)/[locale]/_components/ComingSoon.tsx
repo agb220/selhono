@@ -1,13 +1,12 @@
 import Link from 'next/link'
 import { Button } from './ui/ButtonUI'
-import { getScopedI18n } from '../_locales/server'
+import { getScopedI18n } from '../../_locales/server'
 
 interface ComingSoonProps {
-  locale: string
   isHome?: boolean
 }
 
-export default async function ComingSoon({ locale, isHome = false }: ComingSoonProps) {
+export default async function ComingSoon({ isHome = false }: ComingSoonProps) {
   const t = await getScopedI18n('commingSoon')
 
   return (

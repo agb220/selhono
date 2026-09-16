@@ -7,7 +7,7 @@ import { Button } from './ui/ButtonUI'
 import ArrowSvg from './icons/ArrowSvg'
 import ModalLayout from './Shared/Modal'
 import ContactForm from './Shared/Forms/ContactForm'
-import { useScopedI18n } from '../_locales/client'
+import { useScopedI18n } from '../../_locales/client'
 
 const ContactUsSection = (props: CtaSection) => {
   const [isModalOpen, setIsModalOpen] = useState(false)

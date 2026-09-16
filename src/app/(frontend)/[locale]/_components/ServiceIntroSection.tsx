@@ -1,8 +1,7 @@
 'use client'
-
 import { useState } from 'react'
 import { ServiceIntroBlockType } from '@/payload-types'
-import { useI18n } from '../_locales/client'
+import { useI18n } from '../../_locales/client'
 
 export default function ServiceIntroSection({ title, subtitle, content }: ServiceIntroBlockType) {
   const [isExpanded, setIsExpanded] = useState(false)

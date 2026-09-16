@@ -13,6 +13,7 @@ const nextConfig = {
   serverExternalPackages: ['sharp'],
 
   images: {
+    unoptimized: true,
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL, S3_PUBLIC_URL].filter(Boolean).map((item) => {
         const url = new URL(item)

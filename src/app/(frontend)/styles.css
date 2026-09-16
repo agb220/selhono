@@ -25,6 +25,9 @@ html {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   scrollbar-gutter: stable;
+  margin: 0;
+  color: var(--color-dark-100);
+  background-color: #ffffff;
 }
 
 html,

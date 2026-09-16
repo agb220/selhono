@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { useCurrentLocale, useScopedI18n } from '../_locales/client'
 import SearchSvg from './icons/SearchSvg'
+import { useCurrentLocale, useScopedI18n } from '../../_locales/client'
 
 interface SearchResult {
   id: string

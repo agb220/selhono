@@ -1,7 +1,7 @@
-import { Button } from '@/app/(frontend)/_components/ui/ButtonUI'
 import { getScopedI18n } from '@/app/(frontend)/_locales/server'
 import Link from 'next/link'
 import Stripe from 'stripe'
+import { Button } from '../../_components/ui/ButtonUI'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2023-10-16' as any,

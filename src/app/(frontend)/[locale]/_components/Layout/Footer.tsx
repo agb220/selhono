@@ -1,37 +1,27 @@
 import Image from 'next/image'
 import Link from 'next/dist/client/link'
 import NavLink from '../ui/MenuComp/NavLink'
-import { Locales } from '../../_locales/types'
 import SocialMediaComp from '../Shared/SocialMediaComp'
-import { getCurrentLocale } from '../../_locales/server'
-
 import { getPayload } from '@/lib/payload'
 import { getImageUrl } from '@/lib/getImageUrl'
+import { getCachedGlobal } from '@/lib/data'
+import { getCurrentLocale } from '@/app/(frontend)/_locales/server'
+import { Locales } from '@/app/(frontend)/_locales/types'
 
 const Footer = async () => {
   const payload = await getPayload()
   const locale = await getCurrentLocale()
 
-  const logoSettings = await payload.findGlobal({
-    slug: 'logo-settings',
-  })
-
-  const footerSettings = await payload.findGlobal({
-    slug: 'footer-settings',
-    locale: locale as any,
-  })
-
-  const mainMenu = await payload.findGlobal({
-    slug: 'main-menu',
-    locale: locale as any,
-  })
+  const logoSettings = await getCachedGlobal('logo-settings', locale)
+  const footerSettings = await getCachedGlobal('footer-settings', locale)
+  const mainMenu = await getCachedGlobal('main-menu', locale)
+  const socialLinks = await getCachedGlobal('social-links', locale)
   const categoriesData = await payload.find({
     collection: 'categories',
-    locale: locale as any,
+    locale: locale as Locales,
+    fallbackLocale: Locales.EN,
     limit: 5,
   })
-
-  const socialLinks = await payload.findGlobal({ slug: 'social-links' })
 
   const pagesLinks = mainMenu.items || []
 
@@ -99,7 +89,6 @@ const Footer = async () => {
               ))}
             </ul>
           </div>
-
           <div>
             <h4 className="font-serif text-xl font-semibold mb-5 text-dark-200">
               {footerSettings.columnTitles.contactTitle || 'Contact'}

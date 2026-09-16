@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { usePathname } from 'next/navigation'
 import NavLink from './NavLink'
-import { useChangeLocale, useScopedI18n } from '../../../_locales/client'
-import { Locales } from '../../../_locales/types'
+import { useChangeLocale, useScopedI18n } from '@/app/(frontend)/_locales/client'
+import { Locales } from '@/app/(frontend)/_locales/types'
 
 interface MobileMenuProps {
   allPages: Array<{ id: string; title: string; slug: string }>

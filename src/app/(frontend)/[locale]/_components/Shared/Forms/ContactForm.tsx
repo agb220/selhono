@@ -2,9 +2,10 @@
 import { useState, useEffect } from 'react'
 import { toast as sonnerToast } from 'sonner'
 import { Button } from '../../ui/ButtonUI'
-import { createContactRequestAction } from '../../../_actions/contact'
-import { useScopedI18n } from '../../../_locales/client'
+
 import Input from '../Input'
+import { useScopedI18n } from '@/app/(frontend)/_locales/client'
+import { createContactRequestAction } from '@/app/(frontend)/_actions/contact'
 
 interface ContactFormProps {
   onSuccess: () => void
