@@ -2,17 +2,22 @@ import { getScopedI18n } from '@/app/(frontend)/_locales/server'
 import Link from 'next/link'
 import Stripe from 'stripe'
 import { Button } from '../../_components/ui/ButtonUI'
+import { setStaticParamsLocale } from 'next-international/server'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2023-10-16' as any,
 })
 
 interface SuccessPageProps {
+  params: Promise<{ locale: string }>
   searchParams: Promise<{ session_id?: string }>
 }
 
-export default async function PaymentSuccessPage({ searchParams }: SuccessPageProps) {
+export default async function PaymentSuccessPage({ params, searchParams }: SuccessPageProps) {
+  const { locale } = await params
+  setStaticParamsLocale(locale)
   const t = await getScopedI18n('payments')
+
   const { session_id } = await searchParams
   let customerEmail = ''
 
