@@ -5,14 +5,17 @@ import NavLink from '../ui/MenuComp/NavLink'
 import LanguageSwitcher from '../ui/MenuComp/LanguageSwitcher'
 import MobileMenu from '../ui/MenuComp/MobileMenu'
 import { getImageUrl } from '@/lib/getImageUrl'
-import { getCachedGlobal } from '@/lib/data'
+import { getCachedGlobal } from '@/lib/getCachedGlobal'
 import { getCurrentLocale } from '@/app/(frontend)/_locales/server'
 import { Locales } from '@/app/(frontend)/_locales/types'
 
 export default async function Header() {
   const locale = await getCurrentLocale()
-  const logoSettings = await getCachedGlobal('logo-settings', locale)
-  const mainMenu = await getCachedGlobal('main-menu', locale)
+
+  const [logoSettings, mainMenu] = await Promise.all([
+    getCachedGlobal('logo-settings', locale),
+    getCachedGlobal('main-menu', locale),
+  ])
 
   // const MENU_MOCK = [
   //   { id: '1', title: locale === Locales.DE ? 'Über uns' : 'About Us', slug: 'about' },

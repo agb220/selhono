@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import { setStaticParamsLocale } from 'next-international/server'
 import config from '@/payload.config'
-import { getCachedGlobal } from '@/lib/data'
+import { getCachedGlobal } from '@/lib/getCachedGlobal'
 import { HomePage, Post, Project, ProjectsSectionBlockType } from '@/payload-types'
 import ComingSoon from './_components/ComingSoon'
 import MainHeroSection from './_components/MainHeroSection'

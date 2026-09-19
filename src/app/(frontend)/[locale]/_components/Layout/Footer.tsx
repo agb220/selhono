@@ -4,7 +4,7 @@ import NavLink from '../ui/MenuComp/NavLink'
 import SocialMediaComp from '../Shared/SocialMediaComp'
 import { getPayload } from '@/lib/payload'
 import { getImageUrl } from '@/lib/getImageUrl'
-import { getCachedGlobal } from '@/lib/data'
+import { getCachedGlobal } from '@/lib/getCachedGlobal'
 import { getCurrentLocale } from '@/app/(frontend)/_locales/server'
 import { Locales } from '@/app/(frontend)/_locales/types'
 
@@ -12,16 +12,18 @@ const Footer = async () => {
   const payload = await getPayload()
   const locale = await getCurrentLocale()
 
-  const logoSettings = await getCachedGlobal('logo-settings', locale)
-  const footerSettings = await getCachedGlobal('footer-settings', locale)
-  const mainMenu = await getCachedGlobal('main-menu', locale)
-  const socialLinks = await getCachedGlobal('social-links', locale)
-  const categoriesData = await payload.find({
-    collection: 'categories',
-    locale: locale as Locales,
-    fallbackLocale: Locales.EN,
-    limit: 5,
-  })
+  const [logoSettings, footerSettings, mainMenu, socialLinks, categoriesData] = await Promise.all([
+    getCachedGlobal('logo-settings', locale),
+    getCachedGlobal('footer-settings', locale),
+    getCachedGlobal('main-menu', locale),
+    getCachedGlobal('social-links', locale),
+    payload.find({
+      collection: 'categories',
+      locale: locale as Locales,
+      fallbackLocale: Locales.EN,
+      limit: 5,
+    }),
+  ])
 
   const pagesLinks = mainMenu.items || []
 
@@ -76,10 +78,10 @@ const Footer = async () => {
 
           <div>
             <h4 className="font-serif text-xl font-semibold mb-5 text-dark-200">
-              {footerSettings.columnTitles.servicesTitle || 'Services'}
+              {footerSettings?.columnTitles?.servicesTitle || 'Services'}
             </h4>
             <ul className="flex flex-col gap-3 text-sm text-gray-600">
-              {categoriesData.docs.map((category: any) => (
+              {categoriesData?.docs.map((category: any) => (
                 <li key={category.id}>
                   <NavLink
                     href={`/${locale}/services?category=${category.slug}`}
@@ -91,12 +93,12 @@ const Footer = async () => {
           </div>
           <div>
             <h4 className="font-serif text-xl font-semibold mb-5 text-dark-200">
-              {footerSettings.columnTitles.contactTitle || 'Contact'}
+              {footerSettings?.columnTitles?.contactTitle || 'Contact'}
             </h4>
             <ul className="flex flex-col gap-4 text-dark-200 font-normal">
               {footerSettings.contactBlock?.address && (
                 <li className="whitespace-pre-line max-w-55">
-                  {footerSettings.contactBlock?.address}
+                  {footerSettings?.contactBlock?.address}
                 </li>
               )}
               {footerSettings.contactBlock?.email && (
@@ -109,7 +111,7 @@ const Footer = async () => {
                   </a>
                 </li>
               )}
-              {footerSettings.contactBlock?.phone && (
+              {footerSettings?.contactBlock?.phone && (
                 <li>
                   <a
                     href={`tel:${footerSettings.contactBlock?.phone}`}

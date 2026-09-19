@@ -9,13 +9,15 @@ interface LocaleLayoutProps {
   params: Promise<{ locale: string }>
 }
 
-export function generateStaticParams() {
-  return Object.values(Locales).map((locale) => ({ locale }))
+export async function generateStaticParams() {
+  return [{ locale: Locales.EN }, { locale: Locales.DE }]
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params
   setStaticParamsLocale(locale)
+
+  console.log('👉 [LocaleLayout] Rendering locale:', locale)
 
   return (
     <I18nProviderClient locale={locale}>

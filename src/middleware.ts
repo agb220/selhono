@@ -5,8 +5,8 @@ import { Locales } from '@/app/(frontend)/_locales/types'
 const I18nMiddleware = createI18nMiddleware({
   locales: [...Object.values(Locales)],
   defaultLocale: Locales.EN,
-  //urlMappingStrategy: 'redirect',
-  urlMappingStrategy: 'rewriteDefault',
+  urlMappingStrategy: 'redirect',
+  //urlMappingStrategy: 'rewriteDefault',
 })
 
 export function middleware(request: NextRequest) {
@@ -14,5 +14,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|admin|.*\\..*).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|_next/data|favicon.ico|admin|.*\\..*).*)'],
 }

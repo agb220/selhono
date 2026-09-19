@@ -1,7 +1,6 @@
 import React from 'react'
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import { setStaticParamsLocale } from 'next-international/server'
-
 import { BlogCategory, Post } from '@/payload-types'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
@@ -21,7 +20,7 @@ interface BlogSinglePageProps {
 export async function generateStaticParams() {
   const payload = await getCachedPayload()
   const posts = await payload.find({ collection: 'posts', limit: 100, depth: 0 })
-  const locales = ['de', 'en']
+  const locales = [Locales.DE, Locales.EN]
 
   return posts.docs.flatMap((post: any) =>
     locales.map((locale: string) => ({

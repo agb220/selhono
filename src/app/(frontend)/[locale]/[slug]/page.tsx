@@ -35,7 +35,7 @@ interface PageProps {
 
 export async function generateStaticParams() {
   const payload = await getCachedPayload()
-  const locales = ['de', 'en']
+  const locales = [Locales.DE, Locales.EN]
 
   const pagesByLocale = await Promise.all(
     locales.map(async (locale) => {
