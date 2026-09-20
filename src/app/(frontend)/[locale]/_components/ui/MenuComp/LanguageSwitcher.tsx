@@ -3,6 +3,8 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { DropDownSvg } from '../../icons'
 import { useChangeLocale } from '@/app/(frontend)/_locales/client'
 import { Locales } from '@/app/(frontend)/_locales/types'
+import { useTransition } from 'react'
+import Link from 'next/link'
 
 interface LanguageSwitcherProps {
   currentLocale: string
@@ -10,11 +12,18 @@ interface LanguageSwitcherProps {
 
 export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
   const changeLocale = useChangeLocale()
+  const [isPending, startTransition] = useTransition()
+
+  const handleLanguageChange = (newLocale: Locales) => {
+    startTransition(() => {
+      changeLocale(newLocale)
+    })
+  }
 
   return (
     <div className="pl-6 flex items-center">
       <DropdownMenu.Root modal={false}>
-        <DropdownMenu.Trigger className="flex items-center gap-1.5 link  hover:text-gold-300 transition-colors uppercase outline-none select-none cursor-pointer group">
+        <DropdownMenu.Trigger className="flex items-center gap-1.5 link hover:text-gold-300 transition-colors uppercase outline-none select-none cursor-pointer group">
           {currentLocale}
           <DropDownSvg
             className="size-4 opacity-60 transition-transform duration-200 group-data-[state=open]:rotate-180"
@@ -30,8 +39,10 @@ export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProp
           >
             {Object.values(Locales).map((localeValue) => (
               <DropdownMenu.Item key={localeValue} className="outline-none first:mt-0 mt-0.5">
-                <button
-                  onClick={() => changeLocale(localeValue)}
+                <Link
+                  href={`/${localeValue}`}
+                  replace
+                  scroll={false}
                   className={`flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer outline-none w-full uppercase ${
                     currentLocale === localeValue
                       ? 'bg-gold-300/10 text-gold-300 font-bold'
@@ -39,7 +50,7 @@ export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProp
                   }`}
                 >
                   {localeValue}
-                </button>
+                </Link>
               </DropdownMenu.Item>
             ))}
           </DropdownMenu.Content>

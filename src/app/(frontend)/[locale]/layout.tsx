@@ -17,7 +17,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const { locale } = await params
   setStaticParamsLocale(locale)
 
-  console.log('👉 [LocaleLayout] Rendering locale:', locale)
+  console.log('🟢 [Layout] Rendering layout for locale:', locale)
 
   return (
     <I18nProviderClient locale={locale}>

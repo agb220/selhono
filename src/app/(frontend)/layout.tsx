@@ -35,7 +35,6 @@ export default function FrontendLayout({ children }: FrontendLayoutProps) {
       <head></head>
       <body>
         {children}
-
         <Toaster
           position="bottom-right"
           toastOptions={{

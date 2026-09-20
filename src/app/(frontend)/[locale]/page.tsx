@@ -28,6 +28,8 @@ export default async function HomePageComponent({
   const { locale } = await params
   setStaticParamsLocale(locale)
 
+  console.log('📄 [Page] Rendering Home Page for locale:', locale)
+
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 

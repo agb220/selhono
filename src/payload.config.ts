@@ -82,14 +82,9 @@ export default buildConfig({
   plugins: [
     s3Storage({
       collections: {
-        [Media.slug]: {
-          disableLocalStorage: true,
-          disablePayloadAccessControl: true,
-          generateFileURL: ({ filename }: { filename: string }) => {
-            const publicUrl = process.env.NEXT_PUBLIC_S3_PUBLIC_URL
-            console.log('PAYLOAD S3 DEBUG: Generating URL for', filename, 'with base', publicUrl)
-            return `${publicUrl}/${filename}`
-          },
+        media: {
+          generateFileURL: ({ filename }) =>
+            `https://pub-681c9381ad2b42668af6181e6c46f2b5.r2.dev/${filename}`,
         },
       },
       bucket: process.env.S3_BUCKET || '',
