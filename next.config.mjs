@@ -1,6 +1,9 @@
 import { withPayload } from '@payloadcms/next/withPayload'
+import createNextIntlPlugin from 'next-intl/plugin'
 import path from 'path'
 import { fileURLToPath } from 'url'
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 const S3_PUBLIC_URL = process.env.NEXT_PUBLIC_S3_PUBLIC_URL || ''
@@ -44,6 +47,6 @@ const nextConfig = {
   },
 }
 
-export default withPayload(nextConfig, {
+export default withPayload(withNextIntl(nextConfig), {
   devBundleServerPackages: ['@payloadcms/storage-s3'],
 })

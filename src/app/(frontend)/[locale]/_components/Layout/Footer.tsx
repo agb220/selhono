@@ -1,17 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/dist/client/link'
+import { getLocale } from 'next-intl/server'
 import NavLink from '../ui/MenuComp/NavLink'
 import SocialMediaComp from '../Shared/SocialMediaComp'
 import { getPayload } from '@/lib/payload'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { getCachedGlobal } from '@/lib/getCachedGlobal'
-import { getCurrentLocale } from '@/app/(frontend)/_locales/server'
-import { Locales } from '@/app/(frontend)/_locales/types'
+import { Locales } from '@/messages/types'
 
 const Footer = async () => {
   const payload = await getPayload()
-  const locale = await getCurrentLocale()
-
+  const locale = await getLocale()
   const [logoSettings, footerSettings, mainMenu, socialLinks, categoriesData] = await Promise.all([
     getCachedGlobal('logo-settings', locale),
     getCachedGlobal('footer-settings', locale),

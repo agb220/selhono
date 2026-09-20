@@ -1,10 +1,10 @@
 'use client'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { BlogCard } from './Shared/BlogCard'
 import { Button } from './ui/ButtonUI'
 import { BlogSectionBlockType, Post } from '@/payload-types'
-import { useCurrentLocale, useScopedI18n } from '../../_locales/client'
 
 interface BlogsSectionProps extends BlogSectionBlockType {
   posts?: Post[]
@@ -19,8 +19,8 @@ const BlogsSection = ({
   viewAllText,
   selectedCategory,
 }: BlogsSectionProps) => {
-  const locale = useCurrentLocale()
-  const t = useScopedI18n('posts')
+  const locale = useLocale()
+  const t = useTranslations('posts')
 
   const [emblaRef] = useEmblaCarousel({
     align: 'start',

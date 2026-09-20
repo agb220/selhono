@@ -1,12 +1,12 @@
 'use client'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import ProjectCard from './Shared/ProjectCard'
 import { Button } from './ui/ButtonUI'
 import ProjectTabs, { CategoryItem } from './ProjectTabs'
 import ProjectPagination from './ProjectPagination'
 import { Project, ProjectsSectionBlockType } from '@/payload-types'
-import { useScopedI18n } from '../../_locales/client'
 
 interface ProjectsSectionProps extends ProjectsSectionBlockType {
   projects?: Project[]
@@ -32,7 +32,7 @@ const ProjectsSection = ({
     containScroll: 'trimSnaps',
   })
 
-  const t = useScopedI18n('projects')
+  const t = useTranslations('projects')
 
   if (displayMode === 'fullPage') {
     return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Media, ProcessStepsBlockType } from '@/payload-types'
+import { Media } from '@/payload-types'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { cn } from '@/lib/utils'
 

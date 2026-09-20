@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import SearchSvg from './icons/SearchSvg'
-import { useCurrentLocale, useScopedI18n } from '../../_locales/client'
 
 interface SearchResult {
   id: string
@@ -23,8 +23,8 @@ interface BlogSearchProps {
 }
 
 export default function BlogSearch({ labels }: BlogSearchProps) {
-  const t = useScopedI18n('posts')
-  const locale = useCurrentLocale()
+  const t = useTranslations('posts')
+  const locale = useLocale()
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [isLoading, setIsLoading] = useState(false)

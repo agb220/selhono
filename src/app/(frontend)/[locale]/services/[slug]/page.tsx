@@ -7,7 +7,7 @@ import { YoutubeVideoSection } from '../../_components/YoutubeVideoSection'
 import ServiceFeaturesSection from '../../_components/ServiceFeaturesSection'
 import ServicePromoSection from '../../_components/ServicePromoSection'
 import StatsSection from '../../_components/StatsSection'
-import { Locales } from '@/app/(frontend)/_locales/types'
+import { Locales } from '@/messages/types'
 
 export const dynamic = 'force-dynamic'
 

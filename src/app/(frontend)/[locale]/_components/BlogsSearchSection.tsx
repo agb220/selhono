@@ -1,20 +1,20 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 import BlogSearch from './BlogSearch'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { BlogSearchBlockType, Post } from '@/payload-types'
 import { Title } from './Shared/Title'
 import { Button } from './ui/ButtonUI'
 import { ArrowShortSvg } from './icons'
-import { useCurrentLocale } from '../../_locales/client'
 
 interface BlogsSearchSectionProps extends BlogSearchBlockType {
   latestPost?: Post | null
 }
 
 export default function BlogsSearchSection({ title, latestPost }: BlogsSearchSectionProps) {
-  const locale = useCurrentLocale()
+  const locale = useLocale()
 
   const formattedDate = latestPost?.publishedDate
     ? new Date(latestPost.publishedDate).toLocaleDateString(locale, {

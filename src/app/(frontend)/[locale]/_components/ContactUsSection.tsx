@@ -1,17 +1,17 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
-import { CtaSection } from '@/payload-types'
-import { getImageUrl } from '@/lib/getImageUrl'
+import { useTranslations } from 'next-intl'
 import { Button } from './ui/ButtonUI'
-import ArrowSvg from './icons/ArrowSvg'
 import ModalLayout from './Shared/Modal'
 import ContactForm from './Shared/Forms/ContactForm'
-import { useScopedI18n } from '../../_locales/client'
+import { CtaSection } from '@/payload-types'
+import ArrowSvg from './icons/ArrowSvg'
+import { getImageUrl } from '@/lib/getImageUrl'
 
 const ContactUsSection = (props: CtaSection) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const t = useScopedI18n('modalContact')
+  const t = useTranslations('modalContact')
 
   return (
     <section className="mx-auto mb-10">

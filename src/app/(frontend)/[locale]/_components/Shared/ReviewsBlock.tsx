@@ -1,13 +1,13 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Review } from '@/payload-types'
 import { Button } from '../ui/ButtonUI'
 import ModalLayout from './Modal'
 import ReviewForm from './Forms/ReviewForm'
 import { getImageUrl } from '@/lib/getImageUrl'
-import { useScopedI18n } from '@/app/(frontend)/_locales/client'
 
 interface ReviewsBlockProps {
   reviews: Review[]
@@ -15,7 +15,7 @@ interface ReviewsBlockProps {
 }
 
 export default function ReviewsBlockComp({ reviews, buttonLabel }: ReviewsBlockProps) {
-  const t = useScopedI18n('modal')
+  const t = useTranslations('modal')
   const [emblaRef] = useEmblaCarousel({ align: 'start', loop: false })
 
   const [isModalOpen, setIsModalOpen] = useState(false)

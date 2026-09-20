@@ -1,8 +1,8 @@
 'use client'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Button } from './ui/ButtonUI'
 import { cn } from '@/lib/utils'
-import { useScopedI18n } from '../../_locales/client'
 
 export interface CategoryItem {
   id: string
@@ -19,7 +19,7 @@ export default function ProjectTabs({ categories = [], currentCategory = '' }: P
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const t = useScopedI18n('projects')
+  const t = useTranslations('projects')
 
   const handleCategoryChange = (slug: string) => {
     const params = new URLSearchParams(searchParams.toString())

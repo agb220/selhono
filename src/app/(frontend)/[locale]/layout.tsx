@@ -1,8 +1,8 @@
 import React from 'react'
-import { setStaticParamsLocale } from 'next-international/server'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 import LayoutWrapper from './_components/Layout/LayoutWrapper'
-import { I18nProviderClient } from '../_locales/client'
-import { Locales } from '../_locales/types'
 
 interface LocaleLayoutProps {
   children: React.ReactNode
@@ -10,18 +10,21 @@ interface LocaleLayoutProps {
 }
 
 export async function generateStaticParams() {
-  return [{ locale: Locales.EN }, { locale: Locales.DE }]
+  return [{ locale: 'en' }, { locale: 'de' }]
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params
-  setStaticParamsLocale(locale)
 
-  console.log('🟢 [Layout] Rendering layout for locale:', locale)
+  if (!['en', 'de'].includes(locale)) {
+    notFound()
+  }
+
+  const messages = await getMessages()
 
   return (
-    <I18nProviderClient locale={locale}>
+    <NextIntlClientProvider messages={messages}>
       <LayoutWrapper>{children}</LayoutWrapper>
-    </I18nProviderClient>
+    </NextIntlClientProvider>
   )
 }

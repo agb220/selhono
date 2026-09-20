@@ -1,13 +1,13 @@
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { Button } from './ui/ButtonUI'
-import { getScopedI18n } from '../../_locales/server'
 
 interface ComingSoonProps {
   isHome?: boolean
 }
 
 export default async function ComingSoon({ isHome = false }: ComingSoonProps) {
-  const t = await getScopedI18n('commingSoon')
+  const t = await getTranslations('commingSoon')
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center pt-50 pb-20 xl:pt-30 max-h-screen">

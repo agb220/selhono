@@ -1,10 +1,10 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useTransition } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { usePathname, useRouter } from '@/i18n/routing'
 import NavLink from './NavLink'
-import { useChangeLocale, useScopedI18n } from '@/app/(frontend)/_locales/client'
-import { Locales } from '@/app/(frontend)/_locales/types'
+import { Locales } from '@/messages/types'
 
 interface MobileMenuProps {
   allPages: Array<{ id: string; title: string; slug: string }>
@@ -12,11 +12,13 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
-  const t = useScopedI18n('menu')
+  const t = useTranslations('menu')
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimated, setIsAnimated] = useState(false)
+
   const pathname = usePathname()
-  const changeLocale = useChangeLocale()
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
 
   useEffect(() => {
     if (isOpen) {
@@ -36,6 +38,14 @@ export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
     setTimeout(() => {
       setIsOpen(false)
     }, 450)
+  }
+
+  const handleLanguageChange = (nextLocale: string) => {
+    if (nextLocale === locale) return
+
+    startTransition(() => {
+      router.replace(pathname, { locale: nextLocale })
+    })
   }
 
   return (
@@ -104,12 +114,13 @@ export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
 
           <div className="pt-4 border-t border-border/60 flex flex-col gap-3 shrink-0">
             <span className="text-xs font-bold text-dark-200/40 uppercase tracking-widest">
-              {locale === Locales.DE ? t('lang') : t('lang')}
+              {t('lang')}
             </span>
             <div className="grid grid-cols-2 gap-3">
               <button
-                onClick={() => changeLocale(Locales.EN)}
-                className={`py-2.5 text-xs font-bold rounded-md uppercase tracking-wider transition-colors cursor-pointer border ${
+                disabled={isPending}
+                onClick={() => handleLanguageChange(Locales.EN)}
+                className={`py-2.5 text-xs font-bold rounded-md uppercase tracking-wider transition-colors cursor-pointer border disabled:opacity-50 ${
                   locale === Locales.EN
                     ? 'bg-gold-300/10 text-gold-300 border-gold-300/30'
                     : 'bg-gray-50 text-dark-200/70 border-transparent hover:bg-gray-100'
@@ -118,8 +129,9 @@ export default function MobileMenu({ allPages, locale }: MobileMenuProps) {
                 {Locales.EN}
               </button>
               <button
-                onClick={() => changeLocale(Locales.DE)}
-                className={`py-2.5 text-xs font-bold rounded-md uppercase tracking-wider transition-colors cursor-pointer border ${
+                disabled={isPending}
+                onClick={() => handleLanguageChange(Locales.DE)}
+                className={`py-2.5 text-xs font-bold rounded-md uppercase tracking-wider transition-colors cursor-pointer border disabled:opacity-50 ${
                   locale === Locales.DE
                     ? 'bg-gold-300/10 text-gold-300 border-gold-300/30'
                     : 'bg-gray-50 text-dark-200/70 border-transparent hover:bg-gray-100'

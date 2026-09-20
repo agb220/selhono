@@ -1,12 +1,11 @@
 import React from 'react'
 import { getPayload as getCachedPayload } from '@/lib/payload'
-import { setStaticParamsLocale } from 'next-international/server'
 import { BlogCategory, Post } from '@/payload-types'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
 import BlogContent from '../../_components/BlogContent'
 import ContactFormInlineSection from '../../_components/ContactFormInlineSection'
-import { Locales } from '@/app/(frontend)/_locales/types'
+import { Locales } from '@/messages/types'
 
 export const dynamic = 'force-dynamic'
 
@@ -33,8 +32,6 @@ export async function generateStaticParams() {
 
 export default async function SingleBlogPage({ params }: BlogSinglePageProps) {
   const { slug, locale } = await params
-
-  setStaticParamsLocale(locale)
 
   const payload = await getCachedPayload()
 

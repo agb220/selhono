@@ -1,16 +1,16 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Key } from 'react'
+import { getLocale } from 'next-intl/server'
 import NavLink from '../ui/MenuComp/NavLink'
 import LanguageSwitcher from '../ui/MenuComp/LanguageSwitcher'
 import MobileMenu from '../ui/MenuComp/MobileMenu'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { getCachedGlobal } from '@/lib/getCachedGlobal'
-import { getCurrentLocale } from '@/app/(frontend)/_locales/server'
-import { Locales } from '@/app/(frontend)/_locales/types'
+import { Locales } from '@/messages/types'
 
 export default async function Header() {
-  const locale = await getCurrentLocale()
+  const locale = await getLocale()
 
   const [logoSettings, mainMenu] = await Promise.all([
     getCachedGlobal('logo-settings', locale),
@@ -82,7 +82,7 @@ export default async function Header() {
               return <NavLink key={page.id} href={pageHref} title={page.title} />
             })}
           </nav>
-          <LanguageSwitcher currentLocale={locale} />
+          <LanguageSwitcher />
         </div>
         <div className={hasMorePages ? 'block' : 'block xl:hidden'}>
           <MobileMenu allPages={allHeaderPages} locale={locale} />

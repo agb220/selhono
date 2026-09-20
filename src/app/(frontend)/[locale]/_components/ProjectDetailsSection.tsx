@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import useEmblaCarousel from 'embla-carousel-react'
 import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
@@ -11,14 +12,13 @@ import SearchSvg from './icons/SearchSvg'
 import { ArrowShortSvg } from './icons'
 import { Button } from './ui/ButtonUI'
 import { Title } from './Shared/Title'
-import { useScopedI18n } from '../../_locales/client'
 
 interface ProjectDetailsSectionProps {
   project: Project
 }
 
 export default function ProjectDetailsSection({ project }: ProjectDetailsSectionProps) {
-  const t = useScopedI18n('projectDetail')
+  const t = useTranslations('projectDetail')
   const { title, category, mainImage, gallery, projectDetails, description } = project
 
   const imagesList: Array<{ url: string; alt: string }> = []

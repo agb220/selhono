@@ -1,5 +1,4 @@
 import { getPayload } from 'payload'
-import { setStaticParamsLocale } from 'next-international/server'
 import config from '@/payload.config'
 import { getCachedGlobal } from '@/lib/getCachedGlobal'
 import { HomePage, Post, Project, ProjectsSectionBlockType } from '@/payload-types'
@@ -16,7 +15,7 @@ import StatsSection from './_components/StatsSection'
 import BlogsSection from './_components/BlogsSection'
 import PricingSection from './_components/PricingSection'
 import ContactUsSection from './_components/ContactUsSection'
-import { Locales } from '../_locales/types'
+import { Locales } from '../../../messages/types'
 
 export const revalidate = 3600
 
@@ -26,9 +25,6 @@ export default async function HomePageComponent({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  setStaticParamsLocale(locale)
-
-  console.log('📄 [Page] Rendering Home Page for locale:', locale)
 
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })

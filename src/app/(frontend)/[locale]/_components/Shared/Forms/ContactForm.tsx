@@ -1,10 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { toast as sonnerToast } from 'sonner'
+import { useTranslations } from 'next-intl'
 import { Button } from '../../ui/ButtonUI'
-
 import Input from '../Input'
-import { useScopedI18n } from '@/app/(frontend)/_locales/client'
 import { createContactRequestAction } from '@/app/(frontend)/_actions/contact'
 
 interface ContactFormProps {
@@ -18,7 +17,7 @@ interface ContactFormErrors {
 }
 
 export default function ContactForm({ onSuccess }: ContactFormProps) {
-  const t = useScopedI18n('modalContact')
+  const t = useTranslations('modalContact')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [name, setName] = useState('')

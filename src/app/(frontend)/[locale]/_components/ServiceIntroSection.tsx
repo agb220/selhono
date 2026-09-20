@@ -1,11 +1,11 @@
 'use client'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { ServiceIntroBlockType } from '@/payload-types'
-import { useI18n } from '../../_locales/client'
 
 export default function ServiceIntroSection({ title, subtitle, content }: ServiceIntroBlockType) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const t = useI18n()
+  const t = useTranslations()
 
   return (
     <section className="pb-16 md:pb-24 container">

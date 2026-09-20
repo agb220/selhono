@@ -1,10 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { toast as sonnerToast } from 'sonner'
+import { useTranslations } from 'next-intl'
 import { Button } from '../../ui/ButtonUI'
 import Input from '../Input'
 import { createReviewOnlyAction } from '@/app/(frontend)/_actions/reviews'
-import { useScopedI18n } from '@/app/(frontend)/_locales/client'
 
 interface ReviewFormProps {
   onSuccess: () => void
@@ -17,7 +17,7 @@ interface FormErrors {
 }
 
 export default function ReviewForm({ onSuccess }: ReviewFormProps) {
-  const t = useScopedI18n('modal')
+  const t = useTranslations('modal')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
   const [fileName, setFileName] = useState<string | null>(null)

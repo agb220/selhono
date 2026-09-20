@@ -1,12 +1,10 @@
 import React from 'react'
 import { getPayload as getCachedPayload } from '@/lib/payload'
-
-import { setStaticParamsLocale } from 'next-international/server'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
 import ProjectDetailsSection from '../../_components/ProjectDetailsSection'
 import ContactFormInlineSection from '../../_components/ContactFormInlineSection'
-import { Locales } from '@/app/(frontend)/_locales/types'
+import { Locales } from '@/messages/types'
 
 export const dynamic = 'force-dynamic'
 
@@ -33,9 +31,6 @@ export async function generateStaticParams() {
 
 export default async function SingleProjectPage({ params }: ServicePageProps) {
   const { slug, locale } = await params
-
-  setStaticParamsLocale(locale)
-
   const payload = await getCachedPayload()
 
   const projectData = await payload.find({

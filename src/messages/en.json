@@ -1,0 +1,74 @@
+{
+  "menu": {
+    "home": "Home",
+    "lang": "Language",
+    "navTitle": "Navigation Menu"
+  },
+  "commingSoon": {
+    "title": "Coming Soon",
+    "desc": "This page is currently under development. Please check back soon!",
+    "titleBtn": "Back to Home"
+  },
+  "modal": {
+    "title": "Leave a Review",
+    "desc": "Share your experience with us. Your review will be moderated before publishing.",
+    "inputName": "Name",
+    "inputLocation": "Location",
+    "avatarInput": "Foto (optional)",
+    "fileBtn": "Choose File",
+    "fileNoFile": "No file chosen",
+    "inputReview": "Your Review",
+    "placeholderReview": "Max. 180 symbols",
+    "btnTitle": "Submit Review",
+    "successTitle": "Thank you!",
+    "successDesc": "Your review will appear on the website soon.",
+    "errorTitle": "Error",
+    "errorDesc": "Something went wrong. Please try again.",
+    "uploadingImage": "Uploading photo...",
+    "isSubmitting": "Saving review..."
+  },
+  "modalContact": {
+    "title": "Get in Touch",
+    "description": "Leave your details and we will contact you shortly.",
+    "inputName": "Full Name",
+    "inputEmail": "Email",
+    "inputMessage": "Message",
+    "btnTitle": "Send",
+    "successTitle": "Thank you!",
+    "successDesc": "We will contact you shortly.",
+    "errorTitle": "Error",
+    "errorDesc": "Something went wrong. Please try again."
+  },
+  "serviceIntro": {
+    "btnMore": "Show More",
+    "btnLess": "Show Less"
+  },
+  "payments": {
+    "title": "Payment Successful!",
+    "desc": "Thank you for your order. We have sent a confirmation email to",
+    "titleBtn": "Back to Home"
+  },
+  "projects": {
+    "all": "All Categories",
+    "noProject": "No projects found."
+  },
+  "projectDetail": {
+    "clientname": "Client",
+    "category": "Category",
+    "tags": "Tags",
+    "date": "Date"
+  },
+  "posts": {
+    "postTitle": "Posts",
+    "search": "Searching...",
+    "notFound": "No matches found",
+    "input": "Search",
+    "notCategory": "No posts found in category:",
+    "btnTitle": "View All"
+  },
+  "blog": {
+    "last": "Latest News",
+    "categories": "Categories",
+    "tags": "Tags"
+  }
+}

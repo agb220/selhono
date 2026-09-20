@@ -1,6 +1,4 @@
 import { getPayload as getCachedPayload } from '@/lib/payload'
-import { setStaticParamsLocale } from 'next-international/server'
-import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@/payload-types'
 import ComingSoon from '../_components/ComingSoon'
 import MainHeroSection from '../_components/MainHeroSection'
 import HeroScrollSection from '../_components/HeroScrollSection'
@@ -19,7 +17,8 @@ import ContactUsSection from '../_components/ContactUsSection'
 import ProcessStepsSection from '../_components/ProcessStepsSection'
 import PricingSection from '../_components/PricingSection'
 import BlogsSearchSection from '../_components/BlogsSearchSection'
-import { Locales } from '../../_locales/types'
+import { Locales } from '../../../../messages/types'
+import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@/payload-types'
 
 interface PageProps {
   params: Promise<{
@@ -60,8 +59,6 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
   const { slug, locale } = await params
   const { category: selectedCategory, page: currentPageParam, q: searchQuery } = await searchParams
   const pageNumber = Number(currentPageParam) || 1
-
-  setStaticParamsLocale(locale)
 
   const payload = await getCachedPayload()
 

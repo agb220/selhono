@@ -1,5 +1,5 @@
 import { unstable_cache } from 'next/cache'
-import { Locales } from '@/app/(frontend)/_locales/types'
+import { Locales } from '@/messages/types'
 import { getPayload } from './payload'
 
 export const getCachedGlobal = async (slug: string, locale: string, depth = 1) => {
