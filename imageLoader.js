@@ -1,5 +1,5 @@
-const imageLoader = ({ src }) => {
-  return src; // Return the original URL without processing
-};
+const imageLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
 
-export default imageLoader;
+export default imageLoader

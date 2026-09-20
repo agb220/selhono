@@ -1392,9 +1392,7 @@ export interface MainMenu {
  */
 export interface LogoSetting {
   id: string;
-  logoType?: ('text' | 'image') | null;
-  logoText?: string | null;
-  logoImage?: (string | null) | Media;
+  logoImage: string | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1594,8 +1592,6 @@ export interface MainMenuSelect<T extends boolean = true> {
  * via the `definition` "logo-settings_select".
  */
 export interface LogoSettingsSelect<T extends boolean = true> {
-  logoType?: T;
-  logoText?: T;
   logoImage?: T;
   updatedAt?: T;
   createdAt?: T;

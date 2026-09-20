@@ -1,18 +1,21 @@
-import { Button } from '@/app/(frontend)/_components/ui/ButtonUI'
-import { getScopedI18n } from '@/app/(frontend)/_locales/server'
+import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import Stripe from 'stripe'
+import { Button } from '../../_components/ui/ButtonUI'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2023-10-16' as any,
 })
 
 interface SuccessPageProps {
+  params: Promise<{ locale: string }>
   searchParams: Promise<{ session_id?: string }>
 }
 
-export default async function PaymentSuccessPage({ searchParams }: SuccessPageProps) {
-  const t = await getScopedI18n('payments')
+export default async function PaymentSuccessPage({ params, searchParams }: SuccessPageProps) {
+  const { locale } = await params
+  const t = await getTranslations('payments')
+
   const { session_id } = await searchParams
   let customerEmail = ''
 

@@ -1,0 +1,74 @@
+{
+  "menu": {
+    "home": "Startseite",
+    "lang": "Sprache",
+    "navTitle": "Navigationsmenü"
+  },
+  "commingSoon": {
+    "title": "Demnächst verfügbar",
+    "desc": "Diese Seite befindet sich noch in der Entwicklung. Schauen Sie bald wieder vorbei!",
+    "titleBtn": "Zur Startseite"
+  },
+  "modal": {
+    "title": "Bewertung schreiben",
+    "desc": "Teilen Sie Ihre Erfahrung. Jede Bewertung wird vor der Veröffentlichung geprüft.",
+    "inputName": "Name",
+    "inputLocation": "Standort",
+    "avatarInput": "Foto hochladen (optional)",
+    "fileBtn": "Datei auswählen",
+    "fileNoFile": "Keine Datei ausgewählt",
+    "inputReview": "Ihre Bewertung",
+    "placeholderReview": "Max. 180 Zeichen",
+    "btnTitle": "Senden",
+    "successTitle": "Vielen Dank!",
+    "successDesc": "Ihre Bewertung wird bald auf der Website erscheinen.",
+    "errorTitle": "Fehler",
+    "errorDesc": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
+    "uploadingImage": "Wird hochgeladen...",
+    "isSubmitting": "Wird gespeichert..."
+  },
+  "modalContact": {
+    "title": "Kontaktieren Sie uns",
+    "description": "Hinterlassen Sie Ihre Kontaktdaten, wir melden uns kürze bei Ihnen.",
+    "inputName": "Vollständiger Name",
+    "inputEmail": "Email",
+    "inputMessage": "Nachricht",
+    "btnTitle": "Senden",
+    "successTitle": "Vielen Dank!",
+    "successDesc": "Wir werden uns kürze bei Ihnen melden.",
+    "errorTitle": "Fehler",
+    "errorDesc": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "serviceIntro": {
+    "btnMore": "Mehr anzeigen",
+    "btnLess": "Weniger anzeigen"
+  },
+  "payments": {
+    "title": "Zahlung erfolgreich!",
+    "desc": "Vielen Dank für Ihre Bestellung. Wir haben eine Bestätigungs-E-Mail gesendet an",
+    "titleBtn": "Zurück zur Startseite"
+  },
+  "projects": {
+    "all": "Alle Kategorien",
+    "noProject": "Keine Projekte gefunden."
+  },
+  "projectDetail": {
+    "clientname": "Kunde",
+    "category": "Kategorie",
+    "tags": "Tags",
+    "date": "Datum"
+  },
+  "posts": {
+    "postTitle": "Beiträge",
+    "search": "Suchen...",
+    "notFound": "Keine Treffer gefunden",
+    "input": "Suche",
+    "notCategory": "Keine Beiträge gefunden in der Kategorie:",
+    "btnTitle": "Alle anzeigen"
+  },
+  "blog": {
+    "last": "Aktuelle Nachrichten",
+    "categories": "Kategorien",
+    "tags": "Tags"
+  }
+}

@@ -7,7 +7,7 @@ export const metadata = {
   description: "SELHONO - Let's make your home beautiful together",
   title: 'SELHONO',
   icons: {
-    icon: '../(frontend)/favicon.ico',
+    icon: '/favicon.ico',
   },
 }
 
@@ -35,7 +35,6 @@ export default function FrontendLayout({ children }: FrontendLayoutProps) {
       <head></head>
       <body>
         {children}
-
         <Toaster
           position="bottom-right"
           toastOptions={{
