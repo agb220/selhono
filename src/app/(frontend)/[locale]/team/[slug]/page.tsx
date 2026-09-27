@@ -1,15 +1,15 @@
 import React from 'react'
 import { getPayload as getCachedPayload } from '@/lib/payload'
-import { BlogCategory, Post } from '@/payload-types'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
-import BlogContent from '../../_components/BlogContent'
 import ContactFormInlineSection from '../../_components/ContactFormInlineSection'
 import { Locales } from '@/messages/types'
+import TeamDetailSection from '../../_components/TeamDetailSection'
+import TeamSection from '../../_components/TeamSection'
 
 export const dynamic = 'force-dynamic'
 
-interface BlogSinglePageProps {
+interface TeamPageProps {
   params: Promise<{
     locale: string
     slug: string
@@ -18,25 +18,24 @@ interface BlogSinglePageProps {
 
 export async function generateStaticParams() {
   const payload = await getCachedPayload()
-  const posts = await payload.find({ collection: 'posts', limit: 100, depth: 0 })
-  const locales = [Locales.DE, Locales.EN]
+  const team = await payload.find({ collection: 'team', limit: 100, depth: 0 })
+  const locales = ['de', 'en']
 
-  return posts.docs.flatMap((post: any) =>
+  return team.docs.flatMap((item: any) =>
     locales.map((locale: string) => ({
       locale: locale as Locales,
       fallbackLocale: Locales.EN,
-      slug: post.slug,
+      slug: item.slug,
     })),
   )
 }
 
-export default async function SingleBlogPage({ params }: BlogSinglePageProps) {
+export default async function SingleTeamPage({ params }: TeamPageProps) {
   const { slug, locale } = await params
-
   const payload = await getCachedPayload()
 
-  const postData = await payload.find({
-    collection: 'posts',
+  const teamData = await payload.find({
+    collection: 'team',
     where: {
       slug: {
         equals: slug,
@@ -47,36 +46,42 @@ export default async function SingleBlogPage({ params }: BlogSinglePageProps) {
     depth: 0,
   })
 
-  const rawPost = postData.docs[0]
+  const rawTeam = teamData.docs[0]
 
-  // if (!rawPost) {
+  // if (!rawProject) {
   //   return notFound()
   // }
 
-  const [post, latestPostsData, categoriesData] = await Promise.all([
+  const [team] = await Promise.all([
     payload.findByID({
-      collection: 'posts',
-      id: rawPost.id,
+      collection: 'team',
+      id: rawTeam.id,
       locale: locale as Locales,
       fallbackLocale: Locales.EN,
       depth: 3,
     }),
-    payload.find({
-      collection: 'posts',
-      limit: 3,
-      sort: '-publishedDate',
-      locale: locale as Locales,
-      fallbackLocale: Locales.EN,
-    }),
-    payload.find({
-      collection: 'categories',
-      limit: 10,
-      locale: locale as Locales,
-      fallbackLocale: Locales.EN,
-    }),
   ])
 
-  const layout = (post as any).layout || []
+  const layout = (team as any).layout || []
+
+  const hasTeamSection = layout.some((s: any) => s.blockType === 'team-block')
+  let teamMembers: any[] = []
+
+  if (hasTeamSection) {
+    const allMembersData = await payload.find({
+      collection: 'team',
+      where: {
+        id: {
+          not_equals: rawTeam.id,
+        },
+      },
+      locale: locale as Locales,
+      fallbackLocale: Locales.EN,
+      depth: 2,
+      limit: 100,
+    })
+    teamMembers = allMembersData.docs
+  }
 
   return (
     <main>
@@ -89,13 +94,12 @@ export default async function SingleBlogPage({ params }: BlogSinglePageProps) {
               return (
                 <React.Fragment key={idx}>
                   <HeroSection {...section} />
-                  <BlogContent
-                    post={post as Post}
-                    latestPosts={latestPostsData.docs as Post[]}
-                    categories={categoriesData.docs as BlogCategory[]}
-                  />
+                  <TeamDetailSection member={team} />
                 </React.Fragment>
               )
+
+            case 'team-block':
+              return <TeamSection key={idx} {...section} members={teamMembers} viewMode="scroll" />
 
             case 'contact-form-inline-block':
               return <ContactFormInlineSection key={idx} {...section} />
