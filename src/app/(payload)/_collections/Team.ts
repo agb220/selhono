@@ -1,3 +1,4 @@
+import { formatSlug } from '@/lib/hooks/formatSlug'
 import type { CollectionConfig } from 'payload'
 
 export const Team: CollectionConfig = {
@@ -5,6 +6,7 @@ export const Team: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'role', 'location'],
+    group: 'Team',
   },
   fields: [
     {
@@ -21,18 +23,7 @@ export const Team: CollectionConfig = {
         position: 'sidebar',
       },
       hooks: {
-        beforeValidate: [
-          ({ value, operation, data }) => {
-            if ((operation === 'create' || operation === 'update') && !value && data?.name) {
-              return data.name
-                .toLowerCase()
-                .trim()
-                .replace(/ /g, '-')
-                .replace(/[^\w-]+/g, '')
-            }
-            return value
-          },
-        ],
+        beforeValidate: [formatSlug('name')],
       },
     },
     {
@@ -63,14 +54,18 @@ export const Team: CollectionConfig = {
           required: true,
           options: [
             { label: 'Facebook', value: 'facebook' },
-            { label: 'Twitter / X', value: 'twitter' },
-            { label: 'LinkedIn', value: 'linkedin' },
-            { label: 'Instagram', value: 'instagram' },
+            { label: 'X', value: 'X' },
           ],
         },
         {
           name: 'url',
           type: 'text',
+          required: true,
+        },
+        {
+          name: 'icon',
+          type: 'upload',
+          relationTo: 'media',
           required: true,
         },
       ],

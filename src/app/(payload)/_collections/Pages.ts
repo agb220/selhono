@@ -17,6 +17,7 @@ import { ContactFormInlineBlock } from '../_blocks/CTAInlineBlock'
 import { ProcessStepsBlock } from '../_blocks/ProcessStepsBlock'
 import { PricingBlock } from '../_blocks/PricingBlock'
 import { BlogSearchSection } from '../_blocks/BlogSearchBlock'
+import { TeamBlock } from '../_blocks/TeamBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -79,6 +80,7 @@ export const Pages: CollectionConfig = {
         ProcessStepsBlock,
         PricingBlock,
         BlogSearchSection,
+        TeamBlock,
       ],
     },
   ],

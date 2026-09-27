@@ -17,6 +17,7 @@ import ContactUsSection from '../_components/ContactUsSection'
 import ProcessStepsSection from '../_components/ProcessStepsSection'
 import PricingSection from '../_components/PricingSection'
 import BlogsSearchSection from '../_components/BlogsSearchSection'
+import TeamSection from '../_components/TeamSection'
 import { Locales } from '../../../../messages/types'
 import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@/payload-types'
 
@@ -201,8 +202,22 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
     }
   }
 
+  const hasTeamSection = layout.some((s: any) => s.blockType === 'team-block')
+  let teamMembers: any[] = []
+
+  if (hasTeamSection) {
+    const teamRes = await payload.find({
+      collection: 'team',
+      limit: 100,
+      locale: locale as Locales,
+      fallbackLocale: Locales.EN,
+      overrideAccess: true,
+      sort: 'createdAt',
+    })
+    teamMembers = teamRes.docs
+  }
+
   return (
-    // <LayoutWrapper>
     <main>
       {layout.length === 0 ? (
         <ComingSoon isHome={false} />
@@ -283,12 +298,14 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
             case 'blog-search-section':
               return <BlogsSearchSection key={idx} {...section} latestPost={latestPostItem} />
 
+            case 'team-block':
+              return <TeamSection key={idx} {...section} members={teamMembers} />
+
             default:
               return null
           }
         })
       )}
     </main>
-    // </LayoutWrapper>
   )
 }

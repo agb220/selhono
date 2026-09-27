@@ -17,16 +17,6 @@ export default async function Header() {
     getCachedGlobal('main-menu', locale),
   ])
 
-  // const MENU_MOCK = [
-  //   { id: '1', title: locale === Locales.DE ? 'Über uns' : 'About Us', slug: 'about' },
-  //   { id: '2', title: locale === Locales.DE ? 'Dienstleistungen' : 'Services', slug: 'services' },
-  //   { id: '3', title: locale === Locales.DE ? 'Projekte' : 'Projects', slug: 'projects' },
-  //   { id: '4', title: locale === Locales.DE ? 'Galerie' : 'Gallery', slug: 'gallery' },
-  //   { id: '5', title: locale === Locales.DE ? 'Blog' : 'Blog', slug: 'blog' },
-  //   { id: '6', title: locale === Locales.DE ? 'Preise' : 'Pricing', slug: 'pricing' },
-  //   { id: '7', title: locale === Locales.DE ? 'Kontakt' : 'Contact', slug: 'contact' },
-  // ]
-
   const dynamicItems =
     (mainMenu as any)?.items?.map((pageData: any) => {
       return {
@@ -45,7 +35,7 @@ export default async function Header() {
   const allHeaderPages = [homePage, ...dynamicItems]
 
   const MAX_VISIBLE_ITEMS = 6
-  const shouldSlice = allHeaderPages.length > MAX_VISIBLE_ITEMS + 1
+  const shouldSlice = allHeaderPages.length > MAX_VISIBLE_ITEMS
 
   const visiblePages = shouldSlice ? allHeaderPages.slice(0, MAX_VISIBLE_ITEMS) : allHeaderPages
   const hasMorePages = shouldSlice ? allHeaderPages.slice(MAX_VISIBLE_ITEMS) : []
