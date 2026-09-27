@@ -686,6 +686,9 @@ export interface TeamBlockType {
    * Optional section title
    */
   title?: string | null;
+  button?: {
+    label?: string | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'team-block';
@@ -758,6 +761,49 @@ export interface Team {
   photo: string | Media;
   role: string;
   location: string;
+  contacts?: {
+    email?: string | null;
+    phone?: string | null;
+    website?: string | null;
+  };
+  shortDescription?: string | null;
+  biography?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  skillsBlock?: {
+    title?: string | null;
+    description?: string | null;
+    items?:
+      | {
+          label: string;
+          percentage: number;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  faqBlock?: {
+    title?: string | null;
+    description?: string | null;
+    items?:
+      | {
+          question: string;
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   socials?:
     | {
         platform: 'facebook' | 'X';
@@ -766,6 +812,7 @@ export interface Team {
         id?: string | null;
       }[]
     | null;
+  layout?: (HeroBlockType | TeamBlockType | ContactFormInlineBlockType)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1154,6 +1201,11 @@ export interface BlogSearchBlockTypeSelect<T extends boolean = true> {
  */
 export interface TeamBlockTypeSelect<T extends boolean = true> {
   title?: T;
+  button?:
+    | T
+    | {
+        label?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1370,6 +1422,41 @@ export interface TeamSelect<T extends boolean = true> {
   photo?: T;
   role?: T;
   location?: T;
+  contacts?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        website?: T;
+      };
+  shortDescription?: T;
+  biography?: T;
+  skillsBlock?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              label?: T;
+              percentage?: T;
+              id?: T;
+            };
+      };
+  faqBlock?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+      };
   socials?:
     | T
     | {
@@ -1377,6 +1464,13 @@ export interface TeamSelect<T extends boolean = true> {
         url?: T;
         icon?: T;
         id?: T;
+      };
+  layout?:
+    | T
+    | {
+        'hero-block'?: T | HeroBlockTypeSelect<T>;
+        'team-block'?: T | TeamBlockTypeSelect<T>;
+        'contact-form-inline-block'?: T | ContactFormInlineBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;

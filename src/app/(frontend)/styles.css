@@ -114,7 +114,7 @@ svg {
   @apply font-dm text-[85px] leading-tight font-normal;
 }
 
-.text-number-big {
+@utility text-number-big {
   @apply font-dm text-[250px] leading-tight font-normal;
 }
 
@@ -126,11 +126,11 @@ svg {
   @apply font-jost text-base leading-normal font-normal;
 }
 
-.text-medium-bold {
+@utility text-medium-bold {
   @apply font-jost text-2xl leading-normal font-bold;
 }
 
-.button {
+@utility button {
   @apply font-jost text-lg leading-tight font-medium;
 }
 
@@ -138,11 +138,11 @@ svg {
   @apply font-jost text-lg leading-tight font-semibold;
 }
 
-.button-small {
+@utility button-small {
   @apply font-jost text-[16px] leading-normal font-medium;
 }
 
-.link {
+@utility link {
   @apply font-jost text-xl leading-tight font-medium;
 }
 
@@ -150,11 +150,11 @@ svg {
   @apply font-jost text-xl leading-normal font-normal;
 }
 
-.input {
+@utility input {
   @apply font-jost text-[30px] leading-normal font-normal;
 }
 
-.input-medium {
+@utility input-medium {
   @apply font-jost text-[22px] leading-normal font-medium;
 }
 

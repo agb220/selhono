@@ -25,5 +25,16 @@ export const TeamBlock: Block = {
         description: 'Optional section title',
       },
     },
+    {
+      name: 'button',
+      type: 'group',
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          localized: true,
+        },
+      ],
+    },
   ],
 }
