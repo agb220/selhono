@@ -1,10 +1,18 @@
 import { GlobalConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const MainMenu: GlobalConfig = {
   slug: 'main-menu',
   label: 'Main menu',
   admin: {
     group: 'Settings',
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        revalidatePath('/', 'layout')
+      },
+    ],
   },
   fields: [
     {

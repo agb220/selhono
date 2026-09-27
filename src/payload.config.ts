@@ -29,6 +29,7 @@ import { ContactRequests } from './app/(payload)/_collections/ContactRequests'
 import { Services } from './app/(payload)/_collections/Services'
 import { PricingGlobal } from './app/(payload)/_globals/Pricing'
 import { Payments } from './app/(payload)/_collections/Payments'
+import { Team } from './app/(payload)/_collections/Team'
 
 sharp.concurrency(1)
 sharp.cache(false)
@@ -56,6 +57,7 @@ export default buildConfig({
     Posts,
     ContactRequests,
     Payments,
+    Team,
   ],
   globals: [
     HomePage,
@@ -103,7 +105,7 @@ export default buildConfig({
   localization: {
     locales: ['en', 'de'],
     defaultLocale: 'en',
-    fallback: true,
+    fallback: false,
   },
   i18n: {
     supportedLanguages: { en, de },

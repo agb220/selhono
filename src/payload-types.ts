@@ -78,6 +78,7 @@ export interface Config {
     posts: Post;
     'contact-requests': ContactRequest;
     payments: Payment;
+    team: Team;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -96,6 +97,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     'contact-requests': ContactRequestsSelect<false> | ContactRequestsSelect<true>;
     payments: PaymentsSelect<false> | PaymentsSelect<true>;
+    team: TeamSelect<false> | TeamSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -236,6 +238,7 @@ export interface Page {
         | ProcessStepsBlockType
         | PricingBlockType
         | BlogSearchBlockType
+        | TeamBlockType
       )[]
     | null;
   updatedAt: string;
@@ -676,6 +679,19 @@ export interface BlogSearchBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlockType".
+ */
+export interface TeamBlockType {
+  /**
+   * Optional section title
+   */
+  title?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'team-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -728,6 +744,28 @@ export interface Payment {
   periodEnd: string;
   stripeCustomerId?: string | null;
   stripeSubscriptionId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team".
+ */
+export interface Team {
+  id: string;
+  name: string;
+  slug: string;
+  photo: string | Media;
+  role: string;
+  location: string;
+  socials?:
+    | {
+        platform: 'facebook' | 'X';
+        url: string;
+        icon: string | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -798,6 +836,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'payments';
         value: string | Payment;
+      } | null)
+    | ({
+        relationTo: 'team';
+        value: string | Team;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -908,6 +950,7 @@ export interface PagesSelect<T extends boolean = true> {
         'process-steps-block'?: T | ProcessStepsBlockTypeSelect<T>;
         'pricing-block'?: T | PricingBlockTypeSelect<T>;
         'blog-search-section'?: T | BlogSearchBlockTypeSelect<T>;
+        'team-block'?: T | TeamBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1101,6 +1144,15 @@ export interface PricingBlockTypeSelect<T extends boolean = true> {
  * via the `definition` "BlogSearchBlockType_select".
  */
 export interface BlogSearchBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlockType_select".
+ */
+export interface TeamBlockTypeSelect<T extends boolean = true> {
   title?: T;
   id?: T;
   blockName?: T;
@@ -1305,6 +1357,27 @@ export interface PaymentsSelect<T extends boolean = true> {
   periodEnd?: T;
   stripeCustomerId?: T;
   stripeSubscriptionId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team_select".
+ */
+export interface TeamSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  photo?: T;
+  role?: T;
+  location?: T;
+  socials?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

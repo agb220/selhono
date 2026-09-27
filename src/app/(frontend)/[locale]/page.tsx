@@ -53,31 +53,6 @@ export default async function HomePageComponent({
     getCachedGlobal('pricing-global', locale),
   ])
 
-  // const [homePageData, promoData, reviewsData, marqueeData, statsData, ctaData, pricingData] =
-  //   await Promise.all([
-  //     payload.findGlobal({ slug: 'home-page', locale: locale as any, depth: 2 }),
-  //     payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
-  //     payload.findGlobal({
-  //       slug: 'reviews-block',
-  //       locale: locale as any,
-  //       fallbackLocale: 'en',
-  //       depth: 2,
-  //     }),
-  //     payload.findGlobal({ slug: 'logo-marquee', locale: locale as any, fallbackLocale: 'en' }),
-  //     payload.findGlobal({ slug: 'company-stats', locale: locale as any, depth: 1 }),
-  //     payload.findGlobal({
-  //       slug: 'cta-section',
-  //       locale: locale as any,
-  //       fallbackLocale: 'en',
-  //       depth: 1,
-  //     }),
-  //     payload.findGlobal({ slug: 'pricing-global', locale: locale as any, depth: 1 }),
-  //   ])
-
-  //const layout = homePageData.layout || []
-
-  // const projectSectionConfig = layout.find((s) => s.blockType === 'projects-section') as
-  //   ProjectsSectionBlockType | undefined
   let projectItems: Project[] = []
 
   if (projectSectionConfig) {
