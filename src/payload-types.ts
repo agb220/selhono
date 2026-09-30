@@ -119,6 +119,7 @@ export interface Config {
     'company-stats': CompanyStat;
     'cta-section': CtaSection;
     'pricing-global': PricingGlobal;
+    contacts: Contact;
   };
   globalsSelect: {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
@@ -132,6 +133,7 @@ export interface Config {
     'company-stats': CompanyStatsSelect<false> | CompanyStatsSelect<true>;
     'cta-section': CtaSectionSelect<false> | CtaSectionSelect<true>;
     'pricing-global': PricingGlobalSelect<false> | PricingGlobalSelect<true>;
+    contacts: ContactsSelect<false> | ContactsSelect<true>;
   };
   locale: 'en' | 'de';
   widgets: {
@@ -239,6 +241,7 @@ export interface Page {
         | PricingBlockType
         | BlogSearchBlockType
         | TeamBlockType
+        | FormWithContactBlockType
       )[]
     | null;
   updatedAt: string;
@@ -695,6 +698,19 @@ export interface TeamBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormWithContactBlockType".
+ */
+export interface FormWithContactBlockType {
+  /**
+   * Section title
+   */
+  title?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'form-with-contact-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -998,6 +1014,7 @@ export interface PagesSelect<T extends boolean = true> {
         'pricing-block'?: T | PricingBlockTypeSelect<T>;
         'blog-search-section'?: T | BlogSearchBlockTypeSelect<T>;
         'team-block'?: T | TeamBlockTypeSelect<T>;
+        'form-with-contact-block'?: T | FormWithContactBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1206,6 +1223,15 @@ export interface TeamBlockTypeSelect<T extends boolean = true> {
     | {
         label?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormWithContactBlockType_select".
+ */
+export interface FormWithContactBlockTypeSelect<T extends boolean = true> {
+  title?: T;
   id?: T;
   blockName?: T;
 }
@@ -1721,6 +1747,22 @@ export interface PricingGlobal {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts".
+ */
+export interface Contact {
+  id: string;
+  email?: string | null;
+  phone?: string | null;
+  website?: string | null;
+  /**
+   * Вставте значення src з Google Maps Embed iframe
+   */
+  mapEmbedUrl?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
@@ -1916,6 +1958,19 @@ export interface PricingGlobalSelect<T extends boolean = true> {
         buttonText?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts_select".
+ */
+export interface ContactsSelect<T extends boolean = true> {
+  email?: T;
+  phone?: T;
+  website?: T;
+  mapEmbedUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

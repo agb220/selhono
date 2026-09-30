@@ -1,3 +1,4 @@
+import React from 'react'
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import ComingSoon from '../_components/ComingSoon'
 import MainHeroSection from '../_components/MainHeroSection'
@@ -20,6 +21,8 @@ import BlogsSearchSection from '../_components/BlogsSearchSection'
 import TeamSection from '../_components/TeamSection'
 import { Locales } from '../../../../messages/types'
 import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@/payload-types'
+import FormWithContactSection from '../_components/FormWithContactSection'
+import GoogleMapEmbed from '../_components/GoogleMapEmbed'
 
 interface PageProps {
   params: Promise<{
@@ -81,22 +84,33 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
   //   return notFound()
   // }
 
-  const [page, promoData, reviewsData, marqueeData, statsData, ctaData, pricingData] =
-    await Promise.all([
-      payload.findByID({
-        collection: 'pages',
-        id: rawPage.id,
-        locale: locale as Locales,
-        fallbackLocale: Locales.EN,
-        depth: 3,
-      }),
-      payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
-      payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
-      payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
-      payload.findGlobal({ slug: 'company-stats', locale: locale as any, depth: 1 }),
-      payload.findGlobal({ slug: 'cta-section', locale: locale as any, depth: 1 }),
-      payload.findGlobal({ slug: 'pricing-global', locale: locale as any, depth: 1 }),
-    ])
+  const [
+    page,
+    promoData,
+    reviewsData,
+    marqueeData,
+    statsData,
+    ctaData,
+    pricingData,
+    contactsData,
+    socialLinksData,
+  ] = await Promise.all([
+    payload.findByID({
+      collection: 'pages',
+      id: rawPage.id,
+      locale: locale as Locales,
+      fallbackLocale: Locales.EN,
+      depth: 3,
+    }),
+    payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
+    payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
+    payload.findGlobal({ slug: 'logo-marquee', locale: locale as any }),
+    payload.findGlobal({ slug: 'company-stats', locale: locale as any, depth: 1 }),
+    payload.findGlobal({ slug: 'cta-section', locale: locale as any, depth: 1 }),
+    payload.findGlobal({ slug: 'pricing-global', locale: locale as any, depth: 1 }),
+    payload.findGlobal({ slug: 'contacts', locale: locale as any }),
+    payload.findGlobal({ slug: 'social-links', locale: locale as any, depth: 2 }),
+  ])
 
   const layout = page.layout || []
 
@@ -300,6 +314,21 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
 
             case 'team-block':
               return <TeamSection key={idx} {...section} members={teamMembers} />
+
+            case 'form-with-contact-block':
+              return (
+                <React.Fragment key={idx}>
+                  <FormWithContactSection
+                    title={section.title}
+                    contacts={contactsData}
+                    socials={socialLinksData?.links}
+                  />
+
+                  <GoogleMapEmbed
+                    mapEmbedUrl={contactsData?.mapEmbedUrl || contactsData?.mapAddress}
+                  />
+                </React.Fragment>
+              )
 
             default:
               return null
