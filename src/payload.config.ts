@@ -30,6 +30,7 @@ import { Services } from './app/(payload)/_collections/Services'
 import { PricingGlobal } from './app/(payload)/_globals/Pricing'
 import { Payments } from './app/(payload)/_collections/Payments'
 import { Team } from './app/(payload)/_collections/Team'
+import { Contacts } from './app/(payload)/_globals/Contacts'
 
 sharp.concurrency(1)
 sharp.cache(false)
@@ -71,6 +72,7 @@ export default buildConfig({
     CompanyStats,
     CTASection,
     PricingGlobal,
+    Contacts,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

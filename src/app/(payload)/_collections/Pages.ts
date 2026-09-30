@@ -18,6 +18,7 @@ import { ProcessStepsBlock } from '../_blocks/ProcessStepsBlock'
 import { PricingBlock } from '../_blocks/PricingBlock'
 import { BlogSearchSection } from '../_blocks/BlogSearchBlock'
 import { TeamBlock } from '../_blocks/TeamBlock'
+import { FormWithContactBlock } from '../_blocks/FormWithContactBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -81,6 +82,7 @@ export const Pages: CollectionConfig = {
         PricingBlock,
         BlogSearchSection,
         TeamBlock,
+        FormWithContactBlock,
       ],
     },
   ],
