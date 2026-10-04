@@ -19,6 +19,7 @@ import { PricingBlock } from '../_blocks/PricingBlock'
 import { BlogSearchSection } from '../_blocks/BlogSearchBlock'
 import { TeamBlock } from '../_blocks/TeamBlock'
 import { FormWithContactBlock } from '../_blocks/FormWithContactBlock'
+import { FaqBlock } from '../_blocks/FaqBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -83,6 +84,7 @@ export const Pages: CollectionConfig = {
         BlogSearchSection,
         TeamBlock,
         FormWithContactBlock,
+        FaqBlock,
       ],
     },
   ],
