@@ -23,6 +23,7 @@ import { Locales } from '../../../../messages/types'
 import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@/payload-types'
 import FormWithContactSection from '../_components/FormWithContactSection'
 import GoogleMapEmbed from '../_components/GoogleMapEmbed'
+import FaqSection from '../_components/FaqSection'
 
 interface PageProps {
   params: Promise<{
@@ -100,7 +101,7 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
       id: rawPage.id,
       locale: locale as Locales,
       fallbackLocale: Locales.EN,
-      depth: 3,
+      depth: 4,
     }),
     payload.findGlobal({ slug: 'promo-block', locale: locale as any }),
     payload.findGlobal({ slug: 'reviews-block', locale: locale as any, depth: 2 }),
@@ -231,6 +232,8 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
     teamMembers = teamRes.docs
   }
 
+  let faqIndex = 0
+
   return (
     <main>
       {layout.length === 0 ? (
@@ -329,6 +332,13 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
                   />
                 </React.Fragment>
               )
+
+            case 'faq-block': {
+              const isReversed = faqIndex % 2 !== 0
+              faqIndex++
+
+              return <FaqSection key={idx} {...section} isReversed={isReversed} />
+            }
 
             default:
               return null

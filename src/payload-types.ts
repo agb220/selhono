@@ -242,6 +242,7 @@ export interface Page {
         | BlogSearchBlockType
         | TeamBlockType
         | FormWithContactBlockType
+        | FaqBlockType
       )[]
     | null;
   updatedAt: string;
@@ -711,6 +712,24 @@ export interface FormWithContactBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlockType".
+ */
+export interface FaqBlockType {
+  title?: string | null;
+  image: string | Media;
+  items?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reviews".
  */
 export interface Review {
@@ -1015,6 +1034,7 @@ export interface PagesSelect<T extends boolean = true> {
         'blog-search-section'?: T | BlogSearchBlockTypeSelect<T>;
         'team-block'?: T | TeamBlockTypeSelect<T>;
         'form-with-contact-block'?: T | FormWithContactBlockTypeSelect<T>;
+        'faq-block'?: T | FaqBlockTypeSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1232,6 +1252,23 @@ export interface TeamBlockTypeSelect<T extends boolean = true> {
  */
 export interface FormWithContactBlockTypeSelect<T extends boolean = true> {
   title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlockType_select".
+ */
+export interface FaqBlockTypeSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
