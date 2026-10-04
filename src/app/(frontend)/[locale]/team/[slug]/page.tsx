@@ -1,4 +1,5 @@
 import React from 'react'
+import { notFound } from 'next/navigation'
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
@@ -48,9 +49,9 @@ export default async function SingleTeamPage({ params }: TeamPageProps) {
 
   const rawTeam = teamData.docs[0]
 
-  // if (!rawProject) {
-  //   return notFound()
-  // }
+  if (!rawTeam) {
+    return notFound()
+  }
 
   const [team] = await Promise.all([
     payload.findByID({

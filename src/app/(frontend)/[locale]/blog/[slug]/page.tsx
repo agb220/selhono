@@ -1,4 +1,5 @@
 import React from 'react'
+import { notFound } from 'next/navigation'
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import { BlogCategory, Post } from '@/payload-types'
 import ComingSoon from '../../_components/ComingSoon'
@@ -49,9 +50,9 @@ export default async function SingleBlogPage({ params }: BlogSinglePageProps) {
 
   const rawPost = postData.docs[0]
 
-  // if (!rawPost) {
-  //   return notFound()
-  // }
+  if (!rawPost) {
+    return notFound()
+  }
 
   const [post, latestPostsData, categoriesData] = await Promise.all([
     payload.findByID({

@@ -1,4 +1,5 @@
 import React from 'react'
+import { notFound } from 'next/navigation'
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import ComingSoon from '../_components/ComingSoon'
 import MainHeroSection from '../_components/MainHeroSection'
@@ -81,9 +82,9 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
 
   const rawPage = pageData.docs[0]
 
-  // if (!rawPage) {
-  //   return notFound()
-  // }
+  if (!rawPage) {
+    return notFound()
+  }
 
   const [
     page,
