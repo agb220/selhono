@@ -1,4 +1,4 @@
-import { getPayload as getCachedPayload } from '@/lib/payload'
+import { notFound } from 'next/navigation'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
 import ServiceIntroSection from '../../_components/ServiceIntroSection'
@@ -8,6 +8,7 @@ import ServiceFeaturesSection from '../../_components/ServiceFeaturesSection'
 import ServicePromoSection from '../../_components/ServicePromoSection'
 import StatsSection from '../../_components/StatsSection'
 import { Locales } from '@/messages/types'
+import { getPayload as getCachedPayload } from '@/lib/payload'
 
 export const dynamic = 'force-dynamic'
 
@@ -51,9 +52,9 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
 
   const rawService = serviceData.docs[0]
 
-  // if (!rawService) {
-  //   return notFound()
-  // }
+  if (!rawService) {
+    return notFound()
+  }
 
   const [service, marqueeData, statsData] = await Promise.all([
     payload.findByID({

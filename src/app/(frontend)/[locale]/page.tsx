@@ -1,4 +1,5 @@
 import { getPayload } from 'payload'
+import { notFound } from 'next/navigation'
 import config from '@/payload.config'
 import { getCachedGlobal } from '@/lib/getCachedGlobal'
 import { HomePage, Post, Project, ProjectsSectionBlockType } from '@/payload-types'
@@ -34,6 +35,10 @@ export default async function HomePageComponent({
     homePageData = (await getCachedGlobal('home-page', locale, 2)) as HomePage
   } catch (error) {
     console.error('Error fetching home-page global:', error)
+  }
+
+  if (!homePageData) {
+    notFound()
   }
 
   const layout = homePageData?.layout || []
@@ -73,8 +78,6 @@ export default async function HomePageComponent({
     }
   }
 
-  // const blogSectionConfig = layout.find((s) => s.blockType === 'blog-section')
-
   let blogPosts: Post[] = []
 
   if (blogSectionConfig) {
@@ -96,7 +99,6 @@ export default async function HomePageComponent({
   }
 
   return (
-    // <LayoutWrapper>
     <main className="">
       {layout.length === 0 ? (
         <ComingSoon isHome={false} />
@@ -151,6 +153,5 @@ export default async function HomePageComponent({
         })
       )}
     </main>
-    // </LayoutWrapper>
   )
 }

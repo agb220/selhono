@@ -70,5 +70,10 @@
     "last": "Latest News",
     "categories": "Categories",
     "tags": "Tags"
+  },
+  "notfound": {
+    "title": "",
+    "desc": "We are sorry, but the page you requested was not found",
+    "btn": "Back To Home"
   }
 }

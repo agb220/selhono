@@ -1,4 +1,5 @@
 import React from 'react'
+import { notFound } from 'next/navigation'
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
@@ -47,9 +48,9 @@ export default async function SingleProjectPage({ params }: ServicePageProps) {
 
   const rawProject = projectData.docs[0]
 
-  // if (!rawProject) {
-  //   return notFound()
-  // }
+  if (!rawProject) {
+    return notFound()
+  }
 
   const [project] = await Promise.all([
     payload.findByID({
@@ -64,7 +65,6 @@ export default async function SingleProjectPage({ params }: ServicePageProps) {
   const layout = (project as any).layout || []
 
   return (
-    // <LayoutWrapper>
     <main>
       {layout.length === 0 ? (
         <ComingSoon isHome={false} />
@@ -88,6 +88,5 @@ export default async function SingleProjectPage({ params }: ServicePageProps) {
         })
       )}
     </main>
-    // </LayoutWrapper>
   )
 }
