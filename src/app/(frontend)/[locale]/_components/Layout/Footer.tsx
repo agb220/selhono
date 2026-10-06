@@ -7,6 +7,9 @@ import { getPayload } from '@/lib/payload'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { getCachedGlobal } from '@/lib/getCachedGlobal'
 import { Locales } from '@/messages/types'
+import FooterAccordion from '../ui/MenuComp/FooterAccordion'
+import { Key } from 'react'
+import { Category } from '@/payload-types'
 
 const Footer = async () => {
   const payload = await getPayload()
@@ -25,12 +28,13 @@ const Footer = async () => {
   ])
 
   const pagesLinks = mainMenu.items || []
+  const categories = (categoriesData?.docs || []) as Category[]
 
   const imageUrl = getImageUrl(logoSettings?.logoImage)
 
   return (
-    <footer className="container pt-10">
-      <div className="flex flex-col xl:flex-row  mb-16 xl:mb-34.5 justify-between gap-14 xl:gap-25.25">
+    <footer className="container pt-10 pb-2">
+      <div className="flex flex-col xl:flex-row  mb-12 xl:mb-24 justify-between gap-12 xl:gap-18">
         <div className=" ">
           <div>
             <Link
@@ -58,37 +62,34 @@ const Footer = async () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row justify-between gap-14 xl:gap-25.25">
+        <div className="flex flex-col md:flex-row justify-between gap-8 xl:gap-16">
           <div>
-            <h4 className="font-serif text-xl font-semibold mb-5 text-dark-200">
-              {footerSettings.columnTitles.pagesTitle || 'Pages'}
-            </h4>
-            <ul className="flex flex-col gap-3 text-sm text-gray-600">
-              <li>
-                <NavLink href={'/'} title={locale === Locales.DE ? 'Startseite' : 'Home'}></NavLink>
-              </li>
-              {pagesLinks.map((item: any) => (
-                <li key={item.id}>
-                  <NavLink href={`/${locale}/${item.slug}`} title={item.title}></NavLink>
+            <FooterAccordion title={footerSettings.columnTitles?.pagesTitle || 'Pages'}>
+              <ul className="flex flex-col gap-3">
+                <li>
+                  <NavLink href="/" title={locale === Locales.DE ? 'Startseite' : 'Home'} />
                 </li>
-              ))}
-            </ul>
+                {pagesLinks.map(
+                  (item: { id: Key | null | undefined; slug: any; title: string }) => (
+                    <li key={item.id}>
+                      <NavLink href={`/${item.slug}`} title={item.title} />
+                    </li>
+                  ),
+                )}
+              </ul>
+            </FooterAccordion>
           </div>
 
           <div>
-            <h4 className="font-serif text-xl font-semibold mb-5 text-dark-200">
-              {footerSettings?.columnTitles?.servicesTitle || 'Services'}
-            </h4>
-            <ul className="flex flex-col gap-3 text-sm text-gray-600">
-              {categoriesData?.docs.map((category: any) => (
-                <li key={category.id}>
-                  <NavLink
-                    href={`/${locale}/services?category=${category.slug}`}
-                    title={category.title}
-                  ></NavLink>
-                </li>
-              ))}
-            </ul>
+            <FooterAccordion title={footerSettings?.columnTitles?.servicesTitle || 'Services'}>
+              <ul className="flex flex-col gap-3 text-sm text-gray-600">
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    <NavLink href={`/projects?category=${category.slug}`} title={category.title} />
+                  </li>
+                ))}
+              </ul>
+            </FooterAccordion>
           </div>
           <div>
             <h4 className="font-serif text-xl font-semibold mb-5 text-dark-200">
