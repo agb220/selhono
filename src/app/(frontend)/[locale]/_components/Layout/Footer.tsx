@@ -27,7 +27,7 @@ const Footer = async () => {
     }),
   ])
 
-  const pagesLinks = mainMenu.items || []
+  const pagesLinks = mainMenu?.items || []
   const categories = (categoriesData?.docs || []) as Category[]
 
   const imageUrl = getImageUrl(logoSettings?.logoImage)

@@ -28,23 +28,23 @@ export const BlogCard = ({ post, variant, locale = 'en-US' }: BlogCardProps) => 
 
   if (variant === 'default') {
     return (
-      <li className="h-full max-w-80">
+      <li className="h-full max-w-80 list-none">
         <div className="group block h-full">
-          <article className="relative h-full flex flex-col bg-white border border-gray-100 rounded-[62px] p-5 shadow-card hover:border-gold-200  group-hover:bg-light-200 transition-colors duration-500">
+          <article className="relative h-full flex flex-col bg-white border border-gray-100 rounded-[62px] p-5 shadow-card hover:border-gold-200 group-hover:bg-light-200 transition-colors duration-500">
             <Link
               href={`/blog/${slug}`}
-              className="relative aspect-340/290 rounded-t-[50px] overflow-hidden mb-5"
+              className="relative aspect-340/290 rounded-t-[50px] overflow-hidden mb-5 block"
             >
               <Image
                 src={getImageUrl(mainImage)}
                 alt={title}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
               {categoryTitle && (
                 <div className="absolute left-2 md:left-5 bottom-2 md:bottom-4 z-10">
-                  <span className="inline-block bg-black/50 text-white px-1  md:px-2 py-1 md:py-2 rounded-t-[10px] rounded-br-[10px] text-number-small md:text-small ">
+                  <span className="inline-block bg-black/50 text-white px-1 md:px-2 py-1 md:py-2 rounded-t-[10px] rounded-br-[10px] text-number-small md:text-small">
                     {categoryTitle}
                   </span>
                 </div>
@@ -76,19 +76,19 @@ export const BlogCard = ({ post, variant, locale = 'en-US' }: BlogCardProps) => 
   }
 
   return (
-    <li className="h-full">
+    <li className="h-full list-none">
       <div className="group block h-full">
         <article className="h-full flex flex-col pb-5 border-b border-gray-100 hover:border-gold-200 transition-colors duration-300">
           <Link
             href={`/blog/${slug}`}
-            className="relative aspect-380/290 rounded-[30px] overflow-hidden mb-7"
+            className="relative aspect-380/290 rounded-[30px] overflow-hidden mb-7 block"
           >
             <Image
               src={getImageUrl(mainImage)}
               alt={title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </Link>
 

@@ -7,29 +7,31 @@ type StatsCardProps = Exclude<CompanyStat['stats'], null | undefined>[number]
 export const StatsCard = ({ value, label }: StatsCardProps) => {
   const elementRef = useRef<HTMLDivElement>(null)
   const numberRef = useRef<HTMLSpanElement>(null)
-  const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (numberRef.current) {
-      numberRef.current.textContent = '1'
-    }
+    let animationFrameId: number = 0
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true
+        if (entry.isIntersecting) {
           startCounter()
-          observer.disconnect()
+        } else {
+          if (numberRef.current) {
+            numberRef.current.textContent = '1'
+          }
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.2 },
     )
 
     if (elementRef.current) {
       observer.observe(elementRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      if (animationFrameId) cancelAnimationFrame(animationFrameId)
+    }
   }, [value])
 
   const startCounter = () => {

@@ -1,7 +1,10 @@
 'use client'
+
+import { useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { motion, useInView, Variants } from 'framer-motion'
 import ProjectCard from './Shared/ProjectCard'
 import { Button } from './ui/ButtonUI'
 import ProjectTabs, { CategoryItem } from './ProjectTabs'
@@ -16,6 +19,18 @@ interface ProjectsSectionProps extends ProjectsSectionBlockType {
   categories?: CategoryItem[]
 }
 
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+}
+
 const ProjectsSection = ({
   heading,
   subheading,
@@ -27,6 +42,9 @@ const ProjectsSection = ({
   currentCategory,
   categories = [],
 }: ProjectsSectionProps) => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const isInView = useInView(sectionRef, { amount: 0.1 })
+
   const [emblaRef] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
@@ -36,9 +54,14 @@ const ProjectsSection = ({
 
   if (displayMode === 'fullPage') {
     return (
-      <section className="container mb-20 md:mb-25 xl:mb-43">
-        <ProjectTabs currentCategory={currentCategory} categories={categories} />
-
+      <section ref={sectionRef} className="container mb-20 md:mb-25 xl:mb-43">
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+        >
+          <ProjectTabs currentCategory={currentCategory} categories={categories} />
+        </motion.div>
         {projects.length > 0 ? (
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 my-10 md:my-14">
             {projects.map((project, index) => (
@@ -48,21 +71,32 @@ const ProjectsSection = ({
         ) : (
           <p className="text-center text-stone-500 py-12">{t('noProject')}</p>
         )}
-
-        <ProjectPagination currentPage={currentPage} totalPages={totalPages} />
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+        >
+          <ProjectPagination currentPage={currentPage} totalPages={totalPages} />
+        </motion.div>
       </section>
     )
   }
 
   return (
-    <section className="container mb-20 md:mb-25 xl:mb-43">
+    <section ref={sectionRef} className="container mb-20 md:mb-25 xl:mb-43 overflow-hidden">
       <div className="flex flex-col">
         {heading && (
-          <div className="mx-auto max-w-130 mb-6 md:mb-10 xl:mb-14">
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            className="mx-auto max-w-130 mb-6 md:mb-10 xl:mb-14"
+          >
             <h2 className="text-dark-200 text-accent xl:h2 text-center mb-2">{heading}</h2>
             {subheading && <p className="md:paragraph text-center">{subheading}</p>}
-          </div>
+          </motion.div>
         )}
+
         <div className="overflow-hidden mb-8 xl:mb-12" ref={emblaRef}>
           {projects.length > 0 && (
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
@@ -78,10 +112,18 @@ const ProjectsSection = ({
             </ul>
           )}
         </div>
+
         {viewAllText && (
-          <Button asChild className="md:self-center md:max-w-[320px]">
-            <Link href={`/projects`}>{viewAllText}</Link>
-          </Button>
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            className="md:self-center"
+          >
+            <Button asChild className="w-full md:max-w-[320px]">
+              <Link href={`/projects`}>{viewAllText}</Link>
+            </Button>
+          </motion.div>
         )}
       </div>
     </section>
