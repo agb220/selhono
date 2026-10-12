@@ -13,7 +13,7 @@ const MainHeroSection = (props: MainHeroBlockType) => {
   const [isTypingComplete, setIsTypingComplete] = useState(false)
   const [resetCount, setResetCount] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.3 })
+  const isInView = useInView(sectionRef, { amount: 0.3, once: false })
 
   useEffect(() => {
     if (isInView) {

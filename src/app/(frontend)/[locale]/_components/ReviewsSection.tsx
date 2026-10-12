@@ -15,7 +15,7 @@ const titleVariants: Variants = {
 
 const ReviewsSection = (data: ReviewsBlock) => {
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.25 })
+  const isInView = useInView(sectionRef, { amount: 0.25, once: false })
 
   const approvedReviews = (data.reviews || []).filter(
     (review): review is Review => typeof review === 'object' && review.isApproved === true,

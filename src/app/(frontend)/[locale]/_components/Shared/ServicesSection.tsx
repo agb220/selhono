@@ -51,7 +51,7 @@ const cardVariants: Variants = {
 
 const ServicesSection = (props: ServicesSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.3 })
+  const isInView = useInView(sectionRef, { amount: 0.3, once: false })
 
   const [emblaRef] = useEmblaCarousel({
     align: 'start',

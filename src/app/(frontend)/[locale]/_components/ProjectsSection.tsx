@@ -43,7 +43,7 @@ const ProjectsSection = ({
   categories = [],
 }: ProjectsSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.1 })
+  const isInView = useInView(sectionRef, { amount: 0.1, once: false })
 
   const [emblaRef] = useEmblaCarousel({
     align: 'start',

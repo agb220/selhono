@@ -38,7 +38,7 @@ const ContactUsSection = (props: CtaSection) => {
   const t = useTranslations('modalContact')
 
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.3 })
+  const isInView = useInView(sectionRef, { amount: 0.3, once: false })
 
   return (
     <section ref={sectionRef} className="container mx-auto mb-10 overflow-hidden">

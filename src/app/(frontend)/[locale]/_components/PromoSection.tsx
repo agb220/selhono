@@ -48,7 +48,7 @@ const rightImageVariants: Variants = {
 
 const PromoSection = (data: PromoBlock) => {
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.2 })
+  const isInView = useInView(sectionRef, { amount: 0.2, once: false })
 
   return (
     <section ref={sectionRef} className="container mb-12 md:mb-24 xl:mb-48.5 overflow-hidden">

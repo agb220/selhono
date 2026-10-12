@@ -66,7 +66,7 @@ const BlogsSection = ({
   const locale = useLocale()
   const t = useTranslations('posts')
   const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.2 })
+  const isInView = useInView(sectionRef, { amount: 0.2, once: false })
 
   const [emblaRef] = useEmblaCarousel({
     align: 'start',
