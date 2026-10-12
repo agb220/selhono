@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import useEmblaCarousel from 'embla-carousel-react'
+import { motion, Variants } from 'framer-motion'
 import { Review } from '@/payload-types'
 import { Button } from '../ui/ButtonUI'
 import ModalLayout from './Modal'
@@ -12,33 +13,83 @@ import { getImageUrl } from '@/lib/getImageUrl'
 interface ReviewsBlockProps {
   reviews: Review[]
   buttonLabel: string
+  isInView?: boolean
 }
 
-export default function ReviewsBlockComp({ reviews, buttonLabel }: ReviewsBlockProps) {
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const cardVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.85,
+    y: 15,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.5, 1],
+    },
+  },
+}
+
+const buttonVariants: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: 0.4, ease: 'easeOut' },
+  },
+}
+
+export default function ReviewsBlockComp({
+  reviews,
+  buttonLabel,
+  isInView = true,
+}: ReviewsBlockProps) {
   const t = useTranslations('modal')
   const [emblaRef] = useEmblaCarousel({ align: 'start', loop: false })
-
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <>
       <div className="overflow-hidden w-full" ref={emblaRef}>
-        <div className="flex gap-4 xl:gap-6 backface-hidden">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="flex gap-4 xl:gap-6 backface-hidden"
+        >
           {reviews.map((review) => (
-            <div
+            <motion.div
               key={review.id}
+              variants={cardVariants}
               className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_31.5%] min-w-0"
             >
               <ReviewCard {...review} />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-
-      <div className="flex justify-center mt-4">
+      <motion.div
+        variants={buttonVariants}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+        className="flex justify-center mt-4"
+      >
         <Button onClick={() => setIsModalOpen(true)}>{buttonLabel}</Button>
-      </div>
-
+      </motion.div>
       <ModalLayout
         isOpen={isModalOpen}
         onOpenChange={setIsModalOpen}

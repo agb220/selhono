@@ -115,13 +115,7 @@ export default async function HomePageComponent({
               return <HeroSection key={idx} {...section} />
 
             case 'services-section':
-              return (
-                <ServicesSection
-                  key={idx}
-                  items={section.services || []}
-                  className="grid md:grid-cols-2 xl:grid-cols-3"
-                />
-              )
+              return <ServicesSection key={idx} items={section.services || []} />
 
             case 'promo-section':
               return <PromoSection key={idx} {...promoData} />

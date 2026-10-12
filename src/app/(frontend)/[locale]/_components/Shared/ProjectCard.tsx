@@ -1,5 +1,9 @@
+'use client'
+
+import { useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion, useInView } from 'framer-motion'
 import { Button } from '../ui/ButtonUI'
 import { getImageUrl } from '@/lib/getImageUrl'
 import { Project } from '@/payload-types'
@@ -11,24 +15,36 @@ interface ProjectCardProps {
   classNameBorder?: string
 }
 
-const ProjectCard = (props: ProjectCardProps) => {
-  const imageUrl = getImageUrl(props.project.mainImage)
-  const categoryName =
-    typeof props.project.category === 'object' ? props.project.category?.title : ''
+const ProjectCard = ({ project, classNameBorder }: ProjectCardProps) => {
+  const cardRef = useRef<HTMLLIElement>(null)
+  const isInView = useInView(cardRef, { once: false, amount: 0.2 })
+
+  const imageUrl = getImageUrl(project.mainImage)
+  const categoryName = typeof project.category === 'object' ? project.category?.title : ''
+
   return (
-    <li className="max-w-136">
+    <motion.li
+      ref={cardRef}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className="max-w-136 list-none"
+    >
       <div className="flex flex-col group cursor-pointer">
         <Link
-          href={`/projects/${props.project.slug}`}
+          href={`/projects/${project.slug}`}
           className={cn(
             'relative aspect-4/3 w-full overflow-hidden mb-4 md:mb-6 max-h-136 block',
-            props.classNameBorder,
+            classNameBorder,
           )}
         >
           {imageUrl ? (
             <Image
               src={imageUrl}
-              alt={props.project.title}
+              alt={project.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105 select-none pointer-events-none"
             />
@@ -41,14 +57,13 @@ const ProjectCard = (props: ProjectCardProps) => {
 
         <div className="flex justify-between items-center gap-2">
           <div>
-            <Link href={`/projects/${props.project.slug}`} className="">
+            <Link href={`/projects/${project.slug}`}>
               <h3 className="h7 md:h5 text-dark-200 mb-1 group-hover:text-gold-200 transition-colors duration-500">
-                {props.project.title}
+                {project.title}
               </h3>
             </Link>
-            {props.project.category && <p className="">{categoryName}</p>}
+            {project.category && <p>{categoryName}</p>}
           </div>
-
           <Button
             asChild
             variant="circle-gold"
@@ -56,11 +71,11 @@ const ProjectCard = (props: ProjectCardProps) => {
             size="icon-md"
             className="group-hover:bg-gold-200"
           >
-            <Link href={`/projects/${props.project.slug}`}></Link>
+            <Link href={`/projects/${project.slug}`}></Link>
           </Button>
         </div>
       </div>
-    </li>
+    </motion.li>
   )
 }
 
