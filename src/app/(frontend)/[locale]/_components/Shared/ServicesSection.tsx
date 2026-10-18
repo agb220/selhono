@@ -13,31 +13,10 @@ interface ServicesSectionProps {
   className?: string
 }
 
-const containerVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    transition: {
-      staggerChildren: 0.08,
-      staggerDirection: -1,
-    },
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.05,
-    },
-  },
-}
-
 const cardVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 12,
-    transition: {
-      duration: 0.5,
-      ease: 'easeIn',
-    },
+    y: 20,
   },
   visible: {
     opacity: 1,
@@ -50,29 +29,21 @@ const cardVariants: Variants = {
 }
 
 const ServicesSection = (props: ServicesSectionProps) => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { amount: 0.3, once: false })
-
   const [emblaRef] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
   })
 
   return (
-    <section ref={sectionRef} className="overflow-hidden mb-8 md:mb-12 xl:mb-20">
+    <section className="overflow-hidden mb-8 md:mb-12 xl:mb-20">
       <div className="container mx-auto">
         <div className="overflow-hidden" ref={emblaRef}>
-          <motion.ul
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            className={cn('flex gap-2 md:gap-10 group/list', props.className)}
-          >
+          <ul className={cn('flex gap-2 md:gap-10 group/list', props.className)}>
             {props.items.map((item, index) => {
               if (typeof item === 'string') return null
               return <ServiceCard {...item} key={item.id || index} />
             })}
-          </motion.ul>
+          </ul>
         </div>
       </div>
     </section>
@@ -82,8 +53,17 @@ const ServicesSection = (props: ServicesSectionProps) => {
 export default ServicesSection
 
 const ServiceCard = (props: Service) => {
+  const cardRef = useRef<HTMLLIElement>(null)
+  const isInView = useInView(cardRef, { amount: 0.2, once: false })
+
   return (
-    <motion.li variants={cardVariants} className="w-full min-w-[320px] max-w-90 list-none mx-auto">
+    <motion.li
+      ref={cardRef}
+      variants={cardVariants}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      className="w-full min-w-[320px] max-w-90 list-none mx-auto"
+    >
       <div
         className="w-full transition-all duration-300 bg-transparent
           group-hover/list:opacity-40 group-hover/list:scale-[0.98]
