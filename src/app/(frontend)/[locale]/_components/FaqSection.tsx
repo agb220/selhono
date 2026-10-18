@@ -1,6 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
+import { motion, useInView } from 'framer-motion'
 import { FaqBlockType, Media } from '@/payload-types'
 import { Title } from './Shared/Title'
 import { ArrowShortSvg } from './icons'
@@ -16,6 +17,8 @@ export default function FaqSection({
   isReversed = false,
 }: FaqSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const listRef = useRef<HTMLDivElement>(null)
+  const isListInView = useInView(listRef, { amount: 0.2, once: false })
 
   const toggleItem = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
@@ -25,20 +28,30 @@ export default function FaqSection({
   const imageUrl = media?.url || (typeof image === 'string' ? image : '')
 
   return (
-    <section className="pb-16 md:pb-24">
+    <section className="pb-16 md:pb-24 overflow-hidden">
       <div className="container mx-auto px-4">
         {title && <Title title={title} className="text-center mb-6 md:mb-14" />}
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div
+            ref={listRef}
             className={`lg:col-span-6 flex flex-col ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}
           >
-            <div className="divide-y divide-dark-200 border-b border-dark-200">
+            <div className="">
               {items?.map((item, idx) => {
                 const isOpen = openIndex === idx
 
                 return (
-                  <div key={idx} className="py-5 md:py-6">
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isListInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: idx * 0.5,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="py-5 md:py-6 border-b border-dark-200"
+                  >
                     <button
                       type="button"
                       onClick={() => toggleItem(idx)}
@@ -67,12 +80,11 @@ export default function FaqSection({
                         <p>{item.answer}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )
               })}
             </div>
           </div>
-
           {imageUrl && (
             <div className={`lg:col-span-6 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}>
               <div className="relative w-full h-80 xl:h-120 max-h-170 rounded-3xl overflow-hidden shadow-xl">
