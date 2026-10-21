@@ -7,6 +7,8 @@ import HeroSection from '../../_components/HeroSection'
 import BlogContent from '../../_components/BlogContent'
 import ContactFormInlineSection from '../../_components/ContactFormInlineSection'
 import { Locales } from '@/messages/types'
+import { getTranslations } from 'next-intl/server'
+import Breadcrumbs from '../../_components/Shared/Breadcrumbs'
 
 export const dynamic = 'force-dynamic'
 
@@ -33,6 +35,7 @@ export async function generateStaticParams() {
 
 export default async function SingleBlogPage({ params }: BlogSinglePageProps) {
   const { slug, locale } = await params
+  const t = await getTranslations('breadcrumbs')
 
   const payload = await getCachedPayload()
 
@@ -77,10 +80,26 @@ export default async function SingleBlogPage({ params }: BlogSinglePageProps) {
     }),
   ])
 
+  const breadcrumbItems = [
+    {
+      label: t('blog') || 'Blog',
+      href: `/blog`,
+    },
+    {
+      label: post.title || slug,
+      href: `/blog/${slug}`,
+    },
+  ]
+
   const layout = (post as any).layout || []
 
   return (
-    <main>
+    <main className="relative">
+      <div className="absolute top-10 md:top-16 left-0 right-0 z-50">
+        <div className="container mx-auto">
+          <Breadcrumbs customItems={breadcrumbItems} />
+        </div>
+      </div>
       {layout.length === 0 ? (
         <ComingSoon isHome={false} />
       ) : (

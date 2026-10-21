@@ -1,5 +1,6 @@
 import React from 'react'
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import { getPayload as getCachedPayload } from '@/lib/payload'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
@@ -7,6 +8,7 @@ import ContactFormInlineSection from '../../_components/ContactFormInlineSection
 import { Locales } from '@/messages/types'
 import TeamDetailSection from '../../_components/TeamDetailSection'
 import TeamSection from '../../_components/TeamSection'
+import Breadcrumbs from '../../_components/Shared/Breadcrumbs'
 
 export const dynamic = 'force-dynamic'
 
@@ -33,6 +35,8 @@ export async function generateStaticParams() {
 
 export default async function SingleTeamPage({ params }: TeamPageProps) {
   const { slug, locale } = await params
+  const t = await getTranslations('breadcrumbs')
+
   const payload = await getCachedPayload()
 
   const teamData = await payload.find({
@@ -84,8 +88,24 @@ export default async function SingleTeamPage({ params }: TeamPageProps) {
     teamMembers = allMembersData.docs
   }
 
+  const breadcrumbItems = [
+    {
+      label: t('team') || 'Team',
+      href: `/team`,
+    },
+    {
+      label: team.name || slug,
+      href: `/team/${slug}`,
+    },
+  ]
+
   return (
-    <main>
+    <main className="relative">
+      <div className="absolute top-10 md:top-16 left-0 right-0 z-50">
+        <div className="container mx-auto">
+          <Breadcrumbs customItems={breadcrumbItems} />
+        </div>
+      </div>
       {layout.length === 0 ? (
         <ComingSoon isHome={false} />
       ) : (
