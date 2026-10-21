@@ -25,6 +25,7 @@ import { Post, BlogSectionBlockType, ProjectsSectionBlockType, Project } from '@
 import FormWithContactSection from '../_components/FormWithContactSection'
 import GoogleMapEmbed from '../_components/GoogleMapEmbed'
 import FaqSection from '../_components/FaqSection'
+import Breadcrumbs from '../_components/Shared/Breadcrumbs'
 
 interface PageProps {
   params: Promise<{
@@ -235,8 +236,20 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
 
   let faqIndex = 0
 
+  const breadcrumbItems = [
+    {
+      label: page.title || slug,
+      href: `/${locale}/${slug}`,
+    },
+  ]
+
   return (
-    <main>
+    <main className="relative">
+      <div className="absolute top-10 md:top-16 left-0 right-0 z-50">
+        <div className="container mx-auto">
+          <Breadcrumbs customItems={breadcrumbItems} />
+        </div>
+      </div>
       {layout.length === 0 ? (
         <ComingSoon isHome={false} />
       ) : (

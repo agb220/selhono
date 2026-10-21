@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import ComingSoon from '../../_components/ComingSoon'
 import HeroSection from '../../_components/HeroSection'
 import ServiceIntroSection from '../../_components/ServiceIntroSection'
@@ -9,6 +10,7 @@ import ServicePromoSection from '../../_components/ServicePromoSection'
 import StatsSection from '../../_components/StatsSection'
 import { Locales } from '@/messages/types'
 import { getPayload as getCachedPayload } from '@/lib/payload'
+import Breadcrumbs from '../../_components/Shared/Breadcrumbs'
 
 export const dynamic = 'force-dynamic'
 
@@ -35,6 +37,7 @@ export async function generateStaticParams() {
 
 export default async function SingleServicePage({ params }: ServicePageProps) {
   const { slug, locale } = await params
+  const t = await getTranslations('breadcrumbs')
 
   const payload = await getCachedPayload()
 
@@ -76,11 +79,26 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
     }),
   ])
 
+  const breadcrumbItems = [
+    {
+      label: t('services') || 'Services',
+      href: `/services`,
+    },
+    {
+      label: service.title || slug,
+      href: `/services/${slug}`,
+    },
+  ]
+
   const layout = (service as any).layout || []
 
   return (
-    // <LayoutWrapper>
-    <main>
+    <main className="relative">
+      <div className="absolute top-10 md:top-16 left-0 right-0 z-50">
+        <div className="container mx-auto">
+          <Breadcrumbs customItems={breadcrumbItems} />
+        </div>
+      </div>
       {layout.length === 0 ? (
         <ComingSoon isHome={false} />
       ) : (
@@ -113,6 +131,5 @@ export default async function SingleServicePage({ params }: ServicePageProps) {
         })
       )}
     </main>
-    // </LayoutWrapper>
   )
 }

@@ -10,6 +10,7 @@ import { Locales } from '@/messages/types'
 import FooterAccordion from '../ui/MenuComp/FooterAccordion'
 import { Key } from 'react'
 import { Category } from '@/payload-types'
+import ScrollToTopButton from '../Shared/ScrollToTopButton'
 
 const Footer = async () => {
   const payload = await getPayload()
@@ -34,6 +35,7 @@ const Footer = async () => {
 
   return (
     <footer className="container pt-10 pb-2">
+      <ScrollToTopButton />
       <div className="flex flex-col xl:flex-row  mb-12 xl:mb-24 justify-between gap-12 xl:gap-18">
         <div className=" ">
           <div>

@@ -75,5 +75,11 @@
     "title": "",
     "desc": "Es tut uns leid, aber die von Ihnen angeforderte Seite wurde nicht gefunden",
     "btn": "Zurück zur Startseite"
+  },
+  "breadcrumbs": {
+    "services": "Services",
+    "projects": "Projects",
+    "blog": "Blog",
+    "team": "Team"
   }
 }
