@@ -39,7 +39,6 @@ const MainHeroSection = (props: MainHeroBlockType) => {
           className="object-cover object-center"
           priority
           sizes="100vw"
-          unoptimized
           fetchPriority="high"
         />
         <div className="relative z-20 max-w-140 pl-4 md:pl-6 pt-8 md:pt-18">
